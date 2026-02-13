@@ -113,7 +113,7 @@ export default function Food() {
                         <p className="text-slate-600 mb-4 leading-relaxed">
                             Our kitchen is cleaned twice daily. We use high-quality oil, fresh vegetables, and RO water for cooking. Parents are welcome to inspect our kitchen at any time.
                         </p>
-                        <div className="p-4 bg-brand-yellow/10 border border-brand-yellow/20 rounded-lg text-sm text-brand-yellow-dark">
+                        <div className="p-4 bg-brand-orange/10 border border-brand-orange/20 rounded-lg text-sm text-brand-dark">
                             <strong>Note:</strong> Outside food is allowed. You can order from Zomato/Swiggy if you wish to eat something different.
                         </div>
                     </div>
