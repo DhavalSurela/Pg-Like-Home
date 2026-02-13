@@ -1,5 +1,6 @@
 import { CallButton } from "@/components/CTAButtons";
 import { Utensils, Clock, AlertCircle, Salad, CheckCircle2, Coffee, Pizza } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
     title: "Food Menu - PG Like Home",
@@ -114,6 +115,23 @@ export default function Food() {
                         </p>
                         <div className="p-4 bg-brand-yellow/10 border border-brand-yellow/20 rounded-lg text-sm text-brand-yellow-dark">
                             <strong>Note:</strong> Outside food is allowed. You can order from Zomato/Swiggy if you wish to eat something different.
+                        </div>
+                    </div>
+
+                    {/* Food Gallery */}
+                    <div className="mt-16">
+                        <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Our Delicious Meals</h2>
+                        <div className="grid md:grid-cols-3 gap-6">
+                            {[1, 2, 3].map((num) => (
+                                <div key={num} className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all group">
+                                    <Image
+                                        src={`/images/food/food-${num}.jpg`}
+                                        alt={`Delicious food at PG Like Home ${num}`}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
