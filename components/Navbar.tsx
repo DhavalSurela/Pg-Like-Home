@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { CallButton, WhatsAppButton } from "./CTAButtons";
+import { Logo } from "./Logo";
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ export function Navbar() {
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-brand-blue">PG Like Home</span>
+                    <Logo />
                 </Link>
 
                 {/* Desktop Navigation */}
