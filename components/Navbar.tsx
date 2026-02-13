@@ -18,8 +18,7 @@ export function Navbar() {
         { href: "/facilities", label: "Facilities" },
         { href: "/gallery", label: "Gallery" },
         { href: "/rules", label: "Rules" },
-        { href: "/about", label: "About" },
-        { href: "/contact", label: "Contact" },
+        { href: "/about", label: "About & Contact" },
     ];
 
     return (
