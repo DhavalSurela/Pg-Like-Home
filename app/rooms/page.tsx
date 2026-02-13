@@ -57,40 +57,49 @@ export default function Rooms() {
             </div>
 
             <div className="container mx-auto px-4 mt-12">
-                {/* Pricing Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {/* Pricing Grid - Centered Flex/Grid approach for better balance with 5 items */}
+                <div className="flex flex-wrap justify-center gap-6">
                     {rooms.map((room, index) => (
                         <div
                             key={index}
-                            className={`relative bg-white rounded-2xl p-6 shadow-sm border ${room.recommended ? 'border-brand-orange ring-1 ring-brand-orange shadow-md' : 'border-slate-200'} flex flex-col`}
+                            className={`relative bg-white rounded-2xl p-6 shadow-sm border border-t-4 flex flex-col w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm transition-transform hover:-translate-y-1 ${room.recommended
+                                    ? 'border-brand-orange ring-1 ring-brand-orange/20 shadow-md scale-105 z-10'
+                                    : 'border-slate-200 border-t-brand-blue/30 hover:border-t-brand-blue hover:shadow-md'
+                                }`}
                         >
                             {room.recommended && (
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
                                     Most Popular
                                 </div>
                             )}
 
-                            <div className="mb-4">
-                                <h3 className="text-lg font-semibold text-slate-700">{room.title}</h3>
-                                <p className="text-sm text-slate-500">{room.type}</p>
+                            <div className="mb-4 text-center border-b border-slate-100 pb-4">
+                                <h3 className="text-xl font-bold text-brand-dark">{room.title}</h3>
+                                <p className="text-sm font-medium text-brand-blue/80 mt-1 uppercase tracking-wider">{room.type}</p>
                             </div>
 
-                            <div className="mb-6 flex items-baseline gap-1">
-                                <span className="text-4xl font-bold text-slate-900">{room.price}</span>
+                            <div className="mb-6 flex justify-center items-baseline gap-1 text-brand-dark">
+                                <span className="text-4xl font-bold">{room.price}</span>
                                 <span className="text-sm text-slate-500 font-medium">/mo</span>
                             </div>
 
                             <ul className="space-y-3 mb-8 flex-grow">
                                 {room.features.map((feature, idx) => (
                                     <li key={idx} className="flex items-start gap-3 text-sm text-slate-600">
-                                        <Check className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
+                                        <div className="mt-0.5 min-w-4">
+                                            <Check className={`w-4 h-4 ${room.recommended ? 'text-brand-orange' : 'text-brand-green'}`} />
+                                        </div>
                                         <span>{feature}</span>
                                     </li>
                                 ))}
                             </ul>
 
                             <div className="mt-auto pt-6 border-t border-slate-100">
-                                <WhatsAppButton className="w-full justify-center" size="sm" variant="outline" />
+                                <WhatsAppButton
+                                    className="w-full justify-center"
+                                    size="sm"
+                                    variant={room.recommended ? "primary" : "outline"}
+                                />
                             </div>
                         </div>
                     ))}
