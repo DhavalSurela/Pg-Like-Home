@@ -1,5 +1,6 @@
 import { CallButton } from "@/components/CTAButtons";
 import { User } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
     title: "About Us - PG Like Home",
@@ -22,8 +23,14 @@ export default function About() {
                 <div className="flex flex-col md:flex-row gap-12 items-start">
                     {/* Bio Card */}
                     <div className="w-full md:w-1/3 bg-white p-8 rounded-2xl border border-slate-200 text-center sticky top-24 shadow-sm">
-                        <div className="w-24 h-24 bg-brand-cream rounded-full flex items-center justify-center mx-auto mb-6 text-brand-blue">
-                            <User className="w-10 h-10" />
+                        <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-brand-cream shadow-md">
+                            <Image /* next/image needs to be imported if not already, checking imports... it's missing in file view */
+                                src="/images/owner.jpg"
+                                alt="Raj Parvadiya"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 160px, 160px"
+                            />
                         </div>
                         <h2 className="text-xl font-bold text-slate-900">Raj Parvadiya</h2>
                         <p className="text-sm font-medium text-blue-600 mt-1">Owner & Founder</p>

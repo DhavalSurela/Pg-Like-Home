@@ -117,22 +117,24 @@ export default function Food() {
                             <strong>Note:</strong> Outside food is allowed. You can order from Zomato/Swiggy if you wish to eat something different.
                         </div>
                     </div>
+                </div>
 
-                    {/* Food Gallery */}
-                    <div className="mt-16">
-                        <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Our Delicious Meals</h2>
-                        <div className="grid md:grid-cols-3 gap-6">
-                            {[1, 2, 3].map((num) => (
-                                <div key={num} className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all group">
-                                    <Image
-                                        src={`/images/food/food-${num}.jpg`}
-                                        alt={`Delicious food at PG Like Home ${num}`}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                {/* Food Gallery */}
+                <div className="mt-16">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Our Delicious Meals</h2>
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {Array.from({ length: 33 }, (_, i) => i + 1).map((num) => (
+                            <div key={num} className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all group bg-slate-200">
+                                <Image
+                                    src={`/images/food/food-${num}.jpg`}
+                                    alt={`Delicious food at PG Like Home ${num}`}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    priority={num <= 6}
+                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -8,15 +9,16 @@ import { Logo } from "./Logo";
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
 
     const navLinks = [
         { href: "/", label: "Home" },
-        { href: "/about", label: "About" },
         { href: "/rooms", label: "Rooms & Pricing" },
-        { href: "/facilities", label: "Facilities" },
         { href: "/food", label: "Food" },
-        { href: "/rules", label: "Rules" },
+        { href: "/facilities", label: "Facilities" },
         { href: "/gallery", label: "Gallery" },
+        { href: "/rules", label: "Rules" },
+        { href: "/about", label: "About" },
         { href: "/contact", label: "Contact" },
     ];
 
@@ -30,15 +32,21 @@ export function Navbar() {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-6">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="text-sm font-medium text-brand-dark transition-colors hover:text-brand-orange"
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+                    {navLinks.map((link) => {
+                        const isActive = pathname === link.href;
+                        return (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`text-sm font-medium transition-colors py-1 ${isActive
+                                    ? "text-brand-orange font-bold border-b-2 border-brand-orange"
+                                    : "text-brand-dark hover:text-brand-orange"
+                                    }`}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
                 {/* Desktop CTAs */}
@@ -61,16 +69,22 @@ export function Navbar() {
             {isOpen && (
                 <div className="lg:hidden border-t border-brand-blue/10 p-4 bg-brand-cream shadow-lg space-y-4">
                     <nav className="flex flex-col space-y-3">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-base font-medium hover:text-blue-600"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {navLinks.map((link) => {
+                            const isActive = pathname === link.href;
+                            return (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className={`text-base font-medium px-4 py-2 rounded-md transition-colors ${isActive
+                                        ? "text-brand-orange font-bold bg-brand-orange/10"
+                                        : "text-slate-600 hover:text-blue-600 hover:bg-slate-50"
+                                        }`}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
                     </nav>
                     <div className="flex flex-col gap-3 pt-4 border-t">
                         <CallButton className="w-full justify-center" />

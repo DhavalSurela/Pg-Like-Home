@@ -67,6 +67,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Food Strip */}
+      <section className="py-12 bg-brand-cream border-b border-brand-orange/10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Freshly Prepared Meals</h2>
+            <Link href="/food" className="text-brand-orange font-semibold hover:text-orange-700 transition-colors text-sm flex items-center gap-1">
+              View Full Menu <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[12, 18, 24, 28].map((num) => (
+              <div key={num} className="relative h-48 md:h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-slate-200">
+                <Image
+                  src={`/images/food/food-${num}.jpg`}
+                  alt="Delicious veg meal"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Teaser */}
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
