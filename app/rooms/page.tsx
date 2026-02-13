@@ -63,8 +63,8 @@ export default function Rooms() {
                         <div
                             key={index}
                             className={`relative bg-white rounded-2xl p-6 shadow-sm border border-t-4 flex flex-col w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm transition-transform hover:-translate-y-1 ${room.recommended
-                                    ? 'border-brand-orange ring-1 ring-brand-orange/20 shadow-md scale-105 z-10'
-                                    : 'border-slate-200 border-t-brand-blue/30 hover:border-t-brand-blue hover:shadow-md'
+                                ? 'border-brand-orange ring-1 ring-brand-orange/20 shadow-md scale-105 z-10'
+                                : 'border-slate-200 border-t-brand-blue/30 hover:border-t-brand-blue hover:shadow-md'
                                 }`}
                         >
                             {room.recommended && (
@@ -98,7 +98,6 @@ export default function Rooms() {
                                 <WhatsAppButton
                                     className="w-full justify-center"
                                     size="sm"
-                                    variant={room.recommended ? "primary" : "outline"}
                                 />
                             </div>
                         </div>
@@ -137,7 +136,7 @@ export default function Rooms() {
                     <p className="text-slate-600 mb-4">Have questions about room availability?</p>
                     <div className="flex justify-center gap-4">
                         <CallButton />
-                        <WhatsAppButton variant="primary" />
+                        <WhatsAppButton />
                     </div>
                 </div>
             </div>

@@ -42,7 +42,7 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
               <CallButton size="lg" className="bg-brand-orange hover:bg-[#D08060] text-white" />
-              <WhatsAppButton size="lg" variant="outline" className="text-white border-white hover:bg-white/10" />
+              <WhatsAppButton size="lg" className="hover:bg-green-700 border-transparent" />
             </div>
           </div>
         </div>
