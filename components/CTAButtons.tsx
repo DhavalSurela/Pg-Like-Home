@@ -39,7 +39,7 @@ export function WhatsAppButton({ className, variant = "secondary", size = "md" }
                 "inline-flex items-center gap-2 rounded-md font-semibold transition-colors",
                 variant === "primary" && "bg-brand-blue text-white hover:bg-[#005f6b]",
                 variant === "secondary" && "bg-green-600 text-white hover:bg-green-700", // Keep WhatsApp green as it's brand-specific
-                variant === "outline" && "border-2 border-current hover:bg-brand-cream/50",
+                variant === "outline" && "border-2 border-green-600 text-green-600 hover:bg-green-50",
                 size === "sm" && "px-3 py-1.5 text-sm",
                 size === "md" && "px-4 py-2 text-base",
                 size === "lg" && "px-6 py-3 text-lg",
