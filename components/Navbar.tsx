@@ -22,14 +22,14 @@ export function Navbar() {
 
     return (
         <header className="sticky top-0 z-40 w-full border-b border-brand-blue/10 bg-brand-cream shadow-sm">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
                     <Logo />
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center gap-6">
+                <nav className="hidden lg:flex items-center gap-6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
                         return (
