@@ -1,10 +1,7 @@
-"use client";
-
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { CallButton, WhatsAppButton } from "./CTAButtons";
 import { Logo } from "./Logo";
 
 export function Navbar() {
@@ -48,12 +45,6 @@ export function Navbar() {
                     })}
                 </nav>
 
-                {/* Desktop CTAs */}
-                <div className="hidden lg:flex items-center gap-4">
-                    <CallButton size="sm" variant="outline" className="hidden xl:inline-flex" />
-                    <WhatsAppButton size="sm" />
-                </div>
-
                 {/* Mobile Menu Toggle */}
                 <button
                     className="lg:hidden p-2"
@@ -85,10 +76,6 @@ export function Navbar() {
                             );
                         })}
                     </nav>
-                    <div className="flex flex-col gap-3 pt-4 border-t">
-                        <CallButton className="w-full justify-center" />
-                        <WhatsAppButton className="w-full justify-center" />
-                    </div>
                 </div>
             )}
         </header>

@@ -39,7 +39,7 @@ export default function About() {
                             <p>BSc, BEd</p>
                         </div>
                         <div className="mt-8">
-                            <CallButton className="w-full justify-center" />
+                            {/* <CallButton className="w-full justify-center" /> - Removed redundant call button */}
                         </div>
                     </div>
 
