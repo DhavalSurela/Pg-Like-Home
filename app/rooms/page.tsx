@@ -94,12 +94,7 @@ export default function Rooms() {
                                 ))}
                             </ul>
 
-                            <div className="mt-auto pt-6 border-t border-slate-100">
-                                <WhatsAppButton
-                                    className="w-full justify-center"
-                                    size="sm"
-                                />
-                            </div>
+
                         </div>
                     ))}
                 </div>
