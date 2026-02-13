@@ -1,0 +1,148 @@
+Here is your PRD in plain TXT format (ready to give to AI agent or save as .txt):
+
+PG LIKE HOME – PUBLIC WEBSITE PRD (PHASE 1)
+
+OBJECTIVE
+Build a fast, SEO-friendly public website for “PG Like Home” to generate WhatsApp and phone enquiries, show rooms, pricing, facilities, food details, rules, gallery, and location.
+No login system and no online booking in this phase.
+
+TARGET USERS
+Students near Gujarat University, IIM Ahmedabad, LD Engineering, HL College, CEPT, JG University, MG Science, working professionals, and parents.
+
+SUCCESS METRICS
+WhatsApp button clicks
+Phone call clicks
+Google Maps direction clicks
+Time spent on site
+
+TECH STACK
+Framework: Next.js (App Router) with Static Site Generation
+Styling: Tailwind CSS
+UI (optional): ShadCN
+Hosting: Vercel
+Images: next/image optimization
+SEO: Next.js metadata + Local Business schema
+
+PAGES AND ROUTES
+
+5.1 HOME (/)
+Hero section with PG name, tagline “Comfort, Care & Feeling of Home” and Call + WhatsApp CTA
+Quick highlights (Pure Veg Food, Wi-Fi, CCTV, RO Water, Housekeeping)
+Room pricing cards (starting ₹9000)
+Nearby colleges grid
+Google Maps embed
+Testimonials placeholder
+
+5.2 ABOUT (/about)
+Owner bio (Raj Parvadiya – Science teacher, BSc BEd)
+Story behind PG and vision
+
+5.3 ROOMS & PRICING (/rooms)
+Pricing table with room type, AC/Non-AC, rent, deposit, electricity, and included facilities
+
+Room data:
+Non AC Hall – 9000
+Non AC 3 Sharing – 10000
+AC 3 Sharing – 11000
+AC 2 Sharing – 14500
+AC 1 Sharing – 20000
+Deposit: One month rent
+Electricity: Included (AC extra)
+Includes: Food, Wi-Fi, Cleaning, RO Water
+
+5.4 FACILITIES (/facilities)
+Icon grid: Wi-Fi, Pure Veg Food, Laundry, Housekeeping, RO Water, Power Backup, Parking, CCTV, Study Table, Cupboard/Locker, 24×7 Water
+
+5.5 FOOD (/food)
+Pure veg meals (breakfast, lunch, dinner)
+Student-decided weekly menu
+Outside food allowed
+Hygienic kitchen
+
+5.6 RULES (/rules)
+No smoking inside PG
+No alcohol
+1 month notice required
+No refund without notice
+No time limit for entry
+
+5.7 GALLERY (/gallery)
+Categories: Rooms, Dining, Building, Common area
+Images stored in public folder or Cloudinary
+
+5.8 CONTACT (/contact)
+Call button: 9054499036
+WhatsApp button: 9925574196
+Email: pglikehome1@gmail.com
+
+Address: C7, 1st Floor, Nilmani Society, Memnagar, beside Sterling Hospital
+Google Maps embed
+Get directions button
+
+GLOBAL COMPONENTS
+Navbar with logo/name, menu links, Call button, WhatsApp button
+Footer with contact info and quick links
+Floating WhatsApp and Call buttons
+
+SEO REQUIREMENTS
+Keywords: PG in Memnagar, PG near Gujarat University, PG near IIM Ahmedabad, Student PG in Ahmedabad
+Each page must have title, meta description, and OpenGraph tags
+Add Local Business schema with address, phone, and map
+
+PERFORMANCE REQUIREMENTS
+Lighthouse score above 90
+Mobile-first responsive design
+Lazy load gallery images
+Use next/image optimization
+
+DESIGN GUIDELINES
+Clean, student-friendly UI
+White + blue/green color theme
+Card-based layout
+Large CTA buttons
+
+CONTENT SOURCE
+All content provided from PG Like Home details form.
+
+FOLDER STRUCTURE
+
+app/
+page.tsx (Home)
+about/page.tsx
+rooms/page.tsx
+facilities/page.tsx
+food/page.tsx
+rules/page.tsx
+gallery/page.tsx
+contact/page.tsx
+
+components/
+Navbar.tsx
+Footer.tsx
+RoomCard.tsx
+FacilityIcon.tsx
+CTAButtons.tsx
+
+lib/
+seo.ts
+
+public/
+images/
+
+FUTURE COMPATIBILITY
+Structure should allow adding /dashboard route later for resident login and Supabase integration.
+
+TIMELINE
+UI design – 1 day
+Development – 2 to 3 days
+SEO and testing – 1 day
+Total – 4 to 5 days
+
+DEFINITION OF DONE
+All pages implemented
+WhatsApp and Call working
+Google Maps working
+Mobile responsive
+SEO metadata added
+Deployed on Vercel
+Domain connected
