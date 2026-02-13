@@ -159,7 +159,7 @@ export default function Home() {
 
           <div className="bg-slate-100 rounded-2xl overflow-hidden h-96 relative shadow-inner ring-1 ring-slate-200">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.581961477169!2d72.529367!3d23.041627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84c70d462159%3A0xf69d72224773e34a!2sSterling%20Hospital!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.2717290421306!2d72.52838387509269!3d23.050497479154185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85d70d2b8d5f%3A0xa073becfd75ae939!2sPg%20like%20home!5e0!3m2!1sen!2sin!4v1771012444714!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
