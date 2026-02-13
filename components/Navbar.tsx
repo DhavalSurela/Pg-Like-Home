@@ -20,7 +20,7 @@ export function Navbar() {
     ];
 
     return (
-        <header className="sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <header className="sticky top-0 z-40 w-full border-b border-brand-blue/10 bg-brand-cream shadow-sm">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
@@ -58,7 +58,7 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="lg:hidden border-t p-4 bg-white shadow-lg space-y-4">
+                <div className="lg:hidden border-t border-brand-blue/10 p-4 bg-brand-cream shadow-lg space-y-4">
                     <nav className="flex flex-col space-y-3">
                         {navLinks.map((link) => (
                             <Link
