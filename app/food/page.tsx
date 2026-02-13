@@ -8,24 +8,48 @@ export const metadata = {
 };
 
 export default function Food() {
-    const menuHighlights = [
+    const weeklyMenu = [
         {
-            title: "Breakfast",
-            time: "8:00 AM - 9:30 AM",
-            items: ["Poha", "Upma", "Thepla", "Ganthiya", "Bread Butter", "Tea/Coffee"],
-            icon: Coffee,
+            day: "Monday",
+            breakfast: "Thepla / Ganthiya",
+            lunch: "Kadhi",
+            dinner: "Kobi Bateta / Choli Bateta / Choli"
         },
         {
-            title: "Lunch",
-            time: "12:30 PM - 2:00 PM",
-            items: ["Roti", "Sabzi (seasonal)", "Dal/Kadhi", "Rice", "Salad", "Buttermilk"],
-            icon: Pizza, // Pizza icon as placeholder for Lunch meal
+            day: "Tuesday",
+            breakfast: "Bhakri",
+            lunch: "Green Sabzi (Seasonal)",
+            dinner: "Ringan Bateta / Papdi Bateta / Flower Bateta"
         },
         {
-            title: "Dinner",
-            time: "8:00 PM - 9:30 PM",
-            items: ["Roti/Bhakhri", "Sabzi", "Khichdi-Kadhi", "Milk (on request)"],
-            icon: Utensils,
+            day: "Wednesday",
+            breakfast: "Bateta Poha / Vaghareli Roti",
+            lunch: "Kadhi",
+            dinner: "Fast Food"
+        },
+        {
+            day: "Thursday",
+            breakfast: "Pav Bhaji / Biscuit / Sev Mamra",
+            lunch: "Mix Sabzi",
+            dinner: "Sukibhaji - Roti"
+        },
+        {
+            day: "Friday",
+            breakfast: "Handvo / Dhokla",
+            lunch: "Tindora Bateta / Kobi Bateta / Flower Bateta",
+            dinner: "Sev Tameta Parotha"
+        },
+        {
+            day: "Saturday",
+            breakfast: "Sev Khamani / Masala Bhakri",
+            lunch: "Kadhi",
+            dinner: "Kadhi Khichdi / Pulao"
+        },
+        {
+            day: "Sunday",
+            breakfast: "Pav Bhaji / Biscuit / Sev Mamra",
+            lunch: "Punjabi / Sweet",
+            dinner: "Light Meal / Closed"
         }
     ];
 
@@ -60,30 +84,36 @@ export default function Food() {
             </div>
 
             <div className="container mx-auto px-4 mt-12">
-                <div className="grid md:grid-cols-3 gap-8">
-                    {menuHighlights.map((meal, index) => (
-                        <div key={index} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
-                            <div className="bg-brand-orange/5 p-6 flex flex-col items-center border-b border-brand-orange/10">
-                                <div className="p-3 bg-white text-brand-orange rounded-full shadow-sm mb-3">
-                                    <meal.icon className="w-6 h-6" />
+
+                {/* Weekly Menu Grid */}
+                <div className="mb-16">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center flex items-center justify-center gap-2">
+                        <Utensils className="text-brand-orange" />
+                        Weekly Time Table
+                    </h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {weeklyMenu.map((item, index) => (
+                            <div key={index} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+                                <div className="bg-brand-orange/10 p-4 border-b border-brand-orange/20 text-center">
+                                    <h3 className="font-bold text-brand-dark text-lg">{item.day}</h3>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-800">{meal.title}</h3>
-                                <span className="text-xs text-slate-500 font-medium bg-brand-orange/10 px-2 py-1 rounded-full mt-2">
-                                    {meal.time}
-                                </span>
+                                <div className="p-4 space-y-4">
+                                    <div>
+                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Breakfast</p>
+                                        <p className="text-slate-700 font-medium text-sm">{item.breakfast}</p>
+                                    </div>
+                                    <div className="border-t border-slate-50 pt-2">
+                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Lunch</p>
+                                        <p className="text-slate-700 font-medium text-sm">{item.lunch}</p>
+                                    </div>
+                                    <div className="border-t border-slate-50 pt-2">
+                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Dinner</p>
+                                        <p className="text-slate-700 font-medium text-sm">{item.dinner}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="p-6">
-                                <ul className="space-y-2">
-                                    {meal.items.map((item, idx) => (
-                                        <li key={idx} className="flex items-center gap-2 text-slate-600 text-sm border-b border-slate-50 last:border-0 py-2 first:pt-0">
-                                            <span className="w-1.5 h-1.5 bg-brand-green rounded-full shrink-0" />
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
 
                 {/* Features */}
