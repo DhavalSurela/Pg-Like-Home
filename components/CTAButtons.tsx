@@ -14,9 +14,9 @@ export function CallButton({ className, variant = "primary", size = "md" }: CTAB
             href="tel:9054499036"
             className={cn(
                 "inline-flex items-center gap-2 rounded-md font-semibold transition-colors",
-                variant === "primary" && "bg-blue-600 text-white hover:bg-blue-700",
-                variant === "secondary" && "bg-green-600 text-white hover:bg-green-700",
-                variant === "outline" && "border-2 border-current hover:bg-accent/10",
+                variant === "primary" && "bg-brand-blue text-white hover:bg-[#005f6b]",
+                variant === "secondary" && "bg-brand-green text-brand-dark hover:bg-[#6db5ae]",
+                variant === "outline" && "border-2 border-current hover:bg-brand-cream/50",
                 size === "sm" && "px-3 py-1.5 text-sm",
                 size === "md" && "px-4 py-2 text-base",
                 size === "lg" && "px-6 py-3 text-lg",
@@ -37,9 +37,9 @@ export function WhatsAppButton({ className, variant = "secondary", size = "md" }
             rel="noopener noreferrer"
             className={cn(
                 "inline-flex items-center gap-2 rounded-md font-semibold transition-colors",
-                variant === "primary" && "bg-blue-600 text-white hover:bg-blue-700",
-                variant === "secondary" && "bg-green-600 text-white hover:bg-green-700",
-                variant === "outline" && "border-2 border-current hover:bg-accent/10",
+                variant === "primary" && "bg-brand-blue text-white hover:bg-[#005f6b]",
+                variant === "secondary" && "bg-green-600 text-white hover:bg-green-700", // Keep WhatsApp green as it's brand-specific
+                variant === "outline" && "border-2 border-current hover:bg-brand-cream/50",
                 size === "sm" && "px-3 py-1.5 text-sm",
                 size === "md" && "px-4 py-2 text-base",
                 size === "lg" && "px-6 py-3 text-lg",

@@ -39,8 +39,8 @@ export default function Rules() {
     ];
 
     return (
-        <div className="bg-slate-50 min-h-screen pb-20">
-            <div className="bg-slate-900 text-white py-16">
+        <div className="bg-brand-cream min-h-screen pb-20">
+            <div className="bg-brand-dark text-white py-16">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">House Rules</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -52,8 +52,8 @@ export default function Rules() {
             <div className="container mx-auto px-4 mt-12 max-w-4xl">
                 <div className="grid gap-6">
                     {rules.map((rule, index) => (
-                        <div key={index} className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-start gap-4 hover:bg-slate-50 transition-colors">
-                            <div className={`p-3 rounded-full shrink-0 ${rule.bg} ${rule.color}`}>
+                        <div key={index} className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex gap-4">
+                            <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-brand-dark shrink-0">
                                 <rule.icon className="w-6 h-6" />
                             </div>
                             <div>

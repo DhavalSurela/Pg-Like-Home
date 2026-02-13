@@ -24,7 +24,7 @@ export function Navbar() {
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-blue-700">PG Like Home</span>
+                    <span className="text-xl font-bold text-brand-blue">PG Like Home</span>
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -33,7 +33,7 @@ export function Navbar() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-sm font-medium transition-colors hover:text-blue-600"
+                            className="text-sm font-medium text-brand-dark transition-colors hover:text-brand-orange"
                         >
                             {link.label}
                         </Link>

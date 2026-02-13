@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function About() {
     return (
-        <div className="bg-white min-h-screen pb-20">
-            <div className="bg-slate-900 text-white py-16">
+        <div className="bg-brand-cream min-h-screen pb-20">
+            <div className="bg-brand-dark text-white py-16">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">About Us</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -21,8 +21,8 @@ export default function About() {
             <div className="container mx-auto px-4 mt-12 max-w-4xl">
                 <div className="flex flex-col md:flex-row gap-12 items-start">
                     {/* Bio Card */}
-                    <div className="w-full md:w-1/3 bg-slate-50 p-8 rounded-2xl border border-slate-100 text-center sticky top-24">
-                        <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600">
+                    <div className="w-full md:w-1/3 bg-white p-8 rounded-2xl border border-slate-200 text-center sticky top-24 shadow-sm">
+                        <div className="w-24 h-24 bg-brand-cream rounded-full flex items-center justify-center mx-auto mb-6 text-brand-blue">
                             <User className="w-10 h-10" />
                         </div>
                         <h2 className="text-xl font-bold text-slate-900">Raj Parvadiya</h2>
@@ -55,8 +55,8 @@ export default function About() {
                             </p>
                         </section>
 
-                        <section className="bg-blue-50 p-6 rounded-xl border border-blue-100">
-                            <h3 className="text-lg font-semibold text-blue-900 mb-2">Why "Like Home"?</h3>
+                        <section className="bg-brand-cream p-6 rounded-xl border border-brand-green/20">
+                            <h3 className="text-lg font-semibold text-brand-blue mb-2">Why "Like Home"?</h3>
                             <ul className="list-disc list-inside space-y-2 text-slate-700">
                                 <li>We celebrate festivals together like a family.</li>
                                 <li>We care for you when you are sick.</li>

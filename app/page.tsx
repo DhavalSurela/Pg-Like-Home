@@ -23,9 +23,9 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-slate-900 text-white py-20 lg:py-32">
+      <section className="relative bg-brand-dark text-white py-20 lg:py-32">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 to-slate-900/60 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/95 to-brand-blue/70 z-10" />
           {/* Placeholder for Hero Image - using a high quality Unsplash image */}
           {/* In a real project, we would use next/image with a local file or optimized remote image */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522771753035-1a5b6562f3ba?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay" />
@@ -35,13 +35,13 @@ export default function Home() {
           <div className="max-w-3xl space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
               Comfort, Care & <br className="hidden md:block" />
-              <span className="text-blue-400">Feeling of Home</span>
+              <span className="text-brand-orange">Feeling of Home</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 max-w-xl font-light">
-              Premium student accommodation in Memnagar. Close to Gujarat University, IIM, and HL College. Pure veg food, AC rooms, and all amenities included.
+            <p className="text-lg md:text-xl text-slate-100 max-w-xl font-light">
+              Premium student accommodation in Memnagar. Delicious veg food, hygienic stay, and family atmosphere.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <CallButton size="lg" />
+              <CallButton size="lg" className="bg-brand-orange hover:bg-[#D08060] text-white" />
               <WhatsAppButton size="lg" variant="outline" className="text-white border-white hover:bg-white/10" />
             </div>
           </div>

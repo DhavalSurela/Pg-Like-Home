@@ -1,19 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  
-  /* Custom Colors */
-  --color-primary: #0F5132; /* Strong Green */
-  --color-secondary: #0D6EFD; /* Strong Blue */
-  --color-accent: #198754; /* Green Accent */
-  --color-neutral-bg: #F8F9FA; /* Light Gray Background */
+  --font-sans: var(--font-inter);
+
+  /* Brand Colors inspired by marketing material */
+  /* Blue: Trust, Cleanliness (from "Clean & Hygienic Stay") */
+  --color-brand-blue: #006D77;
+  /* Orange: Food, Warmth, Energy (from "Delicious, Healthy Food") */
+  --color-brand-orange: #E29578;
+  /* Green: Freshness, Eco (from decorative swirls) */
+  --color-brand-green: #83C5BE;
+  /* Cream: Background, Home-like feel */
+  --color-brand-cream: #EDF6F9;
+  /* Dark: Text */
+  --color-brand-dark: #1D3557;
+
+  /* Semantic Mappings */
+  --color-primary: var(--color-brand-blue);
+  --color-secondary: var(--color-brand-orange);
+  --color-accent: var(--color-brand-green);
+  --color-background-alt: var(--color-brand-cream);
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1D3557;
+  /* Deep Navy for text instead of black */
 }
 
 @media (prefers-color-scheme: dark) {

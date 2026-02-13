@@ -46,8 +46,8 @@ export default function Rooms() {
     ];
 
     return (
-        <div className="bg-slate-50 min-h-screen pb-20">
-            <div className="bg-slate-900 text-white py-16">
+        <div className="bg-brand-cream min-h-screen pb-20">
+            <div className="bg-brand-dark text-white py-16">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Rooms & Pricing</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -62,10 +62,10 @@ export default function Rooms() {
                     {rooms.map((room, index) => (
                         <div
                             key={index}
-                            className={`relative bg-white rounded-2xl p-6 shadow-sm border ${room.recommended ? 'border-blue-500 ring-1 ring-blue-500 shadow-md' : 'border-slate-200'} flex flex-col`}
+                            className={`relative bg-white rounded-2xl p-6 shadow-sm border ${room.recommended ? 'border-brand-orange ring-1 ring-brand-orange shadow-md' : 'border-slate-200'} flex flex-col`}
                         >
                             {room.recommended && (
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
                                     Most Popular
                                 </div>
                             )}
