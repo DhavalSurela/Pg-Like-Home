@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Use Inter for 'Modern & Professional'
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -33,6 +34,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingCTA />
+        <Analytics />
       </body>
     </html>
   );
