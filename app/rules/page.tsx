@@ -40,7 +40,7 @@ export default function Rules() {
 
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-primary text-white py-16">
+            <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">House Rules</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">

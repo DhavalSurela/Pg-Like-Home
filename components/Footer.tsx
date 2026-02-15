@@ -31,11 +31,11 @@ export function Footer() {
                         <h4 className="text-lg font-semibold text-white">Contact Us</h4>
                         <ul className="space-y-3 text-sm">
                             <li className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-brand-blue shrink-0" />
+                                <MapPin className="w-5 h-5 text-brand-teal shrink-0" />
                                 <span>C7, 1st Floor, Nilmani Society, Memnagar, Ahmedabad</span>
                             </li>
                             <li className="flex lg:hidden items-center gap-3">
-                                <Phone className="w-5 h-5 text-brand-blue shrink-0" />
+                                <Phone className="w-5 h-5 text-brand-teal shrink-0" />
                                 <a href="tel:9054499036" className="hover:text-white transition-colors">9054499036</a>
                             </li>
                             <li className="flex items-center gap-3">
@@ -49,7 +49,7 @@ export function Footer() {
                                 <a href="https://wa.me/919925574196" className="hover:text-white transition-colors">9925574196</a>
                             </li>
                             <li className="flex items-center gap-3">
-                                <Mail className="w-5 h-5 text-brand-blue shrink-0" />
+                                <Mail className="w-5 h-5 text-brand-teal shrink-0" />
                                 <a href="mailto:pglikehome1@gmail.com" className="hover:text-white transition-colors">pglikehome1@gmail.com</a>
                             </li>
                             <li className="flex items-center gap-3">

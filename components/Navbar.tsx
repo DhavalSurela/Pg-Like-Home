@@ -21,7 +21,7 @@ export function Navbar() {
     ];
 
     return (
-        <header className="sticky top-0 z-40 w-full border-b border-brand-blue/10 bg-brand-cream shadow-sm">
+        <header className="sticky top-0 z-40 w-full border-b border-brand-teal/10 bg-brand-cream shadow-sm">
             <div className="container mx-auto px-6 md:px-12 h-16 flex items-center">
                 {/* Logo Wrapper */}
                 <div className="flex-1 basis-0 flex items-center">
@@ -52,7 +52,7 @@ export function Navbar() {
                 {/* Right Side / Mobile Toggle Wrapper */}
                 <div className="flex-1 basis-0 flex items-center justify-end">
                     <button
-                        className="lg:hidden p-2 text-brand-dark hover:bg-brand-blue/10 rounded-md transition-colors"
+                        className="lg:hidden p-2 text-brand-dark hover:bg-brand-teal/10 rounded-md transition-colors"
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle menu"
                     >
@@ -63,7 +63,7 @@ export function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="lg:hidden border-t border-brand-blue/10 p-4 bg-brand-cream shadow-lg space-y-4">
+                <div className="lg:hidden border-t border-brand-teal/10 p-4 bg-brand-cream shadow-lg space-y-4">
                     <nav className="flex flex-col space-y-3">
                         {navLinks.map((link) => {
                             const isActive = pathname === link.href;

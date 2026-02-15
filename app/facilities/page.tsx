@@ -1,5 +1,5 @@
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
-import { Wifi, Utensils, Droplets, Zap, Shirt, Video, ShieldCheck, Warehouse, Coffee, LampDesk } from "lucide-react";
+import { Wifi, Utensils, Droplets, Zap, Shirt, Video, ShieldCheck, Warehouse, Coffee, LampDesk, Plug } from "lucide-react";
 
 export const metadata = {
     title: "Facilities - PG Like Home",
@@ -17,12 +17,13 @@ export default function Facilities() {
         { icon: Video, label: "CCTV Surveillance", desc: "24x7 security monitoring for your safety." },
         { icon: Warehouse, label: "Cupboard & Locker", desc: "Personal storage space with lock." },
         { icon: LampDesk, label: "Study Table", desc: "Dedicated study chair and table in rooms." },
+        { icon: Plug, label: "Personal Switchbox", desc: "Individual charging points near every bed." },
         { icon: Coffee, label: "Dining Area", desc: "Common dining space with TV." },
     ];
 
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-primary text-white py-16">
+            <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Premium Facilities</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -35,7 +36,7 @@ export default function Facilities() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {facilities.map((f, i) => (
                         <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-all hover:-translate-y-1 flex flex-col items-center text-center group">
-                            <div className="w-16 h-16 bg-brand-cream text-brand-blue rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                            <div className="w-16 h-16 bg-brand-cream text-brand-teal rounded-full flex items-center justify-center mb-4 group-hover:bg-brand-teal group-hover:text-white transition-colors">
                                 <f.icon className="w-8 h-8" />
                             </div>
                             <h3 className="text-lg font-bold text-slate-800 mb-2">{f.label}</h3>

@@ -47,7 +47,7 @@ export default function Rooms() {
 
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-primary text-white py-16">
+            <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Rooms & Pricing</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -64,7 +64,7 @@ export default function Rooms() {
                             key={index}
                             className={`relative bg-white rounded-2xl p-6 shadow-sm border border-t-4 flex flex-col w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm transition-transform hover:-translate-y-1 ${room.recommended
                                 ? 'border-brand-orange ring-1 ring-brand-orange/20 shadow-md scale-105 z-10'
-                                : 'border-slate-200 border-t-brand-blue/30 hover:border-t-brand-blue hover:shadow-md'
+                                : 'border-slate-200 border-t-brand-teal/30 hover:border-t-brand-teal hover:shadow-md'
                                 }`}
                         >
                             {room.recommended && (

@@ -10,7 +10,7 @@ export const metadata = {
 export default function About() {
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-primary text-white py-16">
+            <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">About Us</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -79,7 +79,7 @@ export default function About() {
                         </section>
 
                         <section className="bg-brand-cream p-6 rounded-xl border border-brand-green/20">
-                            <h3 className="text-lg font-semibold text-brand-blue mb-2">Why "Like Home"?</h3>
+                            <h3 className="text-lg font-semibold text-brand-teal mb-2">Why "Like Home"?</h3>
                             <ul className="list-disc list-inside space-y-2 text-slate-700">
                                 <li>We celebrate festivals together like a family.</li>
                                 <li>We care for you when you are sick.</li>
@@ -92,7 +92,7 @@ export default function About() {
             </div>
 
             {/* Contact Section - Merged */}
-            <div className="container mx-auto px-6 md:px-12 mt-20 border-t border-brand-dark/10 pt-16">
+            <div className="container mx-auto px-6 md:px-12 mt-8 border-t border-brand-dark/10 pt-8">
                 <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Get in Touch</h2>
                 <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                     {/* Contact Details */}
@@ -101,7 +101,7 @@ export default function About() {
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                                <div className="w-10 h-10 rounded-full bg-brand-teal/10 flex items-center justify-center text-brand-teal shrink-0">
                                     <MapPin className="w-5 h-5" />
                                 </div>
                                 <div>

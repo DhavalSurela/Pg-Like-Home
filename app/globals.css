@@ -5,8 +5,8 @@
 
 
   /* Brand Colors inspired by marketing material */
-  /* Blue: Trust, Cleanliness (from "Clean & Hygienic Stay") */
-  --color-brand-blue: #006D77;
+  /* Teal: Trust, Cleanliness (from "Clean & Hygienic Stay") */
+  --color-brand-teal: #006D77;
   /* Orange: Food, Warmth, Energy (from "Delicious, Healthy Food") */
   --color-brand-orange: #E29578;
   /* Green: Freshness, Eco (from decorative swirls) */
@@ -17,8 +17,7 @@
   --color-brand-dark: #1D3557;
 
   /* Semantic Mappings */
-  --color-primary: var(--color-brand-blue);
-  --color-brand-primary: var(--color-brand-blue);
+  --color-primary: var(--color-brand-teal);
   --color-secondary: var(--color-brand-orange);
   --color-accent: var(--color-brand-green);
   --color-background-alt: var(--color-brand-cream);

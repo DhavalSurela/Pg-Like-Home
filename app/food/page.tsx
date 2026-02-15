@@ -92,6 +92,10 @@ export default function Food() {
             title: "Buttermilk provided daily",
             desc: "Fresh Buttermilk available daily for all residents.",
         },
+        {
+            title: "Kitchen Hygiene",
+            desc: "Our kitchen is cleaned twice daily. We use high-quality oil, fresh vegetables, and RO water for cooking. Parents are welcome to inspect our kitchen at any time.",
+        },
     ];
 
     // Get images for each category
@@ -102,7 +106,7 @@ export default function Food() {
 
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-primary text-white py-16">
+            <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Hygiene & Taste</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
@@ -119,9 +123,9 @@ export default function Food() {
                         <Utensils className="text-brand-orange" />
                         Weekly Time Table
                     </h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0 pb-8 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                         {weeklyMenu.map((item, index) => (
-                            <div key={index} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div key={index} className="min-w-[85vw] sm:min-w-[300px] md:min-w-0 snap-center bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
                                 <div className="bg-brand-orange/10 p-4 border-b border-brand-orange/20 text-center">
                                     <h3 className="font-bold text-brand-dark text-lg">{item.day}</h3>
                                 </div>
@@ -145,35 +149,22 @@ export default function Food() {
                 </div>
 
                 {/* Features */}
-                <div className="mt-16 grid md:grid-cols-2 gap-8">
-                    <div className="bg-white p-8 rounded-2xl border border-slate-200">
-                        <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                            <Salad className="text-brand-green" />
-                            Special Features
-                        </h3>
-                        <div className="space-y-4">
-                            {features.map((feature, i) => (
-                                <div key={i} className="flex gap-4 items-start">
-                                    <div className="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center text-brand-green shrink-0 mt-1">
-                                        <CheckCircle2 className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-slate-800">{feature.title}</h3>
-                                        <p className="text-slate-600 text-sm mt-1">{feature.desc}</p>
-                                    </div>
+                <div className="mt-16 bg-white p-8 rounded-2xl border border-slate-200">
+                    <h3 className="text-xl font-bold text-slate-900 mb-8 text-center">
+                        Special Features
+                    </h3>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {features.map((feature, i) => (
+                            <div key={i} className="flex gap-4 items-start">
+                                <div className="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center text-brand-green shrink-0 mt-1">
+                                    <CheckCircle2 className="w-5 h-5" />
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="bg-white p-8 rounded-2xl border border-slate-200">
-                        <h3 className="text-xl font-bold text-slate-900 mb-4">Kitchen Hygiene</h3>
-                        <p className="text-slate-600 mb-4 leading-relaxed">
-                            Our kitchen is cleaned twice daily. We use high-quality oil, fresh vegetables, and RO water for cooking. Parents are welcome to inspect our kitchen at any time.
-                        </p>
-                        <div className="p-4 bg-brand-orange/10 border border-brand-orange/20 rounded-lg text-sm text-brand-dark">
-                            <strong>Note:</strong> Outside food is allowed. You can order from Zomato/Swiggy if you wish to eat something different.
-                        </div>
+                                <div>
+                                    <h3 className="font-bold text-slate-800">{feature.title}</h3>
+                                    <p className="text-slate-600 text-sm mt-1">{feature.desc}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 

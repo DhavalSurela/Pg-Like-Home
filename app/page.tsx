@@ -3,7 +3,30 @@ import { Check, MapPin, Star, Shield, Wifi, Utensils, Droplets, Zap } from "luci
 import Link from "next/link";
 import Image from "next/image";
 
+import fs from "fs";
+import path from "path";
+import { FoodShowcase } from "@/components/FoodShowcase";
+
+// Helper to get images
+function getImages(category: string): string[] {
+  const dirPath = path.join(process.cwd(), "public", "images", "food", category);
+  try {
+    if (!fs.existsSync(dirPath)) return [];
+    return fs.readdirSync(dirPath)
+      .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
+      .map(file => `/images/food/${category}/${file}`);
+  } catch (error) {
+    return [];
+  }
+}
+
 export default function Home() {
+  // Read images server-side
+  const breakfastImages = getImages("breakfast");
+  const lunchDinnerImages = getImages("lunch-dinner");
+  const festivalImages = getImages("festival-food");
+  const fastFoodImages = getImages("fastfood");
+
   const features = [
     { icon: Utensils, label: "Pure Veg Food", desc: "Breakfast, Lunch, Dinner" },
     { icon: Wifi, label: "High-Speed Wi-Fi", desc: "Unlimited 5G internet" },
@@ -17,15 +40,14 @@ export default function Home() {
     { type: "Non AC Hall", price: "₹9,000", sharing: "Multi Share" },
     { type: "Non AC Room", price: "₹10,000", sharing: "3 Sharing" },
     { type: "AC Room", price: "₹11,000", sharing: "3 Sharing" },
-    { type: "AC Room", price: "₹14,500", sharing: "2 Sharing" },
   ];
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-brand-primary text-white py-20 lg:py-32">
+      <section className="relative bg-brand-teal text-white py-20 lg:py-32">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/95 to-brand-blue/70 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-teal/95 to-brand-teal/70 z-10" />
           {/* Placeholder for Hero Image - using a high quality Unsplash image */}
           {/* In a real project, we would use next/image with a local file or optimized remote image */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522771753035-1a5b6562f3ba?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay" />
@@ -68,30 +90,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Food Strip */}
-      <section className="py-12 bg-brand-cream border-b border-brand-orange/10">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Freshly Prepared Meals</h2>
-            <Link href="/food" className="text-brand-orange font-semibold hover:text-orange-700 transition-colors text-sm flex items-center gap-1">
-              View Full Menu <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[12, 18, 24, 28].map((num) => (
-              <div key={num} className="relative h-48 md:h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-slate-200">
-                <Image
-                  src={`/images/food/food-${num}.jpg`}
-                  alt="Delicious veg meal"
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Food Strip - Dynamic Showcase */}
+      <FoodShowcase
+        breakfastImages={breakfastImages}
+        lunchDinnerImages={lunchDinnerImages}
+        festivalImages={festivalImages}
+        fastFoodImages={fastFoodImages}
+      />
 
       {/* Pricing Teaser */}
       <section className="py-20 bg-slate-50">
@@ -101,7 +106,7 @@ export default function Home() {
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">Transparent pricing with no hidden charges. Rent includes food, housekeeping, Wi-Fi, and all standard facilities.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {pricing.map((p, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-blue-500" />
