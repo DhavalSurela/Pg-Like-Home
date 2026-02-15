@@ -29,7 +29,7 @@ export default function Food() {
         },
         {
             day: "Thursday",
-            breakfast: "Pav Bhaji / Biscuit / Sev Mamra",
+            breakfast: "Pav Khari / Biscuit / Sev Mamra",
             lunch: "Mix Sabzi",
             dinner: "Sukibhaji - Roti"
         },
@@ -47,9 +47,9 @@ export default function Food() {
         },
         {
             day: "Sunday",
-            breakfast: "Pav Bhaji / Biscuit / Sev Mamra",
+            breakfast: "Pav Khari / Biscuit / Sev Mamra",
             lunch: "Punjabi / Sweet",
-            dinner: "Light Meal / Closed"
+            dinner: "Closed"
         }
     ];
 
@@ -67,8 +67,8 @@ export default function Food() {
             desc: "Special meal with Sweet/Farsan every Sunday.",
         },
         {
-            title: "Milk provided daily",
-            desc: "Fresh milk available daily for all residents.",
+            title: "Buttermilk provided daily",
+            desc: "Fresh Buttermilk available daily for all residents.",
         },
     ];
 

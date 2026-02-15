@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, Instagram } from "lucide-react";
 
 export function Footer() {
     return (
@@ -45,6 +45,10 @@ export function Footer() {
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-brand-blue shrink-0" />
                                 <a href="mailto:pglikehome1@gmail.com" className="hover:text-white transition-colors">pglikehome1@gmail.com</a>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Instagram className="w-5 h-5 text-[#E1306C] shrink-0" />
+                                <a href="https://www.instagram.com/pglike_home_1?igsh=OXFxaTVpczE1eXR4" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Follow us on Instagram</a>
                             </li>
                         </ul>
                     </div>

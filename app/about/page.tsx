@@ -1,4 +1,4 @@
-import { CallButton, WhatsAppButton } from "@/components/CTAButtons";
+import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { User, MapPin, MessageCircle } from "lucide-react";
 import Image from "next/image";
 
@@ -114,6 +114,7 @@ export default function About() {
                         <div className="mt-8 pt-8 border-t border-slate-100 grid gap-4">
                             <CallButton size="lg" className="justify-center w-full" />
                             <WhatsAppButton size="lg" className="justify-center w-full" variant="secondary" />
+                            <InstagramButton size="lg" className="justify-center w-full" />
                         </div>
                     </div>
 

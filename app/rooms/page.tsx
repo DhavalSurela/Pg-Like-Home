@@ -1,4 +1,4 @@
-import { CallButton, WhatsAppButton } from "@/components/CTAButtons";
+import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { Check, Info } from "lucide-react";
 
 export const metadata = {
@@ -132,6 +132,7 @@ export default function Rooms() {
                     <div className="flex justify-center gap-4">
                         <CallButton />
                         <WhatsAppButton />
+                        <InstagramButton />
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { CallButton } from "@/components/CTAButtons";
+import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { Wifi, Utensils, Droplets, Zap, Shirt, Video, ShieldCheck, Warehouse, Coffee, LampDesk } from "lucide-react";
 
 export const metadata = {
@@ -51,7 +51,11 @@ export default function Facilities() {
                             Unlike other PGs, we don't just provide a bed. We provide an ecosystem where you can focus on your career while we take care of your daily needs. Our facilities are maintained daily to ensure high standards of hygiene and comfort.
                         </p>
                         <div className="pt-4">
-                            <CallButton size="lg" />
+                            <div className="pt-4 flex flex-wrap justify-center gap-4">
+                                <CallButton size="lg" />
+                                <WhatsAppButton size="lg" />
+                                <InstagramButton size="lg" />
+                            </div>
                         </div>
                     </div>
                 </div>

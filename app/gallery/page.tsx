@@ -1,4 +1,4 @@
-import { CallButton } from "@/components/CTAButtons";
+import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import Image from "next/image";
 
 export const metadata = {
@@ -50,7 +50,11 @@ export default function Gallery() {
 
                 <div className="mt-16 text-center">
                     <h2 className="text-2xl font-bold text-slate-900 mb-6">Want to see it in person?</h2>
-                    <CallButton size="lg" />
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <CallButton size="lg" />
+                        <WhatsAppButton size="lg" />
+                        <InstagramButton size="lg" />
+                    </div>
                 </div>
             </div>
         </div>

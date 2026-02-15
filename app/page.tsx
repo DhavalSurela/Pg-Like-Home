@@ -1,4 +1,4 @@
-import { CallButton, WhatsAppButton } from "@/components/CTAButtons";
+import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { Check, MapPin, Star, Shield, Wifi, Utensils, Droplets, Zap } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -43,6 +43,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 pt-4">
               <CallButton size="lg" className="bg-brand-orange hover:bg-[#D08060] text-white" />
               <WhatsAppButton size="lg" className="hover:bg-green-700 border-transparent" />
+              <InstagramButton size="lg" />
             </div>
           </div>
         </div>
