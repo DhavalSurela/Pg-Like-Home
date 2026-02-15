@@ -22,8 +22,8 @@ export default function Facilities() {
 
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-dark text-white py-16">
-                <div className="container mx-auto px-4 text-center">
+            <div className="bg-brand-primary text-white py-16">
+                <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Premium Facilities</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
                         Everything you need for a comfortable stay. No extra charges.
@@ -31,7 +31,7 @@ export default function Facilities() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-12">
+            <div className="container mx-auto px-6 md:px-12 mt-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {facilities.map((f, i) => (
                         <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-all hover:-translate-y-1 flex flex-col items-center text-center group">

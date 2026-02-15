@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-brand-dark text-white py-20 lg:py-32">
+      <section className="relative bg-brand-primary text-white py-20 lg:py-32">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/95 to-brand-blue/70 z-10" />
           {/* Placeholder for Hero Image - using a high quality Unsplash image */}
@@ -31,7 +31,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522771753035-1a5b6562f3ba?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay" />
         </div>
 
-        <div className="container relative z-20 mx-auto px-4">
+        <div className="container relative z-20 mx-auto px-4 md:px-8">
           <div className="max-w-3xl space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
               Comfort, Care & <br className="hidden md:block" />
@@ -51,7 +51,7 @@ export default function Home() {
 
       {/* Quick Highlights */}
       <section className="py-16 bg-white border-b border-slate-100">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
             {features.map((f, i) => (
               <div key={i} className="flex flex-col items-center space-y-3 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
@@ -70,7 +70,7 @@ export default function Home() {
 
       {/* Food Strip */}
       <section className="py-12 bg-brand-cream border-b border-brand-orange/10">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-slate-900">Freshly Prepared Meals</h2>
             <Link href="/food" className="text-brand-orange font-semibold hover:text-orange-700 transition-colors text-sm flex items-center gap-1">
@@ -95,7 +95,7 @@ export default function Home() {
 
       {/* Pricing Teaser */}
       <section className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900">Affordable Pricing</h2>
             <p className="text-slate-600 mt-3 max-w-2xl mx-auto">Transparent pricing with no hidden charges. Rent includes food, housekeeping, Wi-Fi, and all standard facilities.</p>
@@ -130,7 +130,7 @@ export default function Home() {
 
       {/* Location / Colleges */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Prime Location in Memnagar</h2>

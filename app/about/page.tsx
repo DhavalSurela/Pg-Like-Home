@@ -10,8 +10,8 @@ export const metadata = {
 export default function About() {
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-dark text-white py-16">
-                <div className="container mx-auto px-4 text-center">
+            <div className="bg-brand-primary text-white py-16">
+                <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">About Us</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
                         Driven by a passion for education and student welfare, creating a home away from home.
@@ -19,32 +19,48 @@ export default function About() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-12 max-w-4xl">
+            <div className="container mx-auto px-6 md:px-12 mt-12 max-w-5xl">
                 <div className="flex flex-col md:flex-row gap-12 items-start">
-                    {/* Bio Card */}
-                    <div className="w-full md:w-1/3 bg-white p-8 rounded-2xl border border-slate-200 text-center md:sticky md:top-24 shadow-sm">
-                        <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-brand-cream shadow-md">
-                            <Image /* next/image needs to be imported if not already, checking imports... it's missing in file view */
-                                src="/images/owner.jpg"
-                                alt="Raj Parvadiya"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 160px, 160px"
-                            />
+                    {/* Bio Cards Column */}
+                    <div className="w-full md:w-2/5 space-y-8 md:sticky md:top-24">
+                        {/* Owner 1: Lalitbhai */}
+                        <div className="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                            <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-brand-cream shadow-md">
+                                <Image
+                                    src="/images/owner-lalitbhai.jpg"
+                                    alt="Lalitbhai Parvadiya"
+                                    fill
+                                    className="object-contain"
+                                    sizes="128px"
+                                />
+                            </div>
+                            <h2 className="text-xl font-bold text-slate-900">Lalitbhai Parvadiya</h2>
+                            <p className="text-xs font-bold text-brand-orange uppercase tracking-wider mt-1">Owner & Founder</p>
+                            <p className="text-sm font-medium text-slate-600 mt-2">News Reporter</p>
                         </div>
-                        <h2 className="text-xl font-bold text-slate-900">Raj Parvadiya</h2>
-                        <p className="text-sm font-medium text-blue-600 mt-1">Owner & Founder</p>
-                        <div className="mt-4 text-sm text-slate-600 space-y-2">
-                            <p>Science Teacher</p>
-                            <p>BSc, BEd</p>
-                        </div>
-                        <div className="mt-8">
-                            {/* <CallButton className="w-full justify-center" /> - Removed redundant call button */}
+
+                        {/* Owner 2: Raj */}
+                        <div className="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+                            <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-brand-cream shadow-md">
+                                <Image
+                                    src="/images/owner.jpg"
+                                    alt="Raj Parvadiya"
+                                    fill
+                                    className="object-cover"
+                                    sizes="128px"
+                                />
+                            </div>
+                            <h2 className="text-xl font-bold text-slate-900">Raj Parvadiya</h2>
+                            <p className="text-xs font-bold text-brand-orange uppercase tracking-wider mt-1">Owner & Founder</p>
+                            <div className="mt-2 text-sm text-slate-600 space-y-1">
+                                <p className="font-medium">Science Teacher</p>
+                                <p className="text-xs">BSc, BEd</p>
+                            </div>
                         </div>
                     </div>
 
                     {/* Story Content */}
-                    <div className="w-full md:w-2/3 space-y-8">
+                    <div className="w-full md:w-3/5 space-y-8">
                         <section>
                             <h2 className="text-2xl font-bold text-slate-900 mb-4">Our Vision</h2>
                             <p className="text-slate-600 leading-relaxed">
@@ -76,7 +92,7 @@ export default function About() {
             </div>
 
             {/* Contact Section - Merged */}
-            <div className="container mx-auto px-4 mt-20 border-t border-brand-dark/10 pt-16">
+            <div className="container mx-auto px-6 md:px-12 mt-20 border-t border-brand-dark/10 pt-16">
                 <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Get in Touch</h2>
                 <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                     {/* Contact Details */}

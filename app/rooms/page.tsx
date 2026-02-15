@@ -47,8 +47,8 @@ export default function Rooms() {
 
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-dark text-white py-16">
-                <div className="container mx-auto px-4 text-center">
+            <div className="bg-brand-primary text-white py-16">
+                <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Rooms & Pricing</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
                         Transparent pricing. No hidden costs. Choose the room that fits your budget and comfort.
@@ -56,7 +56,7 @@ export default function Rooms() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-12">
+            <div className="container mx-auto px-6 md:px-12 mt-12">
                 {/* Pricing Grid - Centered Flex/Grid approach for better balance with 5 items */}
                 <div className="flex flex-wrap justify-center gap-6">
                     {rooms.map((room, index) => (

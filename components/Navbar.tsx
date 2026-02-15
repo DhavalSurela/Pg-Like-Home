@@ -22,21 +22,23 @@ export function Navbar() {
 
     return (
         <header className="sticky top-0 z-40 w-full border-b border-brand-blue/10 bg-brand-cream shadow-sm">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
-                {/* Logo */}
-                <Link href="/" className="flex items-center space-x-2">
-                    <Logo />
-                </Link>
+            <div className="container mx-auto px-6 md:px-12 h-16 flex items-center">
+                {/* Logo Wrapper */}
+                <div className="flex-1 basis-0 flex items-center">
+                    <Link href="/" className="flex items-center space-x-2">
+                        <Logo />
+                    </Link>
+                </div>
 
-                {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center gap-6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                {/* Desktop Navigation - Centered */}
+                <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 flex-[2]">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
                         return (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={`text-sm font-medium transition-colors py-1 ${isActive
+                                className={`text-sm font-medium transition-colors py-1 whitespace-nowrap ${isActive
                                     ? "text-brand-orange font-bold border-b-2 border-brand-orange"
                                     : "text-brand-dark hover:text-brand-orange"
                                     }`}
@@ -47,14 +49,16 @@ export function Navbar() {
                     })}
                 </nav>
 
-                {/* Mobile Menu Toggle */}
-                <button
-                    className="lg:hidden p-2 text-brand-dark hover:bg-brand-blue/10 rounded-md transition-colors"
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Toggle menu"
-                >
-                    {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                </button>
+                {/* Right Side / Mobile Toggle Wrapper */}
+                <div className="flex-1 basis-0 flex items-center justify-end">
+                    <button
+                        className="lg:hidden p-2 text-brand-dark hover:bg-brand-blue/10 rounded-md transition-colors"
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}

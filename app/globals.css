@@ -3,6 +3,7 @@
 @theme {
   --font-sans: var(--font-inter);
 
+
   /* Brand Colors inspired by marketing material */
   /* Blue: Trust, Cleanliness (from "Clean & Hygienic Stay") */
   --color-brand-blue: #006D77;
@@ -17,6 +18,7 @@
 
   /* Semantic Mappings */
   --color-primary: var(--color-brand-blue);
+  --color-brand-primary: var(--color-brand-blue);
   --color-secondary: var(--color-brand-orange);
   --color-accent: var(--color-brand-green);
   --color-background-alt: var(--color-brand-cream);

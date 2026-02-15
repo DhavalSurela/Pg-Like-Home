@@ -1,11 +1,33 @@
 import { CallButton } from "@/components/CTAButtons";
-import { Utensils, Clock, AlertCircle, Salad, CheckCircle2, Coffee, Pizza } from "lucide-react";
+import { Utensils, Clock, AlertCircle, Salad, CheckCircle2, Coffee, Pizza, PartyPopper, UtensilsCrossed } from "lucide-react";
 import Image from "next/image";
+import fs from "fs";
+import path from "path";
+import { ImageSlider } from "@/components/ImageSlider";
 
 export const metadata = {
     title: "Food Menu - PG Like Home",
     description: "Pure vegetarian, hygienic, and nutritious food served daily at PG Like Home.",
 };
+
+// Helper function to get images from a directory
+function getImages(category: string): string[] {
+    const dirPath = path.join(process.cwd(), "public", "images", "food", category);
+
+    try {
+        if (!fs.existsSync(dirPath)) {
+            return [];
+        }
+
+        const files = fs.readdirSync(dirPath);
+        return files
+            .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
+            .map(file => `/images/food/${category}/${file}`);
+    } catch (error) {
+        console.error(`Error reading directory ${category}:`, error);
+        return [];
+    }
+}
 
 export default function Food() {
     const weeklyMenu = [
@@ -72,10 +94,16 @@ export default function Food() {
         },
     ];
 
+    // Get images for each category
+    const breakfastImages = getImages("breakfast");
+    const lunchDinnerImages = getImages("lunch-dinner");
+    const festivalImages = getImages("festival-food");
+    const fastFoodImages = getImages("fastfood");
+
     return (
         <div className="bg-brand-cream min-h-screen pb-20">
-            <div className="bg-brand-dark text-white py-16">
-                <div className="container mx-auto px-4 text-center">
+            <div className="bg-brand-primary text-white py-16">
+                <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Hygiene & Taste</h1>
                     <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
                         We believe that good food is essential for good health and better studies. Pure vegetarian meals prepared with love.
@@ -83,7 +111,7 @@ export default function Food() {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-12">
+            <div className="container mx-auto px-6 md:px-12 mt-12">
 
                 {/* Weekly Menu Grid */}
                 <div className="mb-16">
@@ -149,22 +177,52 @@ export default function Food() {
                     </div>
                 </div>
 
-                {/* Food Gallery */}
-                <div className="mt-16">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Our Delicious Meals</h2>
-                    <div className="grid md:grid-cols-3 gap-6">
-                        {Array.from({ length: 33 }, (_, i) => i + 1).map((num) => (
-                            <div key={num} className="relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all group bg-slate-200">
-                                <Image
-                                    src={`/images/food/food-${num}.jpg`}
-                                    alt={`Delicious food at PG Like Home ${num}`}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    priority={num <= 6}
-                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
+                {/* Food Categories Sliders */}
+                <div className="mt-20 space-y-20">
+                    <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">Our Delicious Meals</h2>
+
+                    {/* Breakfast */}
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-yellow-100 rounded-lg text-yellow-700">
+                                <Coffee className="w-6 h-6" />
                             </div>
-                        ))}
+                            <h3 className="text-2xl font-bold text-slate-800">Breakfast</h3>
+                        </div>
+                        <ImageSlider images={breakfastImages} category="Breakfast" />
+                    </div>
+
+                    {/* Lunch & Dinner */}
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-orange-100 rounded-lg text-orange-700">
+                                <UtensilsCrossed className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-slate-800">Lunch & Dinner</h3>
+                        </div>
+                        <ImageSlider images={lunchDinnerImages} category="Lunch & Dinner" />
+                    </div>
+
+                    {/* Festival Food */}
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-purple-100 rounded-lg text-purple-700">
+                                <PartyPopper className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-slate-800">Festival Day Food</h3>
+                        </div>
+                        <ImageSlider images={festivalImages} category="Festival Food" />
+                    </div>
+
+                    {/* Fast Food */}
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-red-100 rounded-lg text-red-700">
+                                <Pizza className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-slate-800">Fast Food</h3>
+                        </div>
+                        <ImageSlider images={fastFoodImages} category="Fast Food" />
                     </div>
                 </div>
             </div>
