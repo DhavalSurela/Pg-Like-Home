@@ -49,7 +49,7 @@ export function Navbar() {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="lg:hidden p-2"
+                    className="lg:hidden p-2 text-brand-dark hover:bg-brand-blue/10 rounded-md transition-colors"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label="Toggle menu"
                 >

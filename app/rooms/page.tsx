@@ -75,7 +75,7 @@ export default function Rooms() {
 
                             <div className="mb-4 text-center border-b border-slate-100 pb-4">
                                 <h3 className="text-xl font-bold text-brand-dark">{room.title}</h3>
-                                <p className="text-sm font-medium text-brand-blue/80 mt-1 uppercase tracking-wider">{room.type}</p>
+                                <p className="text-sm font-medium text-[#e42020] mt-1 uppercase tracking-wider">{room.type}</p>
                             </div>
 
                             <div className="mb-6 flex justify-center items-baseline gap-1 text-brand-dark">

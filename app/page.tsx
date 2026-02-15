@@ -104,7 +104,7 @@ export default function Home() {
             {pricing.map((p, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-blue-500" />
-                <h3 className="font-medium text-slate-500 uppercase tracking-wide text-xs">{p.sharing}</h3>
+                <h3 className="font-medium text-[#e42020] uppercase tracking-wide text-xs">{p.sharing}</h3>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="text-3xl font-bold text-slate-900">{p.price}</span>
                   <span className="text-sm text-slate-400">/mo</span>
