@@ -41,7 +41,7 @@ export default function Home() {
               Premium student accommodation in Memnagar. Delicious veg food, hygienic stay, and family atmosphere.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <CallButton size="lg" className="bg-brand-orange hover:bg-[#D08060] text-white" />
+              <CallButton size="lg" />
               <WhatsAppButton size="lg" className="hover:bg-green-700 border-transparent" />
               <InstagramButton size="lg" />
             </div>
