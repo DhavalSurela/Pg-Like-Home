@@ -169,9 +169,7 @@ export default function Home() {
               referrerPolicy="no-referrer-when-downgrade"
               className="absolute inset-0 w-full h-full grayscale-[50%] hover:grayscale-0 transition-all duration-500"
             />
-            <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">
-              Near Sterling Hospital
-            </div>
+
           </div>
         </div>
       </section>

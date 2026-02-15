@@ -92,7 +92,7 @@ export default function About() {
                                     <h3 className="font-bold text-slate-900">Address</h3>
                                     <p className="text-slate-600 mt-1">
                                         C7, 1st Floor, Nilmani Society,<br />
-                                        Beside Sterling Hospital,<br />
+
                                         Memnagar, Ahmedabad - 380052
                                     </p>
                                 </div>
