@@ -34,7 +34,7 @@ export function Footer() {
                                 <MapPin className="w-5 h-5 text-brand-blue shrink-0" />
                                 <span>C7, 1st Floor, Nilmani Society, Memnagar, Ahmedabad</span>
                             </li>
-                            <li className="flex md:hidden items-center gap-3">
+                            <li className="flex lg:hidden items-center gap-3">
                                 <Phone className="w-5 h-5 text-brand-blue shrink-0" />
                                 <a href="tel:9054499036" className="hover:text-white transition-colors">9054499036</a>
                             </li>

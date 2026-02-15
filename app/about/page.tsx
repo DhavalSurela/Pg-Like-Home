@@ -22,7 +22,7 @@ export default function About() {
             <div className="container mx-auto px-4 mt-12 max-w-4xl">
                 <div className="flex flex-col md:flex-row gap-12 items-start">
                     {/* Bio Card */}
-                    <div className="w-full md:w-1/3 bg-white p-8 rounded-2xl border border-slate-200 text-center sticky top-24 shadow-sm">
+                    <div className="w-full md:w-1/3 bg-white p-8 rounded-2xl border border-slate-200 text-center md:sticky md:top-24 shadow-sm">
                         <div className="relative w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-brand-cream shadow-md">
                             <Image /* next/image needs to be imported if not already, checking imports... it's missing in file view */
                                 src="/images/owner.jpg"

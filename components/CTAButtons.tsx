@@ -13,7 +13,7 @@ export function CallButton({ className, variant = "primary", size = "md" }: CTAB
         <Link
             href="tel:9054499036"
             className={cn(
-                "inline-flex md:hidden items-center gap-2 rounded-md font-semibold transition-colors",
+                "inline-flex lg:hidden items-center gap-2 rounded-md font-semibold transition-colors",
                 variant === "primary" && "bg-white text-black hover:bg-slate-100 border border-slate-200",
                 variant === "secondary" && "bg-brand-green text-brand-dark hover:bg-[#6db5ae]",
                 variant === "outline" && "border-2 border-current hover:bg-brand-cream/50",
