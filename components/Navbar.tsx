@@ -15,7 +15,7 @@ export function Navbar() {
         { href: "/rooms", label: "Rooms & Pricing" },
         { href: "/food", label: "Food" },
         { href: "/facilities", label: "Facilities" },
-        { href: "/gallery", label: "Gallery" },
+
         { href: "/rules", label: "Rules" },
         { href: "/about", label: "About & Contact" },
     ];
