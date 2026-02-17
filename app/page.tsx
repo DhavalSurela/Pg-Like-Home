@@ -1,5 +1,6 @@
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
-import { Check, MapPin, Star, Shield, Wifi, Utensils, Droplets, Zap } from "lucide-react";
+import { RoomCard } from "@/components/RoomCard";
+import { MapPin, Star, Shield, Wifi, Utensils, Droplets, Zap } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -36,10 +37,34 @@ export default function Home() {
     { icon: Star, label: "Housekeeping", desc: "Daily room cleaning" },
   ];
 
-  const pricing = [
-    { type: "Non AC Hall", price: "₹9,000", sharing: "Multi Share" },
-    { type: "Non AC Room", price: "₹10,000", sharing: "3 Sharing" },
-    { type: "AC Room", price: "₹11,000", sharing: "3 Sharing" },
+  const featuredRooms = [
+    {
+      title: "Multi Sharing",
+      subtitle: "Non AC Hall",
+      price: "₹9,000",
+      tag: "Budget",
+      description: "Great for building friendships and keeping costs low.",
+      features: ["Bed & Mattress", "Study Table", "Shared Washroom", "Fan & Lights"],
+      recommended: false,
+    },
+    {
+      title: "3 Sharing",
+      subtitle: "Non AC Room",
+      price: "₹10,000",
+      tag: "Standard",
+      description: "A balanced mix of social living and personal comfort.",
+      features: ["Personal Cupboard", "Study Table", "Attached Washroom", "Fan & Lights"],
+      recommended: true,
+    },
+    {
+      title: "3 Sharing",
+      subtitle: "AC Room",
+      price: "₹11,000",
+      tag: "Premium",
+      description: "Cool comfort with shared amenities.",
+      features: ["Air Conditioner", "Personal Cupboard", "Study Table", "Attached Washroom"],
+      recommended: false,
+    },
   ];
 
   return (
@@ -101,32 +126,21 @@ export default function Home() {
       {/* Pricing Teaser */}
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900">Affordable Pricing</h2>
-            <p className="text-slate-600 mt-3 max-w-2xl mx-auto">Transparent pricing with no hidden charges. Rent includes food, housekeeping, Wi-Fi, and all standard facilities.</p>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-slate-900">Transparent Pricing</h2>
+            <Link href="/rooms" className="hidden md:flex text-brand-orange font-semibold hover:text-orange-700 transition-colors text-sm items-center gap-1">
+              View detailed pricing table <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pricing.map((p, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-blue-500" />
-                <h3 className="font-medium text-[#e42020] uppercase tracking-wide text-xs">{p.sharing}</h3>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="text-3xl font-bold text-slate-900">{p.price}</span>
-                  <span className="text-sm text-slate-400">/mo</span>
-                </div>
-                <div className="mt-2 text-sm font-semibold text-blue-700">{p.type}</div>
-                <ul className="mt-6 space-y-3 text-sm text-slate-600">
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-green-500 shrink-0" /> All Meals Included</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-green-500 shrink-0" /> Electricity {(p.type.includes("Non AC") ? "(Included)" : "(Excluded)")}</li>
-                  <li className="flex gap-2"><Check className="w-4 h-4 text-green-500 shrink-0" /> Daily Cleaning</li>
-                </ul>
-              </div>
+            {featuredRooms.map((room, i) => (
+              <RoomCard key={i} room={room} className="w-full" />
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link href="/rooms" className="text-blue-600 font-semibold hover:text-blue-800 transition-colors inline-flex items-center justify-center gap-1">
+          <div className="mt-8 flex justify-center md:hidden">
+            <Link href="/rooms" className="px-6 py-3 bg-white border border-brand-orange/20 rounded-full text-brand-orange font-semibold hover:bg-brand-orange/5 transition-all text-sm flex items-center gap-2 shadow-sm">
               View detailed pricing table <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>

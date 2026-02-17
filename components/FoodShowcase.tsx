@@ -33,10 +33,10 @@ export function FoodShowcase({
     };
 
     const categories = [
-        { name: "Breakfast", image: getImage(breakfastImages) },
-        { name: "Lunch & Dinner", image: getImage(lunchDinnerImages) },
-        { name: "Festival Special", image: getImage(festivalImages) },
-        { name: "Fast Food", image: getImage(fastFoodImages) },
+        { name: "Breakfast", image: getImage(breakfastImages), link: "/food#breakfast" },
+        { name: "Lunch & Dinner", image: getImage(lunchDinnerImages), link: "/food#lunch-dinner" },
+        { name: "Festival Special", image: getImage(festivalImages), link: "/food#festival-food" },
+        { name: "Fast Food", image: getImage(fastFoodImages), link: "/food#fast-food" },
     ];
 
     return (
@@ -44,14 +44,14 @@ export function FoodShowcase({
             <div className="container mx-auto px-6 md:px-12">
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-bold text-slate-900">Freshly Prepared Meals</h2>
-                    <Link href="/food" className="text-brand-orange font-semibold hover:text-orange-700 transition-colors text-sm flex items-center gap-1">
+                    <Link href="/food" className="hidden md:flex text-brand-orange font-semibold hover:text-orange-700 transition-colors text-sm items-center gap-1">
                         View Full Menu <span aria-hidden="true">&rarr;</span>
                     </Link>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {categories.map((cat, idx) => (
-                        <div key={idx} className="relative h-48 md:h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-slate-200">
+                        <Link key={idx} href={cat.link} className="block relative h-48 md:h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group bg-slate-200">
                             {cat.image ? (
                                 <>
                                     <Image
@@ -71,8 +71,14 @@ export function FoodShowcase({
                                     <span className="text-xs opacity-70">{cat.name}</span>
                                 </div>
                             )}
-                        </div>
+                        </Link>
                     ))}
+                </div>
+
+                <div className="mt-8 flex justify-center md:hidden">
+                    <Link href="/food" className="px-6 py-3 bg-white border border-brand-orange/20 rounded-full text-brand-orange font-semibold hover:bg-brand-orange/5 transition-all text-sm flex items-center gap-2 shadow-sm">
+                        View Full Menu <span aria-hidden="true">&rarr;</span>
+                    </Link>
                 </div>
             </div>
         </section>

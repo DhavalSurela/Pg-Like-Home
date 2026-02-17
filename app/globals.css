@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-jakarta), var(--font-inter);
 
 
   /* Brand Colors inspired by marketing material */
@@ -12,9 +12,9 @@
   /* Green: Freshness, Eco (from decorative swirls) */
   --color-brand-green: #83C5BE;
   /* Cream: Background, Home-like feel */
-  --color-brand-cream: #EDF6F9;
+  --color-brand-cream: #F8FAFC;
   /* Dark: Text */
-  --color-brand-dark: #1D3557;
+  --color-brand-dark: #0F172A;
 
   /* Semantic Mappings */
   --color-primary: var(--color-brand-teal);

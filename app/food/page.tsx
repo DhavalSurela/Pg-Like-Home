@@ -34,42 +34,42 @@ export default function Food() {
         {
             day: "Monday",
             breakfast: "Thepla / Ganthiya",
-            lunch: "Kadhi",
-            dinner: "Kobi Bateta / Choli Bateta / Choli"
+            lunch: "Chana Sabzi",
+            dinner: "Olo Rotlo"
         },
         {
             day: "Tuesday",
-            breakfast: "Bhakri",
-            lunch: "Green Sabzi (Seasonal)",
-            dinner: "Ringan Bateta / Papdi Bateta / Flower Bateta"
+            breakfast: "Bhakhri",
+            lunch: "Kobi Bateta",
+            dinner: "Sev Tameta Parotha/Bhakhari"
         },
         {
             day: "Wednesday",
-            breakfast: "Bateta Poha / Vaghareli Roti",
-            lunch: "Kadhi",
+            breakfast: "Bateta Poha",
+            lunch: "Mag Sabzi",
             dinner: "Fast Food"
         },
         {
             day: "Thursday",
-            breakfast: "Pav Khari / Biscuit / Sev Mamra",
+            breakfast: "Handvo",
             lunch: "Mix Sabzi",
-            dinner: "Sukibhaji - Roti"
+            dinner: "Bhaji - Roti"
         },
         {
             day: "Friday",
-            breakfast: "Handvo / Dhokla",
-            lunch: "Tindora Bateta / Kobi Bateta / Flower Bateta",
-            dinner: "Sev Tameta Parotha"
+            breakfast: "Sev Khamani",
+            lunch: "Guvar Bateta",
+            dinner: "Our Choice"
         },
         {
             day: "Saturday",
-            breakfast: "Sev Khamani / Masala Bhakri",
-            lunch: "Kadhi",
-            dinner: "Kadhi Khichdi / Pulao"
+            breakfast: "Idli",
+            lunch: "Chhole",
+            dinner: "Pulao Bateta"
         },
         {
             day: "Sunday",
-            breakfast: "Pav Khari / Biscuit / Sev Mamra",
+            breakfast: "Pav Khari / Biscuit",
             lunch: "Punjabi / Sweet",
             dinner: "Closed"
         }
@@ -173,7 +173,7 @@ export default function Food() {
                     <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">Our Delicious Meals</h2>
 
                     {/* Breakfast */}
-                    <div className="space-y-4">
+                    <div id="breakfast" className="space-y-4 scroll-mt-24">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-yellow-100 rounded-lg text-yellow-700">
                                 <Coffee className="w-6 h-6" />
@@ -184,7 +184,7 @@ export default function Food() {
                     </div>
 
                     {/* Lunch & Dinner */}
-                    <div className="space-y-4">
+                    <div id="lunch-dinner" className="space-y-4 scroll-mt-24">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-orange-100 rounded-lg text-orange-700">
                                 <UtensilsCrossed className="w-6 h-6" />
@@ -195,7 +195,7 @@ export default function Food() {
                     </div>
 
                     {/* Festival Food */}
-                    <div className="space-y-4">
+                    <div id="festival-food" className="space-y-4 scroll-mt-24">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-purple-100 rounded-lg text-purple-700">
                                 <PartyPopper className="w-6 h-6" />
@@ -206,7 +206,7 @@ export default function Food() {
                     </div>
 
                     {/* Fast Food */}
-                    <div className="space-y-4">
+                    <div id="fast-food" className="space-y-4 scroll-mt-24">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-red-100 rounded-lg text-red-700">
                                 <Pizza className="w-6 h-6" />

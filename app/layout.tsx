@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Use Inter for 'Modern & Professional'
+import { Inter, Plus_Jakarta_Sans } from "next/font/google"; // Use Inter for 'Modern & Professional'
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { FloatingCTA } from "@/components/FloatingCTA";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 
 export const metadata: Metadata = {
   title: "PG Like Home - Student PG in Memnagar, Ahmedabad",
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased text-slate-900 bg-slate-50 flex flex-col min-h-screen`}>
+      <body className={`${inter.variable} ${jakarta.variable} font-sans antialiased text-slate-900 bg-slate-50 flex flex-col min-h-screen`}>
         <Navbar />
         <main className="flex-grow">
           {children}
