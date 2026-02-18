@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CallButton } from "@/components/CTAButtons";
 import { Utensils, Clock, AlertCircle, Salad, CheckCircle2, Coffee, Pizza, PartyPopper, UtensilsCrossed } from "lucide-react";
 import Image from "next/image";
@@ -5,9 +6,19 @@ import fs from "fs";
 import path from "path";
 import { ImageSlider } from "@/components/ImageSlider";
 
-export const metadata = {
-    title: "Food Menu - PG Like Home",
-    description: "Pure vegetarian, hygienic, and nutritious food served daily at PG Like Home.",
+export const metadata: Metadata = {
+    title: "Food Menu - Pure Veg Meals at PG Like Home",
+    description:
+        "Enjoy unlimited pure vegetarian breakfast, lunch & dinner at PG Like Home, Memnagar. Student-decided weekly menu, festival specials, fast food days & daily buttermilk. Hygienic kitchen with RO water cooking.",
+    keywords: ["PG food Ahmedabad", "veg food hostel Memnagar", "PG with meals", "student food menu", "unlimited food PG"],
+    alternates: {
+        canonical: "https://pg-like-home.vercel.app/food",
+    },
+    openGraph: {
+        title: "Food Menu - Pure Veg Meals Daily | PG Like Home",
+        description: "Unlimited pure veg breakfast, lunch & dinner. Student-decided menus, festival specials & hygienic kitchen.",
+        url: "https://pg-like-home.vercel.app/food",
+    },
 };
 
 // Helper function to get images from a directory

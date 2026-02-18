@@ -1,10 +1,21 @@
+import type { Metadata } from "next";
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { RoomCard } from "@/components/RoomCard";
 import { Info, Utensils, Shield, Droplets, Gamepad2 } from "lucide-react";
 
-export const metadata = {
-    title: "Rooms & Pricing - PG Like Home",
-    description: "Affordable room rent in Memnagar. AC and Non-AC rooms available with food included.",
+export const metadata: Metadata = {
+    title: "Rooms & Pricing - AC/Non-AC PG Rooms from ₹9,000",
+    description:
+        "Transparent PG room pricing in Memnagar, Ahmedabad. Multi-sharing from ₹9,000, 3-sharing non-AC ₹10,000, 3-sharing AC ₹11,000, 2-sharing AC ₹14,500 & single AC ₹20,000/month. Food, Wi-Fi & housekeeping included.",
+    keywords: ["PG room price Ahmedabad", "AC room PG Memnagar", "cheap PG Ahmedabad", "PG rent near Gujarat University", "affordable hostel Ahmedabad"],
+    alternates: {
+        canonical: "https://pg-like-home.vercel.app/rooms",
+    },
+    openGraph: {
+        title: "Rooms & Pricing - PG Like Home, Memnagar",
+        description: "AC/Non-AC rooms from ₹9,000/month with food included. No hidden charges.",
+        url: "https://pg-like-home.vercel.app/rooms",
+    },
 };
 
 

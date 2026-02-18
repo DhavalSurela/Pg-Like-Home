@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { RoomCard } from "@/components/RoomCard";
 import { MapPin, Star, Shield, Wifi, Utensils, Droplets, Zap } from "lucide-react";
@@ -7,6 +8,21 @@ import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import { FoodShowcase } from "@/components/FoodShowcase";
+
+export const metadata: Metadata = {
+  title: "PG Like Home - Best Boys PG in Memnagar, Ahmedabad | AC Rooms & Veg Food",
+  description:
+    "Looking for a boys PG in Memnagar, Ahmedabad? PG Like Home offers AC/Non-AC rooms from ₹9,000/month with pure veg food, Wi-Fi, CCTV, RO water & daily housekeeping. Near Gujarat University, IIM Ahmedabad, LD Engineering & CEPT University.",
+  alternates: {
+    canonical: "https://pg-like-home.vercel.app",
+  },
+  openGraph: {
+    title: "PG Like Home - Best Boys PG in Memnagar, Ahmedabad",
+    description:
+      "Premium student PG with AC rooms & veg food from ₹9,000/month. Near Gujarat University & IIM Ahmedabad.",
+    url: "https://pg-like-home.vercel.app",
+  },
+};
 
 // Helper to get images
 function getImages(category: string): string[] {
@@ -156,6 +172,9 @@ export default function Home() {
               <p className="text-slate-600 leading-relaxed">
                 Located in Nilmani Society, Memnagar, we are strategically placed to significantly reduce your daily commute. Spend less time travelling and more time studying or relaxing.
               </p>
+              <address className="not-italic text-slate-600 text-sm mt-2">
+                C7, 1st Floor, Nilmani Society, Memnagar, Ahmedabad - 380052
+              </address>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">

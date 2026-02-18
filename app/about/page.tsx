@@ -1,10 +1,21 @@
+import type { Metadata } from "next";
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { User, MapPin, MessageCircle } from "lucide-react";
 import Image from "next/image";
 
-export const metadata = {
-    title: "About Us - PG Like Home",
-    description: "Learn about Raj Parvadiya and the vision behind PG Like Home in Memnagar.",
+export const metadata: Metadata = {
+    title: "About Us - Meet the Family Behind PG Like Home",
+    description:
+        "PG Like Home was founded by Lalitbhai & Raj Parvadiya in Memnagar, Ahmedabad with a mission to provide students a home away from home. Learn about our vision, story & values.",
+    keywords: ["about PG Like Home", "PG owner Memnagar", "student PG Ahmedabad story", "Raj Parvadiya PG"],
+    alternates: {
+        canonical: "https://pg-like-home.vercel.app/about",
+    },
+    openGraph: {
+        title: "About Us - PG Like Home, Memnagar",
+        description: "Founded by educators, PG Like Home provides a family atmosphere for students in Ahmedabad.",
+        url: "https://pg-like-home.vercel.app/about",
+    },
 };
 
 export default function About() {

@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import { CallButton } from "@/components/CTAButtons";
 import { AlertCircle, Ban, Clock, DoorClosed, FileText } from "lucide-react";
 
-export const metadata = {
-    title: "Rules & Regulations - PG Like Home",
-    description: "Simple guidelines to ensure a peaceful and disciplined environment for all students.",
+export const metadata: Metadata = {
+    title: "House Rules & Regulations",
+    description:
+        "PG Like Home house rules: no smoking/alcohol, 1-month notice period, visitor policy & refund terms. Simple guidelines for a peaceful student environment in Memnagar, Ahmedabad.",
+    keywords: ["PG rules Ahmedabad", "hostel regulations", "PG notice period", "PG refund policy"],
+    alternates: {
+        canonical: "https://pg-like-home.vercel.app/rules",
+    },
+    openGraph: {
+        title: "House Rules - PG Like Home, Memnagar",
+        description: "Simple rules for a peaceful, disciplined living environment for all students.",
+        url: "https://pg-like-home.vercel.app/rules",
+    },
 };
 
 export default function Rules() {

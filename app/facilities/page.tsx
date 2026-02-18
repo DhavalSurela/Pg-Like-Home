@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
 import { Wifi, Utensils, Droplets, Zap, Shirt, Video, ShieldCheck, Warehouse, Coffee, LampDesk, Plug } from "lucide-react";
 
-export const metadata = {
-    title: "Facilities - PG Like Home",
-    description: "Check out the premium facilities at PG Like Home: Wi-Fi, Food, Laundry, and more.",
+export const metadata: Metadata = {
+    title: "Facilities - Wi-Fi, Food, Laundry & More",
+    description:
+        "PG Like Home facilities include high-speed Wi-Fi, pure veg food, laundry, RO water, CCTV, power backup, daily housekeeping, study tables & personal storage. Everything included in your rent.",
+    keywords: ["PG facilities Ahmedabad", "PG with Wi-Fi Memnagar", "PG with laundry", "hostel amenities Ahmedabad", "PG with food and Wi-Fi"],
+    alternates: {
+        canonical: "https://pg-like-home.vercel.app/facilities",
+    },
+    openGraph: {
+        title: "Premium Facilities - PG Like Home, Memnagar",
+        description: "Wi-Fi, veg food, laundry, CCTV, power backup & daily housekeeping. All included.",
+        url: "https://pg-like-home.vercel.app/facilities",
+    },
 };
 
 export default function Facilities() {
