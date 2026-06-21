@@ -1,0 +1,21 @@
+AUTH IMPLEMENTATION SPEC
+
+Objective:
+Implement login system.
+
+Requirements:
+
+Login page (/login)
+
+Email/password auth with Supabase
+
+Session handling
+
+Logout button
+
+Redirect after login:
+admin → /admin
+resident → /dashboard
+
+Output Required:
+Login page + auth actions.

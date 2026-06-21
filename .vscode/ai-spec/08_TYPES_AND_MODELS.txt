@@ -1,0 +1,14 @@
+TYPES SPEC
+
+Create TypeScript types:
+
+User
+Room
+Payment
+Complaint
+Notice
+
+Use Supabase generated types if available.
+
+Output Required:
+types.ts file.

@@ -1,0 +1,1 @@
+-- Seed data will be added in later tasks when local fixtures are needed.

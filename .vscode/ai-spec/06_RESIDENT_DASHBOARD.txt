@@ -1,0 +1,32 @@
+RESIDENT DASHBOARD SPEC
+
+Pages:
+
+/dashboard
+Show:
+
+Name
+
+Room type
+
+Rent amount
+
+Rent status
+
+/dashboard/payments
+List user payments
+
+/dashboard/complaints
+Form to submit complaint
+List user complaints
+
+/dashboard/notices
+List notices
+
+/dashboard/profile
+Show user info
+
+Data must be filtered by logged-in user only.
+
+Output Required:
+All pages + data fetching.

@@ -1,0 +1,28 @@
+ADMIN PANEL SPEC
+
+Pages:
+
+/admin
+Summary cards (total residents, pending payments)
+
+/admin/residents
+Table view
+Add resident form
+Edit resident
+Delete resident
+
+/admin/payments
+Mark rent as paid
+Filter by month
+
+/admin/complaints
+View all complaints
+Change status
+
+/admin/notices
+Create notice
+Edit notice
+Delete notice
+
+Output Required:
+CRUD operations using Supabase.

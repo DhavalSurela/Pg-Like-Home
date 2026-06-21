@@ -1,0 +1,14 @@
+MIDDLEWARE SPEC
+
+Objective:
+Protect routes based on role.
+
+Rules:
+
+/dashboard → only authenticated users
+/admin → only role = admin
+
+If unauthorized → redirect to /login
+
+Output Required:
+Next.js middleware.ts with role check.

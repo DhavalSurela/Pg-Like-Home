@@ -33,7 +33,7 @@ export default function Facilities() {
     ];
 
     return (
-        <div className="bg-brand-cream min-h-screen pb-20">
+        <div className="bg-brand-cream min-h-dvh pb-20">
             <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Premium Facilities</h1>
@@ -60,7 +60,7 @@ export default function Facilities() {
                     <div className="max-w-3xl mx-auto text-center space-y-6">
                         <h2 className="text-2xl font-bold text-slate-900">Why choose PG Like Home?</h2>
                         <p className="text-slate-600">
-                            Unlike other PGs, we don't just provide a bed. We provide an ecosystem where you can focus on your career while we take care of your daily needs. Our facilities are maintained daily to ensure high standards of hygiene and comfort.
+                            Unlike other PGs, we don&apos;t just provide a bed. We provide an ecosystem where you can focus on your career while we take care of your daily needs. Our facilities are maintained daily to ensure high standards of hygiene and comfort.
                         </p>
                         <div className="pt-4">
                             <div className="pt-4 flex flex-wrap justify-center gap-4">

@@ -116,6 +116,7 @@ export function ImageSlider({ images, category }: ImageSliderProps) {
                             fill
                             className="object-cover pointer-events-none" // pointer-events-none prevents image dragging ghost
                             sizes="(max-width: 768px) 288px, 320px"
+                            unoptimized={src.startsWith("http")}
                         />
                     </div>
                 ))}

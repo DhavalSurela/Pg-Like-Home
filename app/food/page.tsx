@@ -5,6 +5,7 @@ import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import { ImageSlider } from "@/components/ImageSlider";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
     title: "Food Menu - Pure Veg Meals at PG Like Home",
@@ -40,7 +41,7 @@ function getImages(category: string): string[] {
     }
 }
 
-export default function Food() {
+export default async function Food() {
     const weeklyMenu = [
         {
             day: "Monday",
@@ -109,14 +110,38 @@ export default function Food() {
         },
     ];
 
+    // Prefer admin-managed photos from the database; fall back to the bundled
+    // filesystem images per category if the DB has none (or is unreachable).
+    const dbByCategory = new Map<string, string[]>();
+    try {
+        const supabase = await createClient();
+        const { data: photos } = await supabase
+            .from("food_photos")
+            .select("image_url, category, sort_order")
+            .order("sort_order", { ascending: true });
+
+        for (const photo of photos ?? []) {
+            const existing = dbByCategory.get(photo.category) ?? [];
+            existing.push(photo.image_url);
+            dbByCategory.set(photo.category, existing);
+        }
+    } catch {
+        // Ignore and use filesystem fallback below.
+    }
+
+    const categoryImages = (category: string) => {
+        const fromDb = dbByCategory.get(category);
+        return fromDb && fromDb.length > 0 ? fromDb : getImages(category);
+    };
+
     // Get images for each category
-    const breakfastImages = getImages("breakfast");
-    const lunchDinnerImages = getImages("lunch-dinner");
-    const festivalImages = getImages("festival-food");
-    const fastFoodImages = getImages("fastfood");
+    const breakfastImages = categoryImages("breakfast");
+    const lunchDinnerImages = categoryImages("lunch-dinner");
+    const festivalImages = categoryImages("festival-food");
+    const fastFoodImages = categoryImages("fastfood");
 
     return (
-        <div className="bg-brand-cream min-h-screen pb-20">
+        <div className="bg-brand-cream min-h-dvh pb-20">
             <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">Hygiene & Taste</h1>

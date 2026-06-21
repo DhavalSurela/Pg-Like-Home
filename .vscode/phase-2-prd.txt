@@ -1,0 +1,415 @@
+PG LIKE HOME – PHASE 2 PRD (ADMIN PANEL)
+
+OBJECTIVE
+Add an Admin panel for PG management.
+Admin can manage rooms, rents, food photos, pricing, tenants, and inquiries.
+No resident-facing portal in this phase.
+
+USER ROLES
+
+ADMIN (Only role in Phase 2)
+Manage rooms (add, edit, delete room details)
+Manage rents (assign, update, view rent records per tenant)
+Manage food photos (upload, update, delete food/meal photos)
+Manage pricing (set and update PG pricing plans)
+Manage tenants (add, edit, remove tenant records)
+Manage inquiries (view, respond to, and close incoming inquiries)
+
+TECH STACK & ARCHITECTURE
+
+── Frontend & Hosting ──────────────────────────────────
+Framework:     Next.js 14+ (App Router)
+Styling:       Tailwind CSS + ShadCN UI
+Hosting:       Vercel (automatic deployments from Git)
+Rendering:     Server Components by default; Client Components only where interactivity is needed
+
+── Backend ─────────────────────────────────────────────
+Logic:         Next.js Server Actions + API Routes (running on Vercel serverless)
+               Server Actions for forms and mutations (no separate REST layer needed)
+               API Routes for any webhook or third-party callbacks
+
+── Database ────────────────────────────────────────────
+Provider:      Supabase (PostgreSQL)
+Access:        Supabase JS client (server-side only from Server Actions/API routes)
+Safety:        Row Level Security (RLS) policies — admin-only access enforced at DB level
+Migrations:    Supabase CLI for schema versioning
+
+── Authentication ──────────────────────────────────────
+Provider:      Supabase Auth
+Method:        Email + Password (admin only)
+Session:       Supabase SSR helpers (@supabase/ssr) for cookie-based sessions in Next.js
+Route Guard:   Middleware (middleware.ts) to protect all /admin routes server-side
+
+── File / Photo Storage ────────────────────────────────
+Provider:      Supabase Storage (S3-compatible)
+Usage:         Food photo uploads stored in a dedicated bucket
+Access:        Signed URLs or public bucket with RLS policies
+Upload:        Direct-to-Supabase from the browser (bypasses Vercel 4.5MB body limit)
+
+── Developer Experience ────────────────────────────────
+TypeScript:    Strict mode enabled throughout
+Env Variables: .env.local for local dev; Vercel environment variables for production
+Linting:       ESLint + Prettier
+Type Safety:   Supabase generated types (supabase gen types typescript) for DB schema
+
+AUTHENTICATION REQUIREMENTS
+
+Email/password login for admin only
+Protected route for /admin
+Redirect unauthenticated users to login page
+Single admin role (no resident role in this phase)
+
+ADMIN PANEL FEATURES
+
+Blocks Management
+Add new block (block name / flat number, floor, type e.g. 2BHK / 3BHK)
+Edit block details
+Delete block
+View all blocks with rooms inside them
+
+Rooms Management
+Add new room inside a block (room number, type, capacity)
+Edit room details
+Delete room
+View all rooms grouped by block
+A block can have more than 2 rooms (e.g. 3 rooms in a 2BHK)
+
+Rents Management
+Assign rent amount to a room or tenant
+View all rent records
+Mark rent as paid / pending
+Filter rent records by month or tenant
+
+Food Photos Management
+Upload food / meal photos
+Update existing photos
+Delete photos
+Display photos in a gallery view
+
+Pricing Management
+Add pricing plans (e.g. single occupancy, double occupancy)
+Edit pricing (monthly rate, deposit, inclusions)
+Delete pricing plans
+View all active pricing plans
+
+Tenants Management
+Add new tenant (name, phone, email, room, join date)
+Edit tenant details
+Remove tenant
+View all tenants with room and rent info
+
+Inquiries Management
+View all incoming inquiries (name, phone, message, date)
+Mark inquiry as responded / closed
+Add admin notes to an inquiry
+Delete old inquiries
+
+DATABASE TABLES
+
+admin_users
+id
+email
+password_hash
+created_at
+
+blocks
+id
+block_name         (e.g. Flat A, Block 1)
+block_type         (e.g. 2BHK, 3BHK)
+floor
+total_rooms        (number of rooms in this block)
+created_at
+
+rooms
+id
+block_id           (FK → blocks)
+room_number
+room_type          (e.g. single, double, triple)
+capacity           (max tenants in this room)
+status             (available / occupied)
+created_at
+
+tenants
+id
+name
+phone
+email
+room_id (FK → rooms)
+join_date
+created_at
+
+rents
+id
+tenant_id (FK → tenants)
+room_id (FK → rooms)
+month
+amount
+status (paid / pending)
+payment_date
+created_at
+
+food_photos
+id
+title
+image_url
+uploaded_at
+
+pricing
+id
+plan_name
+occupancy_type
+monthly_rate
+deposit
+inclusions
+created_at
+
+inquiries
+id
+name
+phone
+email
+message
+status (new / responded / closed)
+admin_note
+created_at
+
+ROUTES
+
+Public routes remain unchanged (from Phase 1)
+
+Admin protected routes
+/admin                    – Dashboard overview
+/admin/blocks             – Block management (flats/units)
+/admin/rooms              – Room management (grouped by block)
+/admin/tenants            – Tenant management
+/admin/rents              – Rent management
+/admin/food-photos        – Food photo management
+/admin/pricing            – Pricing management
+/admin/inquiries          – Inquiry management
+
+SECURITY REQUIREMENTS
+
+Use Supabase Row Level Security (RLS)
+Admin-only access to all /admin routes
+Store API keys in environment variables
+Middleware to protect all /admin routes
+
+UI REQUIREMENTS
+
+Admin dashboard with summary cards (total rooms, tenants, pending rents, new inquiries)
+Table views for rooms, tenants, rents, inquiries
+Gallery grid view for food photos
+Modal forms for add/edit actions
+Status badges for rent (Paid / Pending) and inquiry (New / Responded / Closed)
+Confirmation dialogs for delete actions
+
+PERFORMANCE REQUIREMENTS
+
+Lazy load table data
+Use server components where possible
+Optimistic UI for status updates
+
+FUTURE PHASE 3
+
+Resident login portal
+Online rent payment (UPI)
+WhatsApp rent reminders
+Bed availability tracker
+Meal menu system
+
+TASK BREAKDOWN
+
+──────────────────────────────────────────────────────────
+TASK 1 – Project Setup & Configuration          [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Install ShadCN UI
+[ ] Install Supabase JS client (@supabase/supabase-js, @supabase/ssr)
+[ ] Set up .env.local with Supabase URL and anon key
+[ ] Install Prettier and configure rules
+[ ] Create Supabase project (production)
+[ ] Connect repo to Vercel, add environment variables on Vercel
+[ ] Set up Supabase CLI for local migrations
+
+
+──────────────────────────────────────────────────────────
+TASK 2 – Database Schema & Migrations           [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Write migration: admin_users table
+[ ] Write migration: blocks table
+[ ] Write migration: rooms table (FK → blocks)
+[ ] Write migration: tenants table (FK → rooms)
+[ ] Write migration: rents table (FK → tenants, rooms)
+[ ] Write migration: food_photos table
+[ ] Write migration: pricing table
+[ ] Write migration: inquiries table
+[ ] Apply migrations to Supabase (local + production)
+[ ] Generate TypeScript types: supabase gen types typescript
+
+──────────────────────────────────────────────────────────
+TASK 3 – Authentication & Route Protection      [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Enable Email + Password auth in Supabase Auth settings
+[ ] Create admin user manually in Supabase Auth dashboard
+[ ] Create /login page with email + password form
+[ ] Implement Server Action for login using Supabase Auth
+[ ] Implement logout action
+[ ] Create middleware.ts to protect all /admin/* routes
+[ ] Redirect unauthenticated users to /login
+[ ] Redirect authenticated admin from /login to /admin
+[ ] Set up Supabase SSR client helper (cookie-based sessions)
+
+──────────────────────────────────────────────────────────
+TASK 4 – Admin Layout & Dashboard Overview      [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Create /admin layout with sidebar navigation
+[ ] Add sidebar links: Dashboard, Blocks, Rooms, Tenants, Rents, Food Photos, Pricing, Inquiries
+[ ] Add logout button in sidebar/header
+[ ] Build /admin dashboard home page with summary cards:
+      – Total blocks
+      – Total rooms
+      – Total tenants
+      – Pending rents count
+      – New inquiries count
+[ ] Fetch summary counts via Server Components
+
+──────────────────────────────────────────────────────────
+TASK 5 – Blocks Management                      [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Build /admin/blocks page with table listing all blocks
+[ ] Show columns: Block Name, Type (2BHK/3BHK), Floor, Total Rooms, Actions
+[ ] Add block form (modal): block name, type, floor, total rooms
+[ ] Server Action: create block
+[ ] Server Action: update block
+[ ] Server Action: delete block (with confirmation dialog)
+[ ] Validate: cannot delete block if it has rooms
+
+──────────────────────────────────────────────────────────
+TASK 6 – Rooms Management                       [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Build /admin/rooms page with table grouped by block
+[ ] Show columns: Block, Room Number, Type, Capacity, Status, Actions
+[ ] Filter rooms by block (dropdown)
+[ ] Add room form (modal): select block, room number, type, capacity
+[ ] Server Action: create room
+[ ] Server Action: update room
+[ ] Server Action: delete room (with confirmation dialog)
+[ ] Validate: cannot delete room if it has a tenant
+
+──────────────────────────────────────────────────────────
+TASK 7 – Tenants Management                     [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Build /admin/tenants page with table listing all tenants
+[ ] Show columns: Name, Phone, Email, Room, Block, Join Date, Actions
+[ ] Add tenant form (modal): name, phone, email, select room, join date
+[ ] Server Action: create tenant (also update room status → occupied)
+[ ] Server Action: update tenant
+[ ] Server Action: remove tenant (also update room status → available)
+[ ] View tenant detail with rent history
+
+──────────────────────────────────────────────────────────
+TASK 8 – Rents Management                       [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Build /admin/rents page with table listing all rent records
+[ ] Show columns: Tenant, Room, Month, Amount, Status (badge), Payment Date, Actions
+[ ] Filter by month and by tenant
+[ ] Add rent record form (modal): select tenant, month, amount
+[ ] Server Action: create rent record
+[ ] Server Action: mark rent as paid (set payment_date)
+[ ] Server Action: mark rent as pending
+[ ] Status badge: green for Paid, red for Pending
+
+──────────────────────────────────────────────────────────
+TASK 9 – Food Photos Management                 [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Create Supabase Storage bucket: food-photos
+[ ] Set bucket policy (public read or signed URLs)
+[ ] Build /admin/food-photos page with gallery grid view
+[ ] Upload form: title + file picker (direct upload to Supabase Storage from browser)
+[ ] Save image_url and title to food_photos table after upload
+[ ] Server Action: update photo title
+[ ] Server Action: delete photo (remove from storage + DB row)
+[ ] Show upload progress indicator
+
+──────────────────────────────────────────────────────────
+TASK 10 – Pricing Management                    [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Build /admin/pricing page with table listing all pricing plans
+[ ] Show columns: Plan Name, Occupancy Type, Monthly Rate, Deposit, Inclusions, Actions
+[ ] Add pricing form (modal): plan name, occupancy type, monthly rate, deposit, inclusions
+[ ] Server Action: create pricing plan
+[ ] Server Action: update pricing plan
+[ ] Server Action: delete pricing plan (with confirmation dialog)
+
+──────────────────────────────────────────────────────────
+TASK 11 – Inquiries Management                  [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Build /admin/inquiries page with table listing all inquiries
+[ ] Show columns: Name, Phone, Email, Message, Status (badge), Date, Actions
+[ ] Filter by status: New / Responded / Closed
+[ ] View inquiry detail in a side panel or modal
+[ ] Server Action: mark inquiry as responded
+[ ] Server Action: mark inquiry as closed
+[ ] Server Action: add / update admin note
+[ ] Server Action: delete inquiry (with confirmation dialog)
+[ ] Status badge: blue for New, yellow for Responded, grey for Closed
+
+──────────────────────────────────────────────────────────
+TASK 12 – RLS Policies & Security               [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Write RLS policy: only authenticated admin can SELECT on all tables
+[ ] Write RLS policy: only authenticated admin can INSERT / UPDATE / DELETE on all tables
+[ ] Write RLS policy: Supabase Storage bucket — admin write, public read (food photos)
+[ ] Test all policies: verify unauthenticated requests are blocked
+[ ] Confirm all /admin routes return redirect without valid session
+
+──────────────────────────────────────────────────────────
+TASK 13 – Testing & QA                          [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Test all CRUD flows (blocks, rooms, tenants, rents, food photos, pricing, inquiries)
+[ ] Test auth: login, logout, session expiry, protected routes
+[ ] Test RLS: confirm DB rejects unauthenticated calls
+[ ] Test photo upload size limits and error handling
+[ ] Cross-browser check (Chrome, Safari, Firefox)
+[ ] Mobile responsive check for admin panel
+
+──────────────────────────────────────────────────────────
+TASK 14 – Deployment                            [0.5 day]
+──────────────────────────────────────────────────────────
+[ ] Push migrations to production Supabase
+[ ] Confirm all environment variables are set on Vercel
+[ ] Deploy to Vercel (main branch)
+[ ] Smoke test all admin features on production URL
+[ ] Set up admin user credentials for production
+
+──────────────────────────────────────────────────────────
+TIMELINE SUMMARY
+──────────────────────────────────────────────────────────
+Task 1  – Project setup & config             0.5 day
+Task 2  – Database schema & migrations       0.5 day
+Task 3  – Auth & route protection            0.5 day
+Task 4  – Admin layout & dashboard           0.5 day
+Task 5  – Blocks management                  0.5 day
+Task 6  – Rooms management                   0.5 day
+Task 7  – Tenants management                 0.5 day
+Task 8  – Rents management                   0.5 day
+Task 9  – Food photos management             0.5 day
+Task 10 – Pricing management                 0.5 day
+Task 11 – Inquiries management               0.5 day
+Task 12 – RLS policies & security            0.5 day
+Task 13 – Testing & QA                       0.5 day
+Task 14 – Deployment                         0.5 day
+
+TOTAL                                        7 days
+
+DEFINITION OF DONE
+
+Admin can log in securely
+Admin can manage rooms (CRUD)
+Admin can manage tenants (CRUD)
+Admin can manage rents (assign, mark paid/pending)
+Admin can upload and manage food photos
+Admin can manage pricing plans
+Admin can view and respond to inquiries
+All /admin routes protected by auth
+RLS policies implemented
+Deployed on Vercel

@@ -84,29 +84,44 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-brand-teal text-white py-20 lg:py-32">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-teal/95 to-brand-teal/70 z-10" />
-          {/* Placeholder for Hero Image - using a high quality Unsplash image */}
-          {/* In a real project, we would use next/image with a local file or optimized remote image */}
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522771753035-1a5b6562f3ba?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay" />
+    <div className="flex flex-col min-h-dvh">
+      <section className="relative bg-brand-teal text-white min-h-[90vh] flex items-center overflow-hidden">
+        {/* Right side illustration (Desktop: full opacity and positioned right, Mobile: faint background) */}
+        <div className="absolute right-0 top-0 bottom-0 w-full lg:left-[45%] lg:w-auto h-full z-0 opacity-15 lg:opacity-100 pointer-events-none">
+          <div className="relative w-full h-full">
+
+          </div>
         </div>
 
-        <div className="container relative z-20 mx-auto px-4 md:px-8">
-          <div className="max-w-3xl space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+        {/* Left Side Decorative Background Elements */}
+        {/* Orange Arc */}
+        <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full border border-brand-orange/20 pointer-events-none z-0" />
+        {/* Dot Grid */}
+        <svg
+          className="absolute bottom-12 left-12 w-32 h-10 opacity-30 text-white fill-current pointer-events-none z-0"
+          viewBox="0 0 128 40"
+        >
+          {Array.from({ length: 3 }).map((_, r) =>
+            Array.from({ length: 8 }).map((_, c) => (
+              <circle key={`${r}-${c}`} cx={12 + c * 16} cy={8 + r * 12} r={2} />
+            ))
+          )}
+        </svg>
+
+        <div className="container relative z-10 mx-auto px-6 md:px-12 py-20 lg:py-32">
+          <div className="max-w-2xl lg:max-w-[540px] space-y-6">
+            <h1 className="text-4xl md:text-5xl lg:text-[4.75rem] lg:leading-[1.1] font-extrabold tracking-tight drop-shadow-md lg:drop-shadow-none">
               Comfort, Care & <br className="hidden md:block" />
               <span className="text-brand-orange">Feeling of Home</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-100 max-w-xl font-light">
-              Premium student accommodation in Memnagar. Delicious veg food, hygienic stay, and family atmosphere.
+            <p className="text-lg md:text-xl text-white/90 max-w-xl font-light drop-shadow-sm lg:drop-shadow-none leading-relaxed">
+              Premium student accommodation in Memnagar. <br className="hidden lg:block" />
+              Delicious veg food, hygienic stay, and family atmosphere.
             </p>
             <div className="hidden md:flex flex-wrap gap-4 pt-4">
               <CallButton size="lg" />
-              <WhatsAppButton size="lg" className="hover:bg-green-700 border-transparent" />
-              <InstagramButton size="lg" />
+              <WhatsAppButton size="lg" className="shadow-md hover:scale-105 active:scale-95 transition-transform" />
+              <InstagramButton size="lg" className="shadow-md hover:scale-105 active:scale-95 transition-transform" />
             </div>
           </div>
         </div>

@@ -1,0 +1,14 @@
+UI COMPONENT SPEC
+
+Create reusable components:
+
+DashboardCard
+StatusBadge (paid/pending/open/resolved)
+DataTable
+FormModal
+ProtectedLayout
+
+Use Tailwind + ShadCN.
+
+Output Required:
+Component files.

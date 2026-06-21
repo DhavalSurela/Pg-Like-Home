@@ -1,20 +1,23 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans: var(--font-jakarta), var(--font-inter);
-
 
   /* Brand Colors inspired by marketing material */
   /* Teal: Trust, Cleanliness (from "Clean & Hygienic Stay") */
   --color-brand-teal: #006D77;
   /* Orange: Food, Warmth, Energy (from "Delicious, Healthy Food") */
-  --color-brand-orange: #E29578;
+  --color-brand-orange: #F3A17E;
   /* Green: Freshness, Eco (from decorative swirls) */
-  --color-brand-green: #83C5BE;
+  --color-brand-green: #83c5be;
   /* Cream: Background, Home-like feel */
-  --color-brand-cream: #F8FAFC;
+  --color-brand-cream: #f8fafc;
   /* Dark: Text */
-  --color-brand-dark: #0F172A;
+  --color-brand-dark: #0f172a;
 
   /* Semantic Mappings */
   --color-primary: var(--color-brand-teal);
@@ -24,20 +27,172 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #1D3557;
   /* Deep Navy for text instead of black */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: var(--font-sans), sans-serif;
+}
+
+@theme inline {
+  --font-heading: var(--font-jakarta), var(--font-inter);
+  --font-sans: var(--font-jakarta), var(--font-inter);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  /* Warm, calm admin canvas — a soft cream gradient with a faint top-corner
+     glow. This warm-neutral base is what gives the panel its premium feel. */
+  .admin-bg {
+    background-color: #f6f3ec;
+    background-image:
+      radial-gradient(52rem 40rem at 88% -12%, rgba(146, 109, 64, 0.07), transparent 60%),
+      radial-gradient(44rem 34rem at -8% -6%, rgba(120, 100, 70, 0.05), transparent 55%),
+      linear-gradient(to bottom, #faf8f2 0%, #f4f0e7 100%);
+  }
+
+  /* Subtle diagonal warm gradient for card surfaces (white → faint cream). */
+  .card-surface {
+    background-image: linear-gradient(135deg, #ffffff 0%, #faf7f1 100%);
+  }
+
+  /* Soft, warm-tinted layered shadows used across the admin surface. */
+  .shadow-card {
+    box-shadow:
+      0 1px 2px 0 rgba(68, 56, 40, 0.04),
+      0 1px 3px 0 rgba(68, 56, 40, 0.06);
+  }
+
+  .shadow-card-md {
+    box-shadow:
+      0 1px 2px 0 rgba(68, 56, 40, 0.04),
+      0 14px 36px -14px rgba(68, 56, 40, 0.18);
+  }
+
+  /* Thin gradient hairline used as a top accent on cards. */
+  .accent-hairline {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      rgba(120, 113, 108, 0.45),
+      transparent
+    );
+  }
 }

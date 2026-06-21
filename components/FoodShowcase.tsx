@@ -21,9 +21,10 @@ export function FoodShowcase({
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        // Set index based on current hour to rotate images hourly
-        const hour = new Date().getHours();
-        setCurrentIndex(hour);
+        // Rotate the featured image by the viewer's local hour. Done after mount
+        // (not during render) to avoid an SSR/client hydration mismatch.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setCurrentIndex(new Date().getHours());
     }, []);
 
     // Helper to get image at current index (looping if index > length)

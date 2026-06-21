@@ -1,0 +1,18 @@
+DEPLOYMENT SPEC
+
+Checklist:
+
+Add env variables to Vercel
+
+Test login flow
+
+Test role redirects
+
+Test RLS security
+
+Test CRUD operations
+
+Ensure production build works
+
+Output Required:
+Deployment verification report.

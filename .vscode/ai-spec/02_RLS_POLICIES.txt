@@ -1,0 +1,39 @@
+RLS POLICY SPEC
+
+Objective:
+Secure database using Row Level Security.
+
+Policies:
+
+users
+
+Resident can read only their own record
+
+Admin can read all
+
+payments
+
+Resident can read only their own payments
+
+Admin full access
+
+complaints
+
+Resident can insert and read their own
+
+Admin full access
+
+notices
+
+All authenticated users can read
+
+Admin can insert/update/delete
+
+rooms
+
+Readable by all authenticated users
+
+Writable only by admin
+
+Output Required:
+SQL policies for all tables.

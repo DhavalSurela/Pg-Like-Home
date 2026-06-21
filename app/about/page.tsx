@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CallButton, WhatsAppButton, InstagramButton } from "@/components/CTAButtons";
-import { User, MapPin, MessageCircle } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
+import { MapPin, MessageCircle, Phone } from "lucide-react";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function About() {
     return (
-        <div className="bg-brand-cream min-h-screen pb-20">
+        <div className="bg-brand-cream min-h-dvh pb-20">
             <div className="bg-brand-teal text-white py-16">
                 <div className="container mx-auto px-6 md:px-12 text-center">
                     <h1 className="text-3xl md:text-4xl font-bold">About Us</h1>
@@ -75,7 +76,7 @@ export default function About() {
                         <section>
                             <h2 className="text-2xl font-bold text-slate-900 mb-4">Our Vision</h2>
                             <p className="text-slate-600 leading-relaxed">
-                                "PG Like Home" was established with a simple yet powerful vision: to provide students and working professionals with accommodation that doesn't just feel like a hostel, but feels like a family. We understand that moving away from home is difficult, and our goal is to bridge that gap by offering care, comfort, and security.
+                                &ldquo;PG Like Home&rdquo; was established with a simple yet powerful vision: to provide students and working professionals with accommodation that doesn&apos;t just feel like a hostel, but feels like a family. We understand that moving away from home is difficult, and our goal is to bridge that gap by offering care, comfort, and security.
                             </p>
                         </section>
 
@@ -90,7 +91,7 @@ export default function About() {
                         </section>
 
                         <section className="bg-brand-cream p-6 rounded-xl border border-brand-green/20">
-                            <h3 className="text-lg font-semibold text-brand-teal mb-2">Why "Like Home"?</h3>
+                            <h3 className="text-lg font-semibold text-brand-teal mb-2">Why &ldquo;Like Home&rdquo;?</h3>
                             <ul className="list-disc list-inside space-y-2 text-slate-700">
                                 <li>We celebrate festivals together like a family.</li>
                                 <li>We care for you when you are sick.</li>
@@ -126,6 +127,18 @@ export default function About() {
                             </div>
 
                             <div className="flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-full bg-brand-teal/10 flex items-center justify-center text-brand-teal shrink-0">
+                                    <Phone className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-slate-900">Phone</h3>
+                                    <a href="tel:9925574196" className="text-slate-600 mt-1 hover:text-blue-600 block">
+                                        +91 99255 74196
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-4">
                                 <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
                                     <MessageCircle className="w-5 h-5" />
                                 </div>
@@ -145,27 +158,30 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* Map */}
-                    <div className="bg-slate-200 rounded-2xl overflow-hidden h-[450px] border border-slate-300 shadow-inner relative group">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.2717290421306!2d72.52838387509269!3d23.050497479154185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85d70d2b8d5f%3A0xa073becfd75ae939!2sPg%20like%20home!5e0!3m2!1sen!2sin!4v1771012444714!5m2!1sen!2sin"
-                            width="100%"
-                            height="100%"
-                            style={{ border: 0 }}
-                            allowFullScreen={true}
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            className="w-full h-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-300"
-                        />
-                        <div className="absolute bottom-6 left-6 right-6">
-                            <a
-                                href="https://maps.google.com/?q=PG+Like+Home+Memnagar+Ahmedabad"
-                                target="_blank"
-                                className="block w-full text-center bg-white/90 backdrop-blur text-slate-900 font-bold py-3 rounded-lg shadow-lg hover:bg-blue-600 hover:text-white transition-all"
-                            >
-                                Open in Google Maps
-                            </a>
-                        </div>
+                    {/* Contact Form */}
+                    <ContactForm />
+                </div>
+
+                {/* Map */}
+                <div className="max-w-5xl mx-auto mt-12 bg-slate-200 rounded-2xl overflow-hidden h-[450px] border border-slate-300 shadow-inner relative group">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.2717290421306!2d72.52838387509269!3d23.050497479154185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85d70d2b8d5f%3A0xa073becfd75ae939!2sPg%20like%20home!5e0!3m2!1sen!2sin!4v1771012444714!5m2!1sen!2sin"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen={true}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-300"
+                    />
+                    <div className="absolute bottom-6 left-6 right-6">
+                        <a
+                            href="https://maps.google.com/?q=PG+Like+Home+Memnagar+Ahmedabad"
+                            target="_blank"
+                            className="block w-full text-center bg-white/90 backdrop-blur text-slate-900 font-bold py-3 rounded-lg shadow-lg hover:bg-blue-600 hover:text-white transition-all"
+                        >
+                            Open in Google Maps
+                        </a>
                     </div>
                 </div>
             </div>

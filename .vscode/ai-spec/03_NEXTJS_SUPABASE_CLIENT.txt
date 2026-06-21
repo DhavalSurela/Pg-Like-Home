@@ -1,0 +1,19 @@
+NEXTJS SUPABASE CLIENT SPEC
+
+Objective:
+Set up Supabase client for Next.js App Router.
+
+Requirements:
+
+Create supabaseClient.ts for browser
+
+Create supabaseServer.ts for server components
+
+Use environment variables:
+
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY
+
+Output Required:
+Client files and usage example.

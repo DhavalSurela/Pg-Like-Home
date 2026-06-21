@@ -3,9 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { FloatingCTA } from "@/components/FloatingCTA";
+import { SiteChrome } from "@/components/SiteChrome";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
@@ -121,15 +119,7 @@ const jsonLd = {
   hasMap: "https://maps.google.com/?q=PG+Like+Home+Memnagar+Ahmedabad",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     opens: "00:00",
     closes: "23:59",
   },
@@ -143,9 +133,7 @@ const jsonLd = {
     { "@type": "LocationFeatureSpecification", name: "Laundry Facility", value: true },
     { "@type": "LocationFeatureSpecification", name: "Air Conditioning", value: true },
   ],
-  sameAs: [
-    "https://www.instagram.com/pglike_home_1",
-  ],
+  sameAs: ["https://www.instagram.com/pglike_home_1"],
 };
 
 export default function RootLayout({
@@ -155,17 +143,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jakarta.variable} font-sans antialiased text-slate-900 bg-slate-50 flex flex-col min-h-screen`}>
+      <body
+        className={`${inter.variable} ${jakarta.variable} font-sans antialiased text-slate-900 bg-slate-50 flex flex-col min-h-dvh`}
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <FloatingCTA />
+        <SiteChrome>{children}</SiteChrome>
         <Analytics />
         <SpeedInsights />
       </body>
