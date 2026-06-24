@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { Pencil, Plus, Trash2, X } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 
 import {
   createBlock,
@@ -9,6 +9,7 @@ import {
   updateBlock,
   type BlockActionState,
 } from "@/app/admin/blocks/actions";
+import { Modal } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import type { Database } from "@/lib/database.types";
 
@@ -70,27 +71,6 @@ function BlockFormFields({ block, includeRooms }: { block?: Block; includeRooms:
   );
 }
 
-function Modal({ children, title, onClose }: { children: React.ReactNode; title: string; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-        <div className="flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-          <h2 className="text-base font-semibold text-stone-900">{title}</h2>
-          <button
-            aria-label="Close modal"
-            className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-            type="button"
-            onClick={onClose}
-          >
-            <X aria-hidden="true" className="size-5" />
-          </button>
-        </div>
-        <div className="p-5">{children}</div>
-      </div>
-    </div>
-  );
-}
-
 // Each modal owns its action state and is mounted only while open, so the
 // success/error message never lingers when reopened.
 function CreateBlockModal({ onClose }: { onClose: () => void }) {
@@ -101,7 +81,7 @@ function CreateBlockModal({ onClose }: { onClose: () => void }) {
   }, initialState);
 
   return (
-    <Modal title="Add block" onClose={onClose}>
+    <Modal size="lg" title="Add block" onClose={onClose}>
       <form action={action} className="space-y-5">
         <BlockFormFields includeRooms />
         <ActionMessage state={state} />
@@ -126,7 +106,7 @@ function EditBlockModal({ block, onClose }: { block: Block; onClose: () => void 
   }, initialState);
 
   return (
-    <Modal title={`Edit ${block.block_name}`} onClose={onClose}>
+    <Modal size="lg" title={`Edit ${block.block_name}`} onClose={onClose}>
       <form action={action} className="space-y-5">
         <input name="id" type="hidden" value={block.id} />
         <BlockFormFields block={block} includeRooms={false} />
@@ -180,19 +160,63 @@ export function BlocksManager({ blocks }: { blocks: Block[] }) {
 
   return (
     <>
-      <div className="overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card">
-        <div className="flex flex-col gap-3 border-b border-stone-200/80 bg-gradient-to-b from-stone-50/80 to-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-base font-semibold text-stone-900">All blocks</h2>
-            <p className="mt-1 text-sm text-stone-500">Flats and units with room capacity.</p>
-          </div>
-          <Button type="button" onClick={() => setIsCreateOpen(true)}>
+      <div>
+        <div className="flex flex-col gap-3 border-b border-stone-200/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-stone-500">Flats and units with room capacity.</p>
+          <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setIsCreateOpen(true)}>
             <Plus aria-hidden="true" className="size-4" />
             Add block
           </Button>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile: stacked cards */}
+        <ul className="divide-y divide-stone-100 sm:hidden">
+          {blocks.length > 0 ? (
+            blocks.map((block) => (
+              <li key={block.id} className="flex items-start justify-between gap-3 px-4 py-4">
+                <div className="min-w-0">
+                  <p className="font-medium text-stone-900">{block.block_name}</p>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-stone-500">
+                    <span className="inline-flex items-center rounded-full border border-stone-200 bg-stone-50 px-2 py-0.5 text-xs font-medium text-stone-600">
+                      {block.block_type}
+                    </span>
+                    <span>Floor {block.floor}</span>
+                    <span>
+                      {block.total_rooms} {block.total_rooms === 1 ? "room" : "rooms"}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex shrink-0 gap-2">
+                  <Button
+                    aria-label={`Edit ${block.block_name}`}
+                    className="size-10"
+                    size="icon"
+                    type="button"
+                    variant="outline"
+                    onClick={() => setEditingBlock(block)}
+                  >
+                    <Pencil aria-hidden="true" className="size-4" />
+                  </Button>
+                  <Button
+                    aria-label={`Delete ${block.block_name}`}
+                    className="size-10"
+                    size="icon"
+                    type="button"
+                    variant="destructive"
+                    onClick={() => setDeletingBlock(block)}
+                  >
+                    <Trash2 aria-hidden="true" className="size-4" />
+                  </Button>
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="px-4 py-10 text-center text-stone-500">No blocks found.</li>
+          )}
+        </ul>
+
+        {/* Tablet/desktop: table */}
+        <div className="hidden overflow-x-auto sm:block">
           <table className="min-w-full divide-y divide-stone-200/80 text-sm">
             <thead className="bg-stone-50/60 text-left text-xs font-semibold tracking-wide text-stone-400 uppercase">
               <tr>

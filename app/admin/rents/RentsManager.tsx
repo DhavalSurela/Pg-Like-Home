@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { Pencil, Plus, Trash2, X } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 
 import {
   createRent,
@@ -12,6 +12,7 @@ import {
   type RentActionState,
 } from "@/app/admin/rents/actions";
 import { ActionForm } from "@/components/admin/ActionForm";
+import { Modal } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Database } from "@/lib/database.types";
@@ -84,27 +85,6 @@ function ActionMessage({ state }: { state: RentActionState }) {
     >
       {state.message}
     </p>
-  );
-}
-
-function Modal({ children, title, onClose }: { children: React.ReactNode; title: string; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-        <div className="sticky top-0 flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-          <h2 className="text-base font-semibold text-stone-900">{title}</h2>
-          <button
-            aria-label="Close modal"
-            className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-            type="button"
-            onClick={onClose}
-          >
-            <X aria-hidden="true" className="size-5" />
-          </button>
-        </div>
-        <div className="p-5">{children}</div>
-      </div>
-    </div>
   );
 }
 
@@ -263,24 +243,24 @@ export function RentsManager({
   return (
     <div className="space-y-5">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <label className="block">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
+        <label className="block w-full sm:w-auto">
           <span className="block text-xs font-medium text-stone-500">Month</span>
           <input
             type="month"
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-            className={cn(inputClass, "block w-44")}
+            className={cn(inputClass, "block h-11 w-full sm:h-10 sm:w-44")}
           />
         </label>
-        <div className="flex gap-2">
-          <form action={generateAction}>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <form action={generateAction} className="w-full sm:w-auto">
             <input type="hidden" name="month" value={month} />
-            <Button type="submit" variant="outline" disabled={isGenerating}>
+            <Button className="h-11 w-full sm:h-8 sm:w-auto" type="submit" variant="outline" disabled={isGenerating}>
               {isGenerating ? "Generating..." : "Generate from occupied"}
             </Button>
           </form>
-          <Button type="button" onClick={() => setAddOpen(true)}>
+          <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setAddOpen(true)}>
             <Plus aria-hidden="true" className="size-4" />
             Add rent
           </Button>
@@ -312,8 +292,72 @@ export function RentsManager({
                 No rents for {formatMonth(m)} yet — use &ldquo;Generate from occupied&rdquo; or &ldquo;Add rent&rdquo;.
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-stone-200/80 text-sm">
+              <>
+                {/* Mobile: stacked cards */}
+                <ul className="divide-y divide-stone-100 sm:hidden">
+                  {rows.map((rent) => (
+                    <li key={rent.id} className="px-4 py-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="font-medium text-stone-900">{rent.tenant_name}</p>
+                          <p className="mt-0.5 text-sm text-stone-500">
+                            {rent.room_name}
+                            {rent.bed_number ? ` · Bed ${rent.bed_number}` : ""}
+                          </p>
+                        </div>
+                        <StatusBadge status={rent.status} />
+                      </div>
+                      <div className="mt-3 flex items-end justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="text-lg font-semibold text-stone-900">
+                            {Number(rent.amount) > 0 || rent.status === "paid" || rent.status === "deposit"
+                              ? inr.format(Number(rent.amount))
+                              : "—"}
+                          </p>
+                          <p className="truncate text-xs text-stone-400">{paymentSummary(rent)}</p>
+                        </div>
+                        <div className="flex shrink-0 items-center gap-2">
+                          {rent.status === "pending" ? (
+                            <Button type="button" size="sm" onClick={() => setFormTarget({ rent, settlement: "cash" })}>
+                              Record
+                            </Button>
+                          ) : (
+                            <form action={pendingAction}>
+                              <input type="hidden" name="id" value={rent.id} />
+                              <Button type="submit" size="sm" variant="ghost">
+                                Undo
+                              </Button>
+                            </form>
+                          )}
+                          <Button
+                            aria-label="Edit rent"
+                            className="size-10"
+                            size="icon"
+                            type="button"
+                            variant="outline"
+                            onClick={() => setFormTarget({ rent, settlement: currentSettlement(rent) })}
+                          >
+                            <Pencil aria-hidden="true" className="size-4" />
+                          </Button>
+                          <Button
+                            aria-label="Delete rent"
+                            className="size-10"
+                            size="icon"
+                            type="button"
+                            variant="destructive"
+                            onClick={() => setDeleting(rent)}
+                          >
+                            <Trash2 aria-hidden="true" className="size-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tablet/desktop: table */}
+                <div className="hidden overflow-x-auto sm:block">
+                  <table className="min-w-full divide-y divide-stone-200/80 text-sm">
                   <thead className="bg-stone-50/60 text-left text-xs font-semibold tracking-wide text-stone-400 uppercase">
                     <tr>
                       <th className="px-5 py-3">Tenant</th>
@@ -379,7 +423,8 @@ export function RentsManager({
                     ))}
                   </tbody>
                 </table>
-              </div>
+                </div>
+              </>
             )}
           </div>
         );

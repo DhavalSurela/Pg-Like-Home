@@ -59,7 +59,7 @@ export default async function RoomsPage() {
             className="size-4 text-stone-400 transition-transform group-open:rotate-180"
           />
         </summary>
-        <div className="border-t border-stone-200/70 p-5">
+        <div className="border-t border-stone-200/70">
           <BlocksManager blocks={blocks} />
         </div>
       </details>

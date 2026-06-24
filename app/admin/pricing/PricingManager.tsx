@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IndianRupee, Pencil, Plus, Star, Trash2, X } from "lucide-react";
+import { IndianRupee, Pencil, Plus, Star, Trash2 } from "lucide-react";
 
 import {
   createPricing,
@@ -10,6 +10,7 @@ import {
   type PricingActionState,
 } from "@/app/admin/pricing/actions";
 import { ActionForm } from "@/components/admin/ActionForm";
+import { Modal } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import type { Database } from "@/lib/database.types";
 
@@ -102,27 +103,6 @@ function PlanFormFields({ plan }: { plan?: Plan }) {
   );
 }
 
-function Modal({ children, title, onClose }: { children: React.ReactNode; title: string; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-        <div className="sticky top-0 flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-          <h2 className="text-base font-semibold text-stone-900">{title}</h2>
-          <button
-            aria-label="Close modal"
-            className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-            type="button"
-            onClick={onClose}
-          >
-            <X aria-hidden="true" className="size-5" />
-          </button>
-        </div>
-        <div className="p-5">{children}</div>
-      </div>
-    </div>
-  );
-}
-
 export function PricingManager({ plans }: { plans: Plan[] }) {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingPlan, setEditingPlan] = useState<Plan | null>(null);
@@ -136,7 +116,7 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
             <h2 className="text-base font-semibold text-stone-900">Pricing plans</h2>
             <p className="mt-1 text-sm text-stone-500">These cards appear on the public Rooms &amp; Pricing page.</p>
           </div>
-          <Button type="button" onClick={() => setIsCreateOpen(true)}>
+          <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setIsCreateOpen(true)}>
             <Plus aria-hidden="true" className="size-4" />
             Add plan
           </Button>
@@ -198,7 +178,7 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
       </div>
 
       {isCreateOpen ? (
-        <Modal title="Add pricing plan" onClose={() => setIsCreateOpen(false)}>
+        <Modal size="xl" title="Add pricing plan" onClose={() => setIsCreateOpen(false)}>
           <ActionForm action={createPricing} onSuccess={() => setIsCreateOpen(false)} className="space-y-5">
             {(state, pending) => (
               <>
@@ -219,7 +199,7 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
       ) : null}
 
       {editingPlan ? (
-        <Modal title={`Edit ${editingPlan.plan_name}`} onClose={() => setEditingPlan(null)}>
+        <Modal size="xl" title={`Edit ${editingPlan.plan_name}`} onClose={() => setEditingPlan(null)}>
           <ActionForm
             key={editingPlan.id}
             action={updatePricing}

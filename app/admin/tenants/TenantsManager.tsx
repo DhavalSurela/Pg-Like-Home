@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Pencil, Plus, Trash2, Users, X } from "lucide-react";
+import { Pencil, Plus, Trash2, Users } from "lucide-react";
 
 import {
   createTenant,
@@ -10,6 +10,7 @@ import {
   type TenantActionState,
 } from "@/app/admin/tenants/actions";
 import { ActionForm } from "@/components/admin/ActionForm";
+import { Modal } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Database } from "@/lib/database.types";
@@ -48,27 +49,6 @@ function ActionMessage({ state }: { state: TenantActionState }) {
     >
       {state.message}
     </p>
-  );
-}
-
-function Modal({ children, title, onClose }: { children: React.ReactNode; title: string; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-        <div className="flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-          <h2 className="text-base font-semibold text-stone-900">{title}</h2>
-          <button
-            aria-label="Close modal"
-            className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-            type="button"
-            onClick={onClose}
-          >
-            <X aria-hidden="true" className="size-5" />
-          </button>
-        </div>
-        <div className="p-5">{children}</div>
-      </div>
-    </div>
   );
 }
 
@@ -148,13 +128,74 @@ export function TenantsManager({
               Residents and reservations. Assign a tenant to a bed from the Rooms tab.
             </p>
           </div>
-          <Button type="button" onClick={() => setIsCreateOpen(true)}>
+          <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setIsCreateOpen(true)}>
             <Plus aria-hidden="true" className="size-4" />
             Add tenant
           </Button>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile: stacked cards (no horizontal scrolling) */}
+        <ul className="divide-y divide-stone-100 sm:hidden">
+          {tenants.length > 0 ? (
+            tenants.map((tenant) => (
+              <li key={tenant.id} className="px-4 py-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-medium text-stone-900">{tenant.name}</p>
+                    <p className="mt-0.5 text-sm text-stone-600">{tenant.phone}</p>
+                    {tenant.email ? <p className="truncate text-xs text-stone-400">{tenant.email}</p> : null}
+                  </div>
+                  <div className="flex shrink-0 gap-2">
+                    <Button
+                      aria-label={`Edit ${tenant.name}`}
+                      className="size-10"
+                      size="icon"
+                      type="button"
+                      variant="outline"
+                      onClick={() => setEditingTenant(tenant)}
+                    >
+                      <Pencil aria-hidden="true" className="size-4" />
+                    </Button>
+                    <Button
+                      aria-label={`Delete ${tenant.name}`}
+                      className="size-10"
+                      size="icon"
+                      type="button"
+                      variant="destructive"
+                      onClick={() => setDeletingTenant(tenant)}
+                    >
+                      <Trash2 aria-hidden="true" className="size-4" />
+                    </Button>
+                  </div>
+                </div>
+                <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                  <div>
+                    <dt className="text-xs text-stone-400">Rent</dt>
+                    <dd className="text-stone-700">{inr.format(tenant.rent_amount)}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-stone-400">Joined</dt>
+                    <dd className="text-stone-700">{formatDate(tenant.join_date)}</dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-xs text-stone-400">Placement</dt>
+                    <dd className="mt-0.5">
+                      <PlacementCell placement={placements[tenant.id]} />
+                    </dd>
+                  </div>
+                </dl>
+              </li>
+            ))
+          ) : (
+            <li className="flex flex-col items-center gap-2 px-4 py-12 text-center text-stone-500">
+              <Users aria-hidden="true" className="size-5 text-stone-300" />
+              No tenants yet.
+            </li>
+          )}
+        </ul>
+
+        {/* Tablet/desktop: table */}
+        <div className="hidden overflow-x-auto sm:block">
           <table className="min-w-full divide-y divide-stone-200/80 text-sm">
             <thead className="bg-stone-50/60 text-left text-xs font-semibold tracking-wide text-stone-400 uppercase">
               <tr>

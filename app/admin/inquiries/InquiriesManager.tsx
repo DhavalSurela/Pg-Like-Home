@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { ArrowDownUp, Inbox, LayoutGrid, List, Mail, Phone, Plus, Trash2, X } from "lucide-react";
+import { ArrowDownUp, Inbox, LayoutGrid, List, Mail, Phone, Plus, Trash2 } from "lucide-react";
 
 import {
   createInquiry,
@@ -11,6 +11,7 @@ import {
 } from "@/app/admin/inquiries/actions";
 import { INQUIRY_STATUSES } from "@/app/admin/inquiries/constants";
 import { ActionForm } from "@/components/admin/ActionForm";
+import { Modal } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Database } from "@/lib/database.types";
@@ -118,6 +119,65 @@ function InquiryCard({ inquiry, onDelete }: { inquiry: Inquiry; onDelete: () => 
   );
 }
 
+// Denser card used by the List view on mobile (vs the roomier InquiryCard).
+function InquiryListItem({ inquiry, onDelete }: { inquiry: Inquiry; onDelete: () => void }) {
+  const [, action, pending] = useActionState(updateInquiry, idle);
+
+  return (
+    <div className="card-surface rounded-xl border border-stone-200/80 p-4 shadow-card">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <h3 className="truncate text-sm font-semibold text-stone-900">{inquiry.name}</h3>
+            <span
+              className={cn(
+                "shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-semibold tracking-wide uppercase",
+                statusStyles[inquiry.status] ?? "bg-stone-100 text-stone-500"
+              )}
+            >
+              {inquiry.status}
+            </span>
+          </div>
+          <a href={`tel:${inquiry.phone}`} className="mt-0.5 block text-xs text-stone-500">
+            {inquiry.phone}
+          </a>
+        </div>
+        <span className="shrink-0 text-[11px] text-stone-400">{formatDate(inquiry.created_at)}</span>
+      </div>
+      <p className="mt-2 line-clamp-2 text-xs leading-5 text-stone-600">{inquiry.message}</p>
+      <div className="mt-3 flex items-center gap-2">
+        <form action={action} className="flex-1">
+          <input type="hidden" name="id" value={inquiry.id} />
+          <input type="hidden" name="admin_note" value={inquiry.admin_note ?? ""} />
+          <select
+            name="status"
+            defaultValue={inquiry.status}
+            disabled={pending}
+            onChange={(e) => e.currentTarget.form?.requestSubmit()}
+            className={cn(inputClass, "h-9 capitalize")}
+          >
+            {INQUIRY_STATUSES.map((s) => (
+              <option key={s} value={s} className="capitalize">
+                {s}
+              </option>
+            ))}
+          </select>
+        </form>
+        <Button
+          aria-label={`Delete ${inquiry.name}`}
+          className="size-9"
+          size="icon"
+          type="button"
+          variant="destructive"
+          onClick={onDelete}
+        >
+          <Trash2 aria-hidden="true" className="size-4" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 function InquiryRow({ inquiry, onDelete }: { inquiry: Inquiry; onDelete: () => void }) {
   const [, action, pending] = useActionState(updateInquiry, idle);
 
@@ -178,7 +238,7 @@ export function InquiriesManager({ inquiries }: { inquiries: Inquiry[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <div className="flex gap-1 rounded-xl border border-stone-200/70 bg-stone-100/60 p-1">
             {(
@@ -210,7 +270,7 @@ export function InquiriesManager({ inquiries }: { inquiries: Inquiry[] }) {
             {sortAsc ? "Oldest first" : "Newest first"}
           </Button>
         </div>
-        <Button type="button" onClick={() => setCreateOpen(true)}>
+        <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setCreateOpen(true)}>
           <Plus aria-hidden="true" className="size-4" />
           Add inquiry
         </Button>
@@ -228,9 +288,16 @@ export function InquiriesManager({ inquiries }: { inquiries: Inquiry[] }) {
           ))}
         </div>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-stone-200/80 text-sm">
+        <>
+          {/* Mobile: compact cards (a 5-column table is unusable on a phone) */}
+          <div className="grid gap-3 sm:hidden">
+            {sorted.map((inquiry) => (
+              <InquiryListItem key={inquiry.id} inquiry={inquiry} onDelete={() => setDeleting(inquiry)} />
+            ))}
+          </div>
+          <div className="hidden overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card sm:block">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-stone-200/80 text-sm">
               <thead className="bg-stone-50/60 text-left text-xs font-semibold tracking-wide text-stone-400 uppercase">
                 <tr>
                   <th className="px-5 py-3">Name</th>
@@ -246,25 +313,14 @@ export function InquiriesManager({ inquiries }: { inquiries: Inquiry[] }) {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       {createOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-          <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-            <div className="sticky top-0 flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-              <h2 className="text-base font-semibold text-stone-900">Add inquiry</h2>
-              <button
-                aria-label="Close modal"
-                className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-                type="button"
-                onClick={() => setCreateOpen(false)}
-              >
-                <X aria-hidden="true" className="size-5" />
-              </button>
-            </div>
-            <ActionForm action={createInquiry} onSuccess={() => setCreateOpen(false)} className="space-y-4 p-5">
+        <Modal title="Add inquiry" onClose={() => setCreateOpen(false)}>
+            <ActionForm action={createInquiry} onSuccess={() => setCreateOpen(false)} className="space-y-4">
               {(state, pending) => (
                 <>
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -316,25 +372,12 @@ export function InquiriesManager({ inquiries }: { inquiries: Inquiry[] }) {
                 </>
               )}
             </ActionForm>
-          </div>
-        </div>
+        </Modal>
       ) : null}
 
       {deleting ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-            <div className="flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-              <h2 className="text-base font-semibold text-stone-900">Delete inquiry</h2>
-              <button
-                aria-label="Close modal"
-                className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-                type="button"
-                onClick={() => setDeleting(null)}
-              >
-                <X aria-hidden="true" className="size-5" />
-              </button>
-            </div>
-            <ActionForm action={deleteInquiry} onSuccess={() => setDeleting(null)} className="space-y-5 p-5">
+        <Modal title="Delete inquiry" onClose={() => setDeleting(null)}>
+            <ActionForm action={deleteInquiry} onSuccess={() => setDeleting(null)} className="space-y-5">
               {(state, pending) => (
                 <>
                   <input type="hidden" name="id" value={deleting.id} />
@@ -358,8 +401,7 @@ export function InquiriesManager({ inquiries }: { inquiries: Inquiry[] }) {
                 </>
               )}
             </ActionForm>
-          </div>
-        </div>
+        </Modal>
       ) : null}
     </div>
   );

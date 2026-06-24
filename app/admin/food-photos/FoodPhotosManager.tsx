@@ -2,7 +2,7 @@
 
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ImagePlus, Pencil, Trash2, Upload, X } from "lucide-react";
+import { ImagePlus, Pencil, Trash2, Upload } from "lucide-react";
 
 import {
   createFoodPhoto,
@@ -11,6 +11,7 @@ import {
   type FoodPhotoActionState,
 } from "@/app/admin/food-photos/actions";
 import { ActionForm } from "@/components/admin/ActionForm";
+import { Modal } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import { FOOD_CATEGORIES, foodCategoryLabel } from "@/lib/foodCategories";
 import type { Database } from "@/lib/database.types";
@@ -70,27 +71,6 @@ function ActionMessage({ state }: { state: FoodPhotoActionState }) {
     >
       {state.message}
     </p>
-  );
-}
-
-function Modal({ children, title, onClose }: { children: React.ReactNode; title: string; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/30 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-card-md">
-        <div className="flex items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
-          <h2 className="text-base font-semibold text-stone-900">{title}</h2>
-          <button
-            aria-label="Close modal"
-            className="rounded-lg p-1 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-900"
-            type="button"
-            onClick={onClose}
-          >
-            <X aria-hidden="true" className="size-5" />
-          </button>
-        </div>
-        <div className="p-5">{children}</div>
-      </div>
-    </div>
   );
 }
 

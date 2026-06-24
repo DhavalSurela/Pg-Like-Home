@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogOut } from "lucide-react";
+import { Home, LogOut } from "lucide-react";
 
 import { logout } from "@/app/login/actions";
 import { AdminNav } from "@/components/admin/AdminNav";
@@ -21,13 +21,14 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
           {/* Brand */}
           <Link href="/admin" className="flex min-w-0 items-center gap-2.5">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-stone-700 to-stone-900 text-sm font-semibold text-white shadow-card">
-              P
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-stone-700 to-stone-900 text-white shadow-card">
+              <Home aria-hidden="true" className="size-5" strokeWidth={2.5} />
             </span>
-            <span className="hidden min-w-0 sm:block">
+            <span className="block min-w-0">
               <span className="block truncate text-sm font-semibold tracking-tight text-stone-900">
                 PG Like Home
               </span>
+              <span className="block truncate text-xs text-stone-400">Admin panel</span>
             </span>
           </Link>
 
@@ -53,8 +54,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </div>
         </div>
 
-        {/* Scrollable nav (tablet / mobile) */}
-        <div className="border-t border-stone-200/60 px-4 py-2 sm:px-6 lg:hidden">
+        {/* Scrollable nav (tablet / mobile) — full-bleed so tabs scroll to the edges */}
+        <div className="border-t border-stone-200/60 py-2 lg:hidden">
           <AdminNav />
         </div>
       </header>
