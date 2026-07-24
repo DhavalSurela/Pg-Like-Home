@@ -3,18 +3,26 @@
 import { useState } from "react";
 
 import { RoomLayoutManager } from "@/app/admin/rooms/RoomLayoutManager";
-import { BlockSelector, type Bed, type Block, type Room, type Tenant } from "@/app/admin/rooms/shared";
+import {
+  BlockSelector,
+  type Bed,
+  type Block,
+  type Room,
+  type Tenant,
+} from "@/app/admin/rooms/shared";
 
 export function RoomsWorkspace({
   blocks,
   rooms,
   beds,
   tenants,
+  initialBedFilter,
 }: {
   blocks: Block[];
   rooms: Room[];
   beds: Bed[];
   tenants: Tenant[];
+  initialBedFilter: "all" | "occupied" | "available";
 }) {
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(blocks[0]?.id ?? null);
 
@@ -28,8 +36,19 @@ export function RoomsWorkspace({
 
   return (
     <div className="space-y-6">
-      <BlockSelector blocks={blocks} rooms={rooms} selectedBlockId={selectedBlockId} onSelect={setSelectedBlockId} />
-      <RoomLayoutManager selectedBlockId={selectedBlockId} rooms={rooms} beds={beds} tenants={tenants} />
+      <BlockSelector
+        blocks={blocks}
+        rooms={rooms}
+        selectedBlockId={selectedBlockId}
+        onSelect={setSelectedBlockId}
+      />
+      <RoomLayoutManager
+        selectedBlockId={selectedBlockId}
+        rooms={rooms}
+        beds={beds}
+        tenants={tenants}
+        initialBedFilter={initialBedFilter}
+      />
     </div>
   );
 }

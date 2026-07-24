@@ -7,13 +7,16 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const adminLinks = [
-  { href: "/admin", label: "Dashboard" },
-  { href: "/admin/rooms", label: "Rooms" },
-  { href: "/admin/tenants", label: "Tenants" },
-  { href: "/admin/rents", label: "Rents" },
-  { href: "/admin/food-photos", label: "Food Photos" },
-  { href: "/admin/pricing", label: "Pricing" },
-  { href: "/admin/inquiries", label: "Inquiries" },
+  { href: "/admin", label: "Dashboard", paths: ["/admin"], exact: true },
+  { href: "/admin/rooms", label: "Property", paths: ["/admin/rooms", "/admin/blocks"] },
+  { href: "/admin/tenants", label: "Residents", paths: ["/admin/tenants"] },
+  { href: "/admin/rents", label: "Finance", paths: ["/admin/rents", "/admin/bills"] },
+  {
+    href: "/admin/daily-menu",
+    label: "Content",
+    paths: ["/admin/daily-menu", "/admin/food-photos", "/admin/pricing"],
+  },
+  { href: "/admin/inquiries", label: "Inquiries", paths: ["/admin/inquiries"] },
 ];
 
 export function AdminNav() {
@@ -37,11 +40,12 @@ export function AdminNav() {
     <nav
       ref={navRef}
       aria-label="Admin sections"
-      className="flex items-center gap-1 overflow-x-auto px-4 [mask-image:linear-gradient(to_right,transparent,#000_18px,#000_calc(100%-18px),transparent)] [scrollbar-width:none] lg:px-0 lg:[mask-image:none] [&::-webkit-scrollbar]:hidden"
+      className="admin-primary-nav flex items-center gap-1 overflow-x-auto px-4 [mask-image:linear-gradient(to_right,transparent,#000_18px,#000_calc(100%-18px),transparent)] [scrollbar-width:none] lg:rounded-2xl lg:border lg:border-stone-200/80 lg:bg-stone-100/70 lg:p-1 lg:[mask-image:none] [&::-webkit-scrollbar]:hidden"
     >
       {adminLinks.map((link) => {
-        const isActive =
-          link.href === "/admin" ? pathname === "/admin" : pathname.startsWith(link.href);
+        const isActive = link.exact
+          ? pathname === link.href
+          : link.paths.some((path) => pathname.startsWith(path));
 
         return (
           <Link
@@ -50,17 +54,13 @@ export function AdminNav() {
             href={link.href}
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "relative shrink-0 rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors lg:py-2",
-              isActive ? "text-stone-900" : "text-stone-500 hover:text-stone-900"
+              "relative shrink-0 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all lg:px-3 lg:py-2",
+              isActive
+                ? "bg-stone-900 text-white shadow-[0_5px_14px_-6px_rgba(28,25,23,0.7)]"
+                : "text-stone-500 hover:bg-white/80 hover:text-stone-900"
             )}
           >
             {link.label}
-            <span
-              className={cn(
-                "absolute inset-x-3.5 -bottom-px h-0.5 rounded-full bg-stone-900 transition-opacity",
-                isActive ? "opacity-100" : "opacity-0"
-              )}
-            />
           </Link>
         );
       })}

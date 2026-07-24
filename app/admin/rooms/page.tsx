@@ -13,14 +13,26 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RoomsPage() {
+export default async function RoomsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string }>;
+}) {
+  const { status } = await searchParams;
+  const initialBedFilter = status === "occupied" || status === "available" ? status : "all";
   const supabase = await createClient();
   const [blocksResult, roomsResult, bedsResult, tenantsResult] = await Promise.all([
-    supabase.from("blocks").select("*").order("floor", { ascending: true }).order("block_name", { ascending: true }),
+    supabase
+      .from("blocks")
+      .select("*")
+      .order("floor", { ascending: true })
+      .order("block_name", { ascending: true }),
     supabase.from("rooms").select("*"),
     supabase
       .from("beds")
-      .select("id, room_id, bed_number, tenant_id, status, expected_date, created_at, pos_x, pos_y"),
+      .select(
+        "id, room_id, bed_number, tenant_id, status, expected_date, created_at, pos_x, pos_y"
+      ),
     supabase.from("tenants").select("id, name, phone"),
   ]);
 
@@ -28,15 +40,18 @@ export default async function RoomsPage() {
   const rooms = roomsResult.data ?? [];
   const beds = bedsResult.data ?? [];
   const tenants = tenantsResult.data ?? [];
-  const error =
-    blocksResult.error ?? roomsResult.error ?? bedsResult.error ?? tenantsResult.error;
+  const error = blocksResult.error ?? roomsResult.error ?? bedsResult.error ?? tenantsResult.error;
 
   return (
-    <div className="space-y-8">
-      <div>
-        <p className="text-xs font-semibold tracking-[0.18em] text-stone-400 uppercase">Rooms</p>
-        <h1 className="mt-3 text-4xl font-light tracking-tight text-stone-900 sm:text-5xl">Rooms</h1>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-stone-500">
+    <div className="space-y-5 sm:space-y-8">
+      <div className="hidden sm:block">
+        <p className="hidden text-xs font-semibold tracking-[0.18em] text-stone-400 uppercase sm:block">
+          Rooms
+        </p>
+        <h1 className="mt-3 hidden text-4xl font-light tracking-tight text-stone-900 sm:block sm:text-5xl">
+          Rooms
+        </h1>
+        <p className="mt-0 hidden max-w-xl text-[15px] leading-relaxed text-stone-500 sm:mt-3 sm:block">
           Select a block to see its rooms and beds. Click a bed to assign or vacate a tenant.
         </p>
       </div>
@@ -48,10 +63,16 @@ export default async function RoomsPage() {
         </div>
       ) : null}
 
-      <RoomsWorkspace blocks={blocks} rooms={rooms} beds={beds} tenants={tenants} />
+      <RoomsWorkspace
+        blocks={blocks}
+        rooms={rooms}
+        beds={beds}
+        tenants={tenants}
+        initialBedFilter={initialBedFilter}
+      />
 
       {/* Block management, tucked away */}
-      <details className="group rounded-2xl border border-stone-200/80 bg-white/60 shadow-card">
+      <details className="card-surface group rounded-2xl border border-stone-200/80 shadow-card">
         <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm font-semibold text-stone-700">
           Manage blocks
           <ChevronDown

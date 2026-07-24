@@ -17,22 +17,28 @@ import {
 } from "@/app/admin/rooms/shared";
 import { ActionForm } from "@/components/admin/ActionForm";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+type BedFilter = "all" | "available" | "reserved" | "occupied";
 
 export function RoomLayoutManager({
   selectedBlockId,
   rooms,
   beds,
   tenants,
+  initialBedFilter,
 }: {
   selectedBlockId: string | null;
   rooms: Room[];
   beds: Bed[];
   tenants: Tenant[];
+  initialBedFilter: "all" | "occupied" | "available";
 }) {
   const [addRoomOpen, setAddRoomOpen] = useState(false);
   const [editRoomTarget, setEditRoomTarget] = useState<Room | null>(null);
   const [deleteRoomTarget, setDeleteRoomTarget] = useState<Room | null>(null);
   const [bedTarget, setBedTarget] = useState<Bed | null>(null);
+  const [bedFilter, setBedFilter] = useState<BedFilter>(initialBedFilter);
 
   const [addBedState, addBedAction] = useActionState(addBed, idle);
 
@@ -61,18 +67,93 @@ export function RoomLayoutManager({
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-200/80 bg-white/70 px-2.5 py-1 text-stone-600">
+          <button
+            type="button"
+            aria-pressed={bedFilter === "all"}
+            onClick={() => setBedFilter("all")}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition",
+              bedFilter === "all"
+                ? "border-stone-900 bg-stone-900 text-white"
+                : "border-stone-200 bg-white text-stone-600 hover:border-stone-300 hover:text-stone-900"
+            )}
+          >
+            All
+            <span
+              className={cn(
+                "rounded-full px-1.5 py-0.5 text-[10px] leading-none",
+                bedFilter === "all" ? "bg-white/15 text-white" : "bg-stone-100 text-stone-500"
+              )}
+            >
+              {blockBeds.length}
+            </span>
+          </button>
+          <button
+            type="button"
+            aria-pressed={bedFilter === "available"}
+            onClick={() => setBedFilter("available")}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition",
+              bedFilter === "available"
+                ? "border-stone-900 bg-stone-900 text-white"
+                : "border-stone-200 bg-white text-stone-600 hover:border-stone-300 hover:text-stone-900"
+            )}
+          >
             <span className="size-2.5 rounded-sm border border-dashed border-stone-300 bg-white" />
-            Empty <span className="font-semibold text-stone-900">{emptyCount}</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-200/80 bg-white/70 px-2.5 py-1 text-stone-600">
+            Empty
+            <span
+              className={cn(
+                "rounded-full px-1.5 py-0.5 text-[10px] leading-none",
+                bedFilter === "available" ? "bg-white/15 text-white" : "bg-stone-100 text-stone-500"
+              )}
+            >
+              {emptyCount}
+            </span>
+          </button>
+          <button
+            type="button"
+            aria-pressed={bedFilter === "reserved"}
+            onClick={() => setBedFilter("reserved")}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition",
+              bedFilter === "reserved"
+                ? "border-stone-900 bg-stone-900 text-white"
+                : "border-stone-200 bg-white text-stone-600 hover:border-stone-300 hover:text-stone-900"
+            )}
+          >
             <span className="size-2.5 rounded-sm bg-stone-300" />
-            Reserved <span className="font-semibold text-stone-900">{reservedCount}</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-stone-200/80 bg-white/70 px-2.5 py-1 text-stone-600">
+            Reserved
+            <span
+              className={cn(
+                "rounded-full px-1.5 py-0.5 text-[10px] leading-none",
+                bedFilter === "reserved" ? "bg-white/15 text-white" : "bg-stone-100 text-stone-500"
+              )}
+            >
+              {reservedCount}
+            </span>
+          </button>
+          <button
+            type="button"
+            aria-pressed={bedFilter === "occupied"}
+            onClick={() => setBedFilter("occupied")}
+            className={cn(
+              "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition",
+              bedFilter === "occupied"
+                ? "border-stone-900 bg-stone-900 text-white"
+                : "border-stone-200 bg-white text-stone-600 hover:border-stone-300 hover:text-stone-900"
+            )}
+          >
             <span className="size-2.5 rounded-sm bg-stone-800" />
-            Occupied <span className="font-semibold text-stone-900">{occupiedCount}</span>
-          </span>
+            Occupied
+            <span
+              className={cn(
+                "rounded-full px-1.5 py-0.5 text-[10px] leading-none",
+                bedFilter === "occupied" ? "bg-white/15 text-white" : "bg-stone-100 text-stone-500"
+              )}
+            >
+              {occupiedCount}
+            </span>
+          </button>
         </div>
         <Button type="button" disabled={!selectedBlockId} onClick={() => setAddRoomOpen(true)}>
           <Plus aria-hidden="true" className="size-4" />
@@ -88,7 +169,11 @@ export function RoomLayoutManager({
             const roomBeds = (bedsByRoom.get(room.id) ?? []).sort((a, b) =>
               a.bed_number.localeCompare(b.bed_number, undefined, { numeric: true })
             );
+            const visibleBeds =
+              bedFilter === "all" ? roomBeds : roomBeds.filter((bed) => bed.status === bedFilter);
             const freeCount = roomBeds.filter((b) => !b.tenant_id).length;
+
+            if (visibleBeds.length === 0) return null;
 
             return (
               <div
@@ -134,11 +219,11 @@ export function RoomLayoutManager({
                 </div>
 
                 <div className="mt-4 grid grid-cols-3 gap-2.5">
-                  {roomBeds.map((bed) => (
+                  {visibleBeds.map((bed) => (
                     <BedTile
                       key={bed.id}
                       bed={bed}
-                      tenant={bed.tenant_id ? tenantById.get(bed.tenant_id) ?? null : null}
+                      tenant={bed.tenant_id ? (tenantById.get(bed.tenant_id) ?? null) : null}
                       onClick={() => setBedTarget(bed)}
                     />
                   ))}
@@ -157,7 +242,11 @@ export function RoomLayoutManager({
       {/* Add room */}
       {addRoomOpen ? (
         <Modal title="Add room" onClose={() => setAddRoomOpen(false)}>
-          <ActionForm action={createRoom} onSuccess={() => setAddRoomOpen(false)} className="space-y-5">
+          <ActionForm
+            action={createRoom}
+            onSuccess={() => setAddRoomOpen(false)}
+            className="space-y-5"
+          >
             {(state, pending) => (
               <>
                 <input type="hidden" name="block_id" value={selectedBlockId ?? ""} />
@@ -211,13 +300,20 @@ export function RoomLayoutManager({
       {/* Delete room */}
       {deleteRoomTarget ? (
         <Modal title="Delete room" onClose={() => setDeleteRoomTarget(null)}>
-          <ActionForm action={deleteRoom} onSuccess={() => setDeleteRoomTarget(null)} className="space-y-5">
+          <ActionForm
+            action={deleteRoom}
+            onSuccess={() => setDeleteRoomTarget(null)}
+            className="space-y-5"
+          >
             {(state, pending) => (
               <>
                 <input type="hidden" name="id" value={deleteRoomTarget.id} />
                 <p className="text-sm leading-6 text-stone-600">
-                  Delete <span className="font-semibold text-stone-900">{deleteRoomTarget.room_number}</span> and its
-                  beds? This is only allowed when no beds are occupied.
+                  Delete{" "}
+                  <span className="font-semibold text-stone-900">
+                    {deleteRoomTarget.room_number}
+                  </span>{" "}
+                  and its beds? This is only allowed when no beds are occupied.
                 </p>
                 <ActionMessage state={state} />
                 <div className="flex justify-end gap-2">
@@ -238,7 +334,7 @@ export function RoomLayoutManager({
       {bedTarget ? (
         <BedModal
           bed={bedTarget}
-          tenant={bedTarget.tenant_id ? tenantById.get(bedTarget.tenant_id) ?? null : null}
+          tenant={bedTarget.tenant_id ? (tenantById.get(bedTarget.tenant_id) ?? null) : null}
           unassignedTenants={unassignedTenants}
           onClose={() => setBedTarget(null)}
         />

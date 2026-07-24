@@ -28,11 +28,11 @@ export function Modal({
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-stone-950/40 backdrop-blur-sm sm:items-center sm:p-4">
       <div
         className={cn(
-          "flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-2xl border border-stone-200/80 bg-white shadow-card-md sm:max-h-[90dvh] sm:rounded-2xl",
+          "admin-modal-panel flex max-h-[92dvh] w-full flex-col overflow-hidden rounded-t-2xl border border-stone-200/80 bg-white shadow-card-md sm:max-h-[90dvh] sm:rounded-2xl",
           sizes[size]
         )}
       >
-        <div className="flex shrink-0 items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
+        <div className="admin-modal-header flex shrink-0 items-center justify-between border-b border-stone-200/80 bg-gradient-to-b from-stone-50 to-white px-5 py-4">
           <h2 className="text-base font-semibold text-stone-900">{title}</h2>
           <button
             aria-label="Close modal"

@@ -40,12 +40,23 @@ function BlockFormFields({ block, includeRooms }: { block?: Block; includeRooms:
     <div className="grid gap-4 sm:grid-cols-2">
       <label className="block sm:col-span-2">
         <span className="text-sm font-medium text-stone-700">Block name / flat number</span>
-        <input className={inputClass} name="block_name" required defaultValue={block?.block_name ?? ""} placeholder="Flat A" />
+        <input
+          className={inputClass}
+          name="block_name"
+          required
+          defaultValue={block?.block_name ?? ""}
+          placeholder="Flat A"
+        />
       </label>
 
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Type</span>
-        <select className={inputClass} name="block_type" required defaultValue={block?.block_type ?? "2BHK"}>
+        <select
+          className={inputClass}
+          name="block_type"
+          required
+          defaultValue={block?.block_type ?? "2BHK"}
+        >
           <option value="2BHK">2BHK</option>
           <option value="3BHK">3BHK</option>
           <option value="4BHK">4BHK</option>
@@ -55,13 +66,28 @@ function BlockFormFields({ block, includeRooms }: { block?: Block; includeRooms:
 
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Floor</span>
-        <input className={inputClass} name="floor" required type="number" step="1" defaultValue={block?.floor ?? 1} />
+        <input
+          className={inputClass}
+          name="floor"
+          required
+          type="number"
+          step="1"
+          defaultValue={block?.floor ?? 1}
+        />
       </label>
 
       {includeRooms ? (
         <label className="block sm:col-span-2">
           <span className="text-sm font-medium text-stone-700">Number of rooms</span>
-          <input className={inputClass} name="total_rooms" required type="number" min="1" step="1" defaultValue={1} />
+          <input
+            className={inputClass}
+            name="total_rooms"
+            required
+            type="number"
+            min="1"
+            step="1"
+            defaultValue={1}
+          />
           <span className="mt-1 block text-xs text-stone-400">
             Each room is created with 1 bed. You can add or remove rooms later.
           </span>
@@ -136,8 +162,8 @@ function DeleteBlockModal({ block, onClose }: { block: Block; onClose: () => voi
       <form action={action} className="space-y-5">
         <input name="id" type="hidden" value={block.id} />
         <p className="text-sm leading-6 text-stone-600">
-          Delete <span className="font-semibold text-stone-900">{block.block_name}</span>? This is only allowed when the
-          block has no rooms.
+          Delete <span className="font-semibold text-stone-900">{block.block_name}</span>? This is
+          only allowed when the block has no rooms.
         </p>
         <ActionMessage state={state} />
         <div className="flex justify-end gap-2">
@@ -163,7 +189,11 @@ export function BlocksManager({ blocks }: { blocks: Block[] }) {
       <div>
         <div className="flex flex-col gap-3 border-b border-stone-200/70 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-stone-500">Flats and units with room capacity.</p>
-          <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setIsCreateOpen(true)}>
+          <Button
+            className="h-11 w-full sm:h-8 sm:w-auto"
+            type="button"
+            onClick={() => setIsCreateOpen(true)}
+          >
             <Plus aria-hidden="true" className="size-4" />
             Add block
           </Button>
@@ -276,8 +306,12 @@ export function BlocksManager({ blocks }: { blocks: Block[] }) {
       </div>
 
       {isCreateOpen ? <CreateBlockModal onClose={() => setIsCreateOpen(false)} /> : null}
-      {editingBlock ? <EditBlockModal block={editingBlock} onClose={() => setEditingBlock(null)} /> : null}
-      {deletingBlock ? <DeleteBlockModal block={deletingBlock} onClose={() => setDeletingBlock(null)} /> : null}
+      {editingBlock ? (
+        <EditBlockModal block={editingBlock} onClose={() => setEditingBlock(null)} />
+      ) : null}
+      {deletingBlock ? (
+        <DeleteBlockModal block={deletingBlock} onClose={() => setDeletingBlock(null)} />
+      ) : null}
     </>
   );
 }

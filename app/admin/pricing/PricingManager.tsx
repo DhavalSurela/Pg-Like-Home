@@ -45,35 +45,81 @@ function PlanFormFields({ plan }: { plan?: Plan }) {
     <div className="grid gap-4 sm:grid-cols-2">
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Plan name</span>
-        <input className={inputClass} name="plan_name" required defaultValue={plan?.plan_name ?? ""} placeholder="3 Sharing" />
+        <input
+          className={inputClass}
+          name="plan_name"
+          required
+          defaultValue={plan?.plan_name ?? ""}
+          placeholder="3 Sharing"
+        />
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Subtitle</span>
-        <input className={inputClass} name="subtitle" defaultValue={plan?.subtitle ?? ""} placeholder="AC Room" />
+        <input
+          className={inputClass}
+          name="subtitle"
+          defaultValue={plan?.subtitle ?? ""}
+          placeholder="AC Room"
+        />
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Tag</span>
-        <input className={inputClass} name="tag" defaultValue={plan?.tag ?? ""} placeholder="Premium" />
+        <input
+          className={inputClass}
+          name="tag"
+          defaultValue={plan?.tag ?? ""}
+          placeholder="Premium"
+        />
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Occupancy type</span>
-        <input className={inputClass} name="occupancy_type" required defaultValue={plan?.occupancy_type ?? ""} placeholder="3-sharing" />
+        <input
+          className={inputClass}
+          name="occupancy_type"
+          required
+          defaultValue={plan?.occupancy_type ?? ""}
+          placeholder="3-sharing"
+        />
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Monthly rate (₹)</span>
-        <input className={inputClass} name="monthly_rate" required type="number" min="0" step="1" defaultValue={plan?.monthly_rate ?? ""} placeholder="11000" />
+        <input
+          className={inputClass}
+          name="monthly_rate"
+          required
+          type="number"
+          min="0"
+          step="1"
+          defaultValue={plan?.monthly_rate ?? ""}
+          placeholder="11000"
+        />
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Deposit (₹)</span>
-        <input className={inputClass} name="deposit" type="number" min="0" step="1" defaultValue={plan?.deposit ?? 0} />
+        <input
+          className={inputClass}
+          name="deposit"
+          type="number"
+          min="0"
+          step="1"
+          defaultValue={plan?.deposit ?? 0}
+        />
       </label>
       <label className="block sm:col-span-2">
         <span className="text-sm font-medium text-stone-700">Description</span>
-        <textarea className={inputClass} name="description" rows={2} defaultValue={plan?.description ?? ""} placeholder="Cool comfort with shared amenities." />
+        <textarea
+          className={inputClass}
+          name="description"
+          rows={2}
+          defaultValue={plan?.description ?? ""}
+          placeholder="Cool comfort with shared amenities."
+        />
       </label>
       <label className="block sm:col-span-2">
         <span className="text-sm font-medium text-stone-700">Features</span>
-        <span className="mt-0.5 block text-xs text-stone-400">One per line — these become the bullet list on the card.</span>
+        <span className="mt-0.5 block text-xs text-stone-400">
+          One per line — these become the bullet list on the card.
+        </span>
         <textarea
           className={inputClass}
           name="features"
@@ -84,11 +130,22 @@ function PlanFormFields({ plan }: { plan?: Plan }) {
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Inclusions (optional)</span>
-        <input className={inputClass} name="inclusions" defaultValue={plan?.inclusions ?? ""} placeholder="Food, Wi-Fi, housekeeping" />
+        <input
+          className={inputClass}
+          name="inclusions"
+          defaultValue={plan?.inclusions ?? ""}
+          placeholder="Food, Wi-Fi, housekeeping"
+        />
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Sort order</span>
-        <input className={inputClass} name="sort_order" type="number" step="1" defaultValue={plan?.sort_order ?? 0} />
+        <input
+          className={inputClass}
+          name="sort_order"
+          type="number"
+          step="1"
+          defaultValue={plan?.sort_order ?? 0}
+        />
       </label>
       <label className="flex items-center gap-2 sm:col-span-2">
         <input
@@ -97,7 +154,9 @@ function PlanFormFields({ plan }: { plan?: Plan }) {
           type="checkbox"
           defaultChecked={plan?.recommended ?? false}
         />
-        <span className="text-sm font-medium text-stone-700">Highlight as &ldquo;Most popular&rdquo;</span>
+        <span className="text-sm font-medium text-stone-700">
+          Highlight as &ldquo;Most popular&rdquo;
+        </span>
       </label>
     </div>
   );
@@ -110,24 +169,30 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
 
   return (
     <>
-      <div className="card-surface overflow-hidden rounded-2xl border border-stone-200/80 shadow-card">
-        <div className="flex flex-col gap-3 border-b border-stone-200/80 bg-gradient-to-b from-stone-50/80 to-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-base font-semibold text-stone-900">Pricing plans</h2>
-            <p className="mt-1 text-sm text-stone-500">These cards appear on the public Rooms &amp; Pricing page.</p>
+            <p className="mt-1 text-sm text-stone-500">
+              These cards appear on the public Rooms &amp; Pricing page.
+            </p>
           </div>
-          <Button className="h-11 w-full sm:h-8 sm:w-auto" type="button" onClick={() => setIsCreateOpen(true)}>
+          <Button
+            className="h-11 w-full sm:h-8 sm:w-auto"
+            type="button"
+            onClick={() => setIsCreateOpen(true)}
+          >
             <Plus aria-hidden="true" className="size-4" />
             Add plan
           </Button>
         </div>
 
         {plans.length > 0 ? (
-          <div className="grid gap-4 p-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {plans.map((plan) => (
               <div
                 key={plan.id}
-                className="relative flex flex-col rounded-xl border border-stone-200/80 bg-white p-5 shadow-card"
+                className="card-surface relative flex flex-col rounded-xl border border-stone-200/80 p-5 shadow-card"
               >
                 {plan.recommended ? (
                   <span className="absolute top-4 right-4 inline-flex items-center gap-1 rounded-full bg-stone-900 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
@@ -156,11 +221,23 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
                   </ul>
                 ) : null}
                 <div className="mt-5 flex gap-2 border-t border-stone-100 pt-4">
-                  <Button className="flex-1" size="sm" type="button" variant="outline" onClick={() => setEditingPlan(plan)}>
+                  <Button
+                    className="flex-1"
+                    size="sm"
+                    type="button"
+                    variant="outline"
+                    onClick={() => setEditingPlan(plan)}
+                  >
                     <Pencil aria-hidden="true" className="size-3.5" />
                     Edit
                   </Button>
-                  <Button aria-label={`Delete ${plan.plan_name}`} size="icon-sm" type="button" variant="destructive" onClick={() => setDeletingPlan(plan)}>
+                  <Button
+                    aria-label={`Delete ${plan.plan_name}`}
+                    size="icon-sm"
+                    type="button"
+                    variant="destructive"
+                    onClick={() => setDeletingPlan(plan)}
+                  >
                     <Trash2 aria-hidden="true" className="size-4" />
                   </Button>
                 </div>
@@ -168,18 +245,24 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center gap-3 px-5 py-16 text-center">
+          <div className="card-surface flex flex-col items-center justify-center gap-3 rounded-2xl border border-stone-200/80 px-5 py-16 text-center shadow-card">
             <span className="flex size-12 items-center justify-center rounded-full bg-stone-100 text-stone-400">
               <IndianRupee aria-hidden="true" className="size-5" />
             </span>
-            <p className="text-sm text-stone-500">No pricing plans yet. Add your first plan to populate the Rooms page.</p>
+            <p className="text-sm text-stone-500">
+              No pricing plans yet. Add your first plan to populate the Rooms page.
+            </p>
           </div>
         )}
       </div>
 
       {isCreateOpen ? (
         <Modal size="xl" title="Add pricing plan" onClose={() => setIsCreateOpen(false)}>
-          <ActionForm action={createPricing} onSuccess={() => setIsCreateOpen(false)} className="space-y-5">
+          <ActionForm
+            action={createPricing}
+            onSuccess={() => setIsCreateOpen(false)}
+            className="space-y-5"
+          >
             {(state, pending) => (
               <>
                 <PlanFormFields />
@@ -199,7 +282,11 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
       ) : null}
 
       {editingPlan ? (
-        <Modal size="xl" title={`Edit ${editingPlan.plan_name}`} onClose={() => setEditingPlan(null)}>
+        <Modal
+          size="xl"
+          title={`Edit ${editingPlan.plan_name}`}
+          onClose={() => setEditingPlan(null)}
+        >
           <ActionForm
             key={editingPlan.id}
             action={updatePricing}
@@ -227,13 +314,18 @@ export function PricingManager({ plans }: { plans: Plan[] }) {
 
       {deletingPlan ? (
         <Modal title="Delete plan" onClose={() => setDeletingPlan(null)}>
-          <ActionForm action={deletePricing} onSuccess={() => setDeletingPlan(null)} className="space-y-5">
+          <ActionForm
+            action={deletePricing}
+            onSuccess={() => setDeletingPlan(null)}
+            className="space-y-5"
+          >
             {(state, pending) => (
               <>
                 <input name="id" type="hidden" value={deletingPlan.id} />
                 <p className="text-sm leading-6 text-stone-600">
-                  Delete <span className="font-semibold text-stone-900">{deletingPlan.plan_name}</span>? It will be
-                  removed from the public Rooms page immediately.
+                  Delete{" "}
+                  <span className="font-semibold text-stone-900">{deletingPlan.plan_name}</span>? It
+                  will be removed from the public Rooms page immediately.
                 </p>
                 <ActionMessage state={state} />
                 <div className="flex justify-end gap-2">

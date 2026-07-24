@@ -30,7 +30,7 @@ export function ActionForm({
   }, IDLE);
 
   return (
-    <form action={dispatch} className={className}>
+    <form action={dispatch} className={className} suppressHydrationWarning>
       {children(state, pending)}
     </form>
   );

@@ -66,15 +66,32 @@ export function RoomFields({ room }: { room?: Room }) {
       </label>
       <label className="block">
         <span className="text-sm font-medium text-stone-700">Room type</span>
-        <input className={inputClass} name="room_type" required defaultValue={room?.room_type ?? ""} placeholder="AC" list="room-type-options" />
+        <input
+          className={inputClass}
+          name="room_type"
+          required
+          defaultValue={room?.room_type ?? ""}
+          placeholder="AC"
+          list="room-type-options"
+        />
         <datalist id="room-type-options">
           <option value="AC" />
           <option value="Non-AC" />
         </datalist>
       </label>
       <label className="block">
-        <span className="text-sm font-medium text-stone-700">{room ? "Capacity" : "Beds to create"}</span>
-        <input className={inputClass} name="capacity" required type="number" min="1" step="1" defaultValue={room?.capacity ?? 1} />
+        <span className="text-sm font-medium text-stone-700">
+          {room ? "Capacity" : "Beds to create"}
+        </span>
+        <input
+          className={inputClass}
+          name="capacity"
+          required
+          type="number"
+          min="1"
+          step="1"
+          defaultValue={room?.capacity ?? 1}
+        />
       </label>
     </div>
   );
@@ -139,7 +156,7 @@ export function BedTile({
       type="button"
       title={
         occupied
-          ? tenant?.name ?? "Occupied"
+          ? (tenant?.name ?? "Occupied")
           : reserved
             ? `Reserved${bed.expected_date ? ` · coming ${fmtDate(bed.expected_date)}` : ""}`
             : `Bed ${bed.bed_number} — empty, tap to assign`
@@ -149,14 +166,18 @@ export function BedTile({
         "bed-tile flex aspect-square flex-col items-center justify-center gap-1 rounded-xl border p-1 text-center transition-all",
         occupied && "border-stone-800 bg-stone-800 text-white hover:bg-stone-900",
         reserved && "border-stone-300 bg-stone-200 text-stone-700 hover:bg-stone-300",
-        !occupied && !reserved &&
+        !occupied &&
+          !reserved &&
           "border-dashed border-stone-300 bg-white text-stone-400 hover:border-stone-400 hover:text-stone-600",
         className
       )}
     >
       <BedSingle
         aria-hidden="true"
-        className={cn("size-6", occupied ? "text-stone-300" : reserved ? "text-stone-500" : "text-stone-400")}
+        className={cn(
+          "size-6",
+          occupied ? "text-white" : reserved ? "text-stone-500" : "text-stone-400"
+        )}
       />
       {occupied ? (
         <span className="max-w-full truncate px-1 text-[11px] font-medium text-stone-100">
@@ -194,7 +215,9 @@ export function BedModal({
   unassignedTenants: Tenant[];
   onClose: () => void;
 }) {
-  const [mode, setMode] = useState<"existing" | "new">(unassignedTenants.length > 0 ? "existing" : "new");
+  const [mode, setMode] = useState<"existing" | "new">(
+    unassignedTenants.length > 0 ? "existing" : "new"
+  );
   const [placement, setPlacement] = useState<"occupied" | "reserved">("occupied");
 
   const [assignState, assignAction, isAssigning] = useCloseAction(assignBed, onClose);
@@ -346,7 +369,12 @@ export function BedModal({
               </label>
               <label className="block">
                 <span className="text-sm font-medium text-stone-700">Email (optional)</span>
-                <input className={inputClass} name="email" type="email" placeholder="name@example.com" />
+                <input
+                  className={inputClass}
+                  name="email"
+                  type="email"
+                  placeholder="name@example.com"
+                />
               </label>
             </div>
           )}

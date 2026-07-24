@@ -110,60 +110,60 @@ alter table public.inquiries enable row level security;
 -- ============================================================
 -- 20260603000100_add_admin_rls_policies.sql
 -- ============================================================
-create policy "Authenticated admins can read admin users"
+create policy "Admins can read their own admin record"
 on public.admin_users
 for select
 to authenticated
-using (true);
+using (id = (select auth.uid()));
 
 create policy "Authenticated admins can manage blocks"
 on public.blocks
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 create policy "Authenticated admins can manage rooms"
 on public.rooms
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 create policy "Authenticated admins can manage tenants"
 on public.tenants
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 create policy "Authenticated admins can manage rents"
 on public.rents
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 create policy "Authenticated admins can manage food photos"
 on public.food_photos
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 create policy "Authenticated admins can manage pricing"
 on public.pricing
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 create policy "Authenticated admins can manage inquiries"
 on public.inquiries
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 
 -- ============================================================
@@ -218,33 +218,40 @@ on conflict (id) do update set public = true;
 
 -- Public read of the bucket; authenticated admins can write/replace/remove.
 drop policy if exists "Public read food-photos bucket" on storage.objects;
-create policy "Public read food-photos bucket"
-on storage.objects
-for select
-to public
-using (bucket_id = 'food-photos');
 
 drop policy if exists "Admins upload food-photos" on storage.objects;
 create policy "Admins upload food-photos"
 on storage.objects
 for insert
 to authenticated
-with check (bucket_id = 'food-photos');
+with check (
+  bucket_id = 'food-photos'
+  and exists (select 1 from public.admin_users where id = (select auth.uid()))
+);
 
 drop policy if exists "Admins update food-photos" on storage.objects;
 create policy "Admins update food-photos"
 on storage.objects
 for update
 to authenticated
-using (bucket_id = 'food-photos')
-with check (bucket_id = 'food-photos');
+using (
+  bucket_id = 'food-photos'
+  and exists (select 1 from public.admin_users where id = (select auth.uid()))
+)
+with check (
+  bucket_id = 'food-photos'
+  and exists (select 1 from public.admin_users where id = (select auth.uid()))
+);
 
 drop policy if exists "Admins delete food-photos" on storage.objects;
 create policy "Admins delete food-photos"
 on storage.objects
 for delete
 to authenticated
-using (bucket_id = 'food-photos');
+using (
+  bucket_id = 'food-photos'
+  and exists (select 1 from public.admin_users where id = (select auth.uid()))
+);
 
 
 -- ============================================================
@@ -329,8 +336,8 @@ create policy "Authenticated admins can manage beds"
 on public.beds
 for all
 to authenticated
-using (true)
-with check (true);
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
 
 -- Backfill: create beds for each existing room based on its capacity.
 insert into public.beds (room_id, bed_number)
@@ -450,8 +457,14 @@ create policy "Public can submit inquiries"
 on public.inquiries
 for insert
 to anon
-with check (true);
-
+with check (
+  status = 'new'
+  and admin_note is null
+  and char_length(btrim(name)) between 1 and 120
+  and char_length(btrim(phone)) between 1 and 40
+  and char_length(btrim(message)) between 1 and 5000
+  and (email is null or char_length(btrim(email)) between 3 and 320)
+);
 
 -- ============================================================
 -- 20260621000900_rent_payment.sql
@@ -486,3 +499,130 @@ alter table public.rents
   add constraint rents_status_check check (status in ('pending', 'paid', 'waived', 'deposit'));
 
 
+-- ============================================================
+-- 20260724000200_daily_menus.sql
+-- ============================================================
+create table if not exists public.daily_menus (
+  id uuid primary key default extensions.gen_random_uuid(),
+  menu_date date not null unique,
+  breakfast text not null,
+  lunch text not null,
+  dinner text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint daily_menus_breakfast_length check (char_length(btrim(breakfast)) between 1 and 500),
+  constraint daily_menus_lunch_length check (char_length(btrim(lunch)) between 1 and 500),
+  constraint daily_menus_dinner_length check (char_length(btrim(dinner)) between 1 and 500)
+);
+
+create index if not exists daily_menus_menu_date_idx
+  on public.daily_menus (menu_date desc);
+
+alter table public.daily_menus enable row level security;
+
+create policy "Public can read recent daily menus"
+on public.daily_menus
+for select
+to anon
+using (
+  menu_date >= (timezone('Asia/Kolkata', now())::date - 29)
+  and menu_date <= timezone('Asia/Kolkata', now())::date
+);
+
+create policy "Allowlisted admins can manage daily menus"
+on public.daily_menus
+for all
+to authenticated
+using (
+  exists (select 1 from public.admin_users where id = (select auth.uid()))
+)
+with check (
+  exists (select 1 from public.admin_users where id = (select auth.uid()))
+);
+
+-- Monthly block bills and room AC electricity allocation.
+create table if not exists public.block_bills (
+  id uuid primary key default extensions.gen_random_uuid(),
+  block_id uuid not null references public.blocks (id) on delete restrict,
+  month date not null,
+  bill_type text not null check (bill_type in ('rent', 'electricity')),
+  total_amount numeric(12, 2) not null check (total_amount >= 0),
+  notes text,
+  created_at timestamptz not null default now(),
+  constraint block_bills_month_is_first_day
+    check (month = date_trunc('month', month)::date),
+  constraint block_bills_block_month_type_key unique (block_id, month, bill_type)
+);
+
+create table if not exists public.block_bill_payments (
+  id uuid primary key default extensions.gen_random_uuid(),
+  bill_id uuid not null references public.block_bills (id) on delete cascade,
+  rent_id uuid references public.rents (id) on delete cascade,
+  payer_type text not null check (payer_type in ('owner', 'tenant')),
+  tenant_id uuid references public.tenants (id) on delete set null,
+  payer_name text not null,
+  amount numeric(12, 2) not null check (amount > 0),
+  payment_date date not null default current_date,
+  notes text,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.room_ac_bills (
+  id uuid primary key default extensions.gen_random_uuid(),
+  room_id uuid not null references public.rooms (id) on delete restrict,
+  month date not null,
+  total_amount numeric(12, 2) not null check (total_amount >= 0),
+  notes text,
+  created_at timestamptz not null default now(),
+  constraint room_ac_bills_month_is_first_day
+    check (month = date_trunc('month', month)::date),
+  constraint room_ac_bills_room_month_key unique (room_id, month)
+);
+
+create table if not exists public.room_ac_charges (
+  id uuid primary key default extensions.gen_random_uuid(),
+  bill_id uuid not null references public.room_ac_bills (id) on delete cascade,
+  bed_id uuid references public.beds (id) on delete set null,
+  bed_number text not null,
+  tenant_id uuid references public.tenants (id) on delete set null,
+  tenant_name text,
+  amount numeric(12, 2) not null check (amount >= 0),
+  status text not null default 'pending' check (status in ('pending', 'paid')),
+  payment_date date,
+  created_at timestamptz not null default now(),
+  constraint room_ac_charges_bill_bed_key unique (bill_id, bed_number)
+);
+
+create index if not exists block_bills_month_idx on public.block_bills (month desc);
+create index if not exists block_bills_block_id_idx on public.block_bills (block_id);
+create index if not exists block_bill_payments_bill_id_idx on public.block_bill_payments (bill_id);
+create unique index if not exists block_bill_payments_rent_id_key
+  on public.block_bill_payments (rent_id) where rent_id is not null;
+create index if not exists room_ac_bills_month_idx on public.room_ac_bills (month desc);
+create index if not exists room_ac_bills_room_id_idx on public.room_ac_bills (room_id);
+create index if not exists room_ac_charges_bill_id_idx on public.room_ac_charges (bill_id);
+
+alter table public.block_bills enable row level security;
+alter table public.block_bill_payments enable row level security;
+alter table public.room_ac_bills enable row level security;
+alter table public.room_ac_charges enable row level security;
+
+create policy "Allowlisted admins can manage block bills"
+on public.block_bills for all to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Allowlisted admins can manage block bill payments"
+on public.block_bill_payments for all to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Allowlisted admins can manage room AC bills"
+on public.room_ac_bills for all to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));
+
+create policy "Allowlisted admins can manage room AC charges"
+on public.room_ac_charges for all to authenticated
+using (exists (select 1 from public.admin_users where id = (select auth.uid())))
+with check (exists (select 1 from public.admin_users where id = (select auth.uid())));

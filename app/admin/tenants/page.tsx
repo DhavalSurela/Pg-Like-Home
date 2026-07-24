@@ -5,7 +5,7 @@ import { TenantsManager, type Placement } from "@/app/admin/tenants/TenantsManag
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Tenants",
+  title: "Residents",
   robots: {
     index: false,
     follow: false,
@@ -16,14 +16,16 @@ export default async function TenantsPage() {
   const supabase = await createClient();
   const [tenantsResult, bedsResult, roomsResult, blocksResult] = await Promise.all([
     supabase.from("tenants").select("*").order("created_at", { ascending: false }),
-    supabase.from("beds").select("tenant_id, room_id, bed_number, status").not("tenant_id", "is", null),
+    supabase
+      .from("beds")
+      .select("tenant_id, room_id, bed_number, status")
+      .not("tenant_id", "is", null),
     supabase.from("rooms").select("id, room_number, block_id"),
     supabase.from("blocks").select("id, block_name"),
   ]);
 
   const tenants = tenantsResult.data ?? [];
-  const error =
-    tenantsResult.error ?? bedsResult.error ?? roomsResult.error ?? blocksResult.error;
+  const error = tenantsResult.error ?? bedsResult.error ?? roomsResult.error ?? blocksResult.error;
 
   const roomById = new Map((roomsResult.data ?? []).map((r) => [r.id, r]));
   const blockById = new Map((blocksResult.data ?? []).map((b) => [b.id, b]));
@@ -40,19 +42,23 @@ export default async function TenantsPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <p className="text-xs font-semibold tracking-[0.18em] text-stone-400 uppercase">Tenants</p>
-        <h1 className="mt-3 text-4xl font-light tracking-tight text-stone-900 sm:text-5xl">Tenants</h1>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-stone-500">
-          Everyone added across the property — residents, reservations, and unassigned tenants.
+    <div className="space-y-5 sm:space-y-8">
+      <div className="hidden sm:block">
+        <p className="hidden text-xs font-semibold tracking-[0.18em] text-stone-400 uppercase sm:block">
+          Residents
+        </p>
+        <h1 className="mt-3 hidden text-4xl font-light tracking-tight text-stone-900 sm:block sm:text-5xl">
+          Residents
+        </h1>
+        <p className="mt-0 hidden max-w-xl text-[15px] leading-relaxed text-stone-500 sm:mt-3 sm:block">
+          Everyone living at or reserved for the property, including unassigned residents.
         </p>
       </div>
 
       {error ? (
         <div className="flex gap-3 rounded-2xl border border-amber-200/70 bg-amber-50/70 p-4 text-sm text-amber-800 shadow-card">
           <AlertCircle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
-          <p>Tenants could not be loaded: {error.message}</p>
+          <p>Residents could not be loaded: {error.message}</p>
         </div>
       ) : null}
 

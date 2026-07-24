@@ -9,9 +9,9 @@
 
   /* Brand Colors inspired by marketing material */
   /* Teal: Trust, Cleanliness (from "Clean & Hygienic Stay") */
-  --color-brand-teal: #006D77;
+  --color-brand-teal: #006d77;
   /* Orange: Food, Warmth, Energy (from "Delicious, Healthy Food") */
-  --color-brand-orange: #F3A17E;
+  --color-brand-orange: #f3a17e;
   /* Green: Freshness, Eco (from decorative swirls) */
   --color-brand-green: #83c5be;
   /* Cream: Background, Home-like feel */
@@ -170,7 +170,11 @@ body {
 
   /* Subtle diagonal warm gradient for card surfaces (white → faint cream). */
   .card-surface {
-    background-image: linear-gradient(135deg, #ffffff 0%, #faf7f1 100%);
+    background-color: #fffdfa;
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(243, 161, 126, 0.14), transparent 38%),
+      radial-gradient(circle at 0% 100%, rgba(131, 197, 190, 0.12), transparent 42%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 248, 239, 0.94) 100%);
   }
 
   /* Soft, warm-tinted layered shadows used across the admin surface. */
@@ -194,5 +198,684 @@ body {
       rgba(120, 113, 108, 0.45),
       transparent
     );
+  }
+}
+
+/* Mobile admin dark theme. The preference is deliberately scoped below the
+   `sm` breakpoint so tablets and desktops keep the existing light workspace. */
+@media (max-width: 639px) {
+  html.admin-dark .admin-bg {
+    --background: #18181d;
+    --foreground: #f7f7f8;
+    --card: #18181d;
+    --card-foreground: #f7f7f8;
+    --popover: #202026;
+    --popover-foreground: #f7f7f8;
+    --primary: #6d28d9;
+    --primary-foreground: #ffffff;
+    --secondary: #29292f;
+    --secondary-foreground: #f4f4f5;
+    --muted: #29292f;
+    --muted-foreground: #a1a1aa;
+    --accent: #30244a;
+    --accent-foreground: #f5f3ff;
+    --border: #36363e;
+    --input: #3f3f48;
+    --ring: #8b5cf6;
+
+    color-scheme: dark;
+    color: #f7f7f8;
+    background-color: #0d0d10;
+    background-image:
+      radial-gradient(32rem 24rem at 100% -4%, rgba(109, 40, 217, 0.16), transparent 58%),
+      linear-gradient(to bottom, #111116 0%, #0d0d10 100%);
+  }
+
+  html.admin-dark .admin-bg .admin-header {
+    border-color: #303037;
+    background: rgba(24, 24, 29, 0.94);
+    box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.9);
+  }
+
+  html.admin-dark .admin-bg .admin-mobile-nav {
+    border-color: #303037;
+    background: rgba(13, 13, 16, 0.72);
+  }
+
+  html.admin-dark .admin-bg .admin-theme-toggle {
+    border-color: #45454f;
+    color: #ddd6fe;
+    background: #29292f;
+  }
+
+  html.admin-dark .admin-bg .admin-theme-icon-light {
+    display: none;
+  }
+
+  html.admin-dark .admin-bg .admin-theme-icon-dark {
+    display: block;
+  }
+
+  html.admin-dark .admin-bg .card-surface {
+    background-color: #18181d;
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(109, 40, 217, 0.12), transparent 42%),
+      linear-gradient(145deg, #1d1d22 0%, #151519 100%);
+  }
+
+  html.admin-dark .admin-bg .shadow-card {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.025) inset,
+      0 8px 22px -16px rgba(0, 0, 0, 0.95);
+  }
+
+  html.admin-dark .admin-bg .shadow-card-md {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.035) inset,
+      0 22px 52px -22px rgba(0, 0, 0, 0.95);
+  }
+
+  html.admin-dark .admin-bg nav a[aria-current="page"] {
+    color: #ffffff;
+    background: linear-gradient(135deg, #7c3aed, #4c1d95);
+    box-shadow: 0 8px 20px -10px rgba(124, 58, 237, 0.9);
+  }
+
+  html.admin-dark .admin-bg main nav {
+    border-color: #36363e;
+    background: #1b1b20;
+  }
+
+  html.admin-dark .admin-bg main nav a[aria-current="page"] {
+    border: 1px solid #554176;
+    background: #30244a;
+    box-shadow: none;
+  }
+
+  html.admin-dark .admin-bg input,
+  html.admin-dark .admin-bg select,
+  html.admin-dark .admin-bg textarea {
+    border-color: #3f3f48;
+    color: #f4f4f5;
+    background-color: #24242a;
+  }
+
+  html.admin-dark .admin-bg input::placeholder,
+  html.admin-dark .admin-bg textarea::placeholder {
+    color: #777780;
+  }
+
+  html.admin-dark .admin-bg input:focus,
+  html.admin-dark .admin-bg select:focus,
+  html.admin-dark .admin-bg textarea:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.16);
+  }
+
+  html.admin-dark .admin-bg option {
+    color: #f4f4f5;
+    background: #24242a;
+  }
+
+  html.admin-dark .admin-bg .text-stone-950,
+  html.admin-dark .admin-bg .text-stone-900,
+  html.admin-dark .admin-bg .text-stone-800,
+  html.admin-dark .admin-bg .text-stone-700 {
+    color: #f4f4f5 !important;
+  }
+
+  html.admin-dark .admin-bg .text-stone-600,
+  html.admin-dark .admin-bg .text-stone-500 {
+    color: #a1a1aa !important;
+  }
+
+  html.admin-dark .admin-bg .text-stone-400 {
+    color: #85858f !important;
+  }
+
+  html.admin-dark .admin-bg .text-stone-300 {
+    color: #686872 !important;
+  }
+
+  html.admin-dark .admin-bg .bg-white,
+  html.admin-dark .admin-bg .bg-white\/30,
+  html.admin-dark .admin-bg .bg-white\/50,
+  html.admin-dark .admin-bg .bg-white\/55,
+  html.admin-dark .admin-bg .bg-white\/70,
+  html.admin-dark .admin-bg .bg-white\/80,
+  html.admin-dark .admin-bg .bg-white\/90 {
+    background-color: #1d1d22 !important;
+  }
+
+  html.admin-dark .admin-bg .bg-stone-50,
+  html.admin-dark .admin-bg .bg-stone-50\/60,
+  html.admin-dark .admin-bg .bg-stone-50\/70,
+  html.admin-dark .admin-bg .bg-stone-50\/80,
+  html.admin-dark .admin-bg .bg-stone-100,
+  html.admin-dark .admin-bg .bg-stone-100\/60,
+  html.admin-dark .admin-bg .bg-stone-100\/70 {
+    background-color: #29292f !important;
+  }
+
+  html.admin-dark .admin-bg .bg-stone-200,
+  html.admin-dark .admin-bg .bg-stone-300,
+  html.admin-dark .admin-bg .bg-stone-400 {
+    background-color: #45454f !important;
+  }
+
+  html.admin-dark .admin-bg .bg-stone-700 {
+    background-color: #3f3f48 !important;
+  }
+
+  html.admin-dark .admin-bg .bg-stone-800 {
+    background-color: #7c3aed !important;
+  }
+
+  html.admin-dark .admin-bg .bg-stone-900 {
+    background-color: #111114 !important;
+  }
+
+  html.admin-dark .admin-bg .border-stone-100,
+  html.admin-dark .admin-bg .border-stone-200,
+  html.admin-dark .admin-bg .border-stone-200\/60,
+  html.admin-dark .admin-bg .border-stone-200\/70,
+  html.admin-dark .admin-bg .border-stone-200\/80,
+  html.admin-dark .admin-bg .border-stone-300,
+  html.admin-dark .admin-bg .border-stone-400,
+  html.admin-dark .admin-bg .border-stone-800,
+  html.admin-dark .admin-bg .border-stone-900 {
+    border-color: #36363e !important;
+  }
+
+  html.admin-dark .admin-bg .divide-stone-100 > :not(:last-child),
+  html.admin-dark .admin-bg .divide-stone-200\/70 > :not(:last-child),
+  html.admin-dark .admin-bg .divide-stone-200\/80 > :not(:last-child) {
+    border-color: #303037 !important;
+  }
+
+  html.admin-dark .admin-bg .ring-stone-200,
+  html.admin-dark .admin-bg .ring-stone-100,
+  html.admin-dark .admin-bg .ring-stone-200\/70,
+  html.admin-dark .admin-bg .ring-stone-200\/80,
+  html.admin-dark .admin-bg .ring-stone-300,
+  html.admin-dark .admin-bg .ring-stone-900\/5 {
+    --tw-ring-color: #3f3f48 !important;
+  }
+
+  html.admin-dark .admin-bg .from-stone-50 {
+    --tw-gradient-from: #24242a;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+
+  html.admin-dark .admin-bg .to-white {
+    --tw-gradient-to: #18181d;
+  }
+
+  html.admin-dark .admin-bg .bg-emerald-50,
+  html.admin-dark .admin-bg .bg-emerald-50\/70 {
+    background-color: #10251d !important;
+  }
+
+  html.admin-dark .admin-bg .bg-emerald-100 {
+    background-color: #153a2c !important;
+  }
+
+  html.admin-dark .admin-bg .border-emerald-200,
+  html.admin-dark .admin-bg .border-emerald-200\/70,
+  html.admin-dark .admin-bg .border-emerald-200\/80 {
+    border-color: #235c46 !important;
+  }
+
+  html.admin-dark .admin-bg .text-emerald-700,
+  html.admin-dark .admin-bg .text-emerald-700\/70,
+  html.admin-dark .admin-bg .text-emerald-800,
+  html.admin-dark .admin-bg .text-emerald-600 {
+    color: #6ee7b7 !important;
+  }
+
+  html.admin-dark .admin-bg .bg-amber-50,
+  html.admin-dark .admin-bg .bg-amber-50\/70,
+  html.admin-dark .admin-bg .bg-amber-100 {
+    background-color: #30250f !important;
+  }
+
+  html.admin-dark .admin-bg .border-amber-200,
+  html.admin-dark .admin-bg .border-amber-200\/70,
+  html.admin-dark .admin-bg .border-amber-200\/80 {
+    border-color: #70541e !important;
+  }
+
+  html.admin-dark .admin-bg .text-amber-600,
+  html.admin-dark .admin-bg .text-amber-700,
+  html.admin-dark .admin-bg .text-amber-700\/70,
+  html.admin-dark .admin-bg .text-amber-800 {
+    color: #fbbf24 !important;
+  }
+
+  html.admin-dark .admin-bg .bg-red-50,
+  html.admin-dark .admin-bg .bg-red-50\/70,
+  html.admin-dark .admin-bg .bg-red-100 {
+    background-color: #351719 !important;
+  }
+
+  html.admin-dark .admin-bg .border-red-200,
+  html.admin-dark .admin-bg .border-red-200\/70 {
+    border-color: #713034 !important;
+  }
+
+  html.admin-dark .admin-bg .text-red-600,
+  html.admin-dark .admin-bg .text-red-700 {
+    color: #fca5a5 !important;
+  }
+
+  html.admin-dark .admin-bg .bg-sky-50,
+  html.admin-dark .admin-bg .bg-sky-100 {
+    background-color: #142638 !important;
+  }
+
+  html.admin-dark .admin-bg .text-sky-700 {
+    color: #7dd3fc !important;
+  }
+
+  html.admin-dark .admin-bg .bg-violet-100,
+  html.admin-dark .admin-bg .bg-rose-100 {
+    background-color: #30244a !important;
+  }
+
+  html.admin-dark .admin-bg .text-violet-700,
+  html.admin-dark .admin-bg .text-rose-700,
+  html.admin-dark .admin-bg .text-indigo-600 {
+    color: #c4b5fd !important;
+  }
+
+  html.admin-dark .admin-bg .text-orange-600 {
+    color: #fb923c !important;
+  }
+
+  html.admin-dark .admin-bg ::selection {
+    color: #ffffff;
+    background: #6d28d9;
+  }
+}
+
+/* District-inspired polish for the mobile dark workspace: crisp outlined
+   controls, flatter elevated surfaces, bolder hierarchy, and focused violet
+   accents. Kept separate from the palette rules above for easy iteration. */
+@media (max-width: 639px) {
+  html.admin-dark .admin-bg .admin-topbar {
+    height: 4.25rem;
+  }
+
+  html.admin-dark .admin-bg .admin-brand-icon {
+    border: 1px solid #474050;
+    background: linear-gradient(145deg, #30263f, #17171c) !important;
+    box-shadow:
+      0 10px 24px -14px rgba(124, 58, 237, 0.9),
+      inset 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  html.admin-dark .admin-bg .admin-theme-toggle {
+    border-color: #564369;
+    color: #ddd6fe;
+    background: linear-gradient(145deg, #342747, #24242a);
+    box-shadow:
+      0 8px 18px -12px rgba(124, 58, 237, 0.95),
+      inset 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  html.admin-dark .admin-bg .admin-primary-nav {
+    gap: 0.5rem;
+    padding-block: 0.125rem;
+  }
+
+  html.admin-dark .admin-bg .admin-primary-nav a {
+    border: 1px solid #303038;
+    border-radius: 0.75rem;
+    color: #a1a1aa;
+    background: #19191e;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+  }
+
+  html.admin-dark .admin-bg .admin-primary-nav a[aria-current="page"] {
+    border-color: #74559b;
+    color: #ffffff;
+    background: linear-gradient(145deg, #38284d, #241d31);
+    box-shadow:
+      0 8px 18px -12px rgba(124, 58, 237, 0.9),
+      inset 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  html.admin-dark .admin-bg .admin-subnav > div {
+    gap: 0.25rem;
+    padding: 0.25rem;
+    border-color: #323239;
+    border-radius: 0.875rem;
+    background: #18181d;
+  }
+
+  html.admin-dark .admin-bg .admin-subnav a {
+    min-height: 2.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.7rem;
+  }
+
+  html.admin-dark .admin-bg .admin-subnav a[aria-current="page"] {
+    border-color: #554176;
+    background: linear-gradient(145deg, #352747, #271d35);
+  }
+
+  html.admin-dark .admin-bg .card-surface {
+    border-color: #2e2e35 !important;
+    border-radius: 1.125rem !important;
+    background-color: #17171b;
+    background-image: linear-gradient(155deg, #1b1b20 0%, #141418 76%);
+    box-shadow:
+      0 1px rgba(255, 255, 255, 0.035) inset,
+      0 14px 30px -24px rgba(0, 0, 0, 1);
+  }
+
+  html.admin-dark .admin-bg [data-slot="button"] {
+    border-radius: 0.75rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  html.admin-dark .admin-bg .bg-primary {
+    border-color: #5966b8;
+    background-color: #5b21b6 !important;
+    background-image: linear-gradient(135deg, #7c3aed 0%, #4f46e5 52%, #2563eb 100%);
+    box-shadow:
+      0 10px 22px -14px rgba(59, 130, 246, 0.9),
+      inset 0 1px rgba(255, 255, 255, 0.16);
+  }
+
+  html.admin-dark .admin-bg .bed-tile.bg-stone-800 {
+    border-color: #5966a8 !important;
+    background-color: #5b21b6 !important;
+    background-image: linear-gradient(145deg, #7c3aed 0%, #4f46e5 54%, #2563eb 100%);
+    box-shadow:
+      0 14px 26px -18px rgba(59, 130, 246, 0.95),
+      inset 0 1px rgba(255, 255, 255, 0.14);
+  }
+
+  html.admin-dark .admin-bg input:not([type="checkbox"]):not([type="radio"]),
+  html.admin-dark .admin-bg select,
+  html.admin-dark .admin-bg textarea {
+    min-height: 2.75rem;
+    border-radius: 0.8rem;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+  }
+
+  html.admin-dark .admin-bg .admin-modal-panel {
+    position: relative;
+    border-color: #35353d !important;
+    border-radius: 1.5rem 1.5rem 0 0 !important;
+    background: #141418 !important;
+    box-shadow:
+      0 -1px rgba(255, 255, 255, 0.035),
+      0 -24px 60px -24px rgba(0, 0, 0, 0.95);
+  }
+
+  html.admin-dark .admin-bg .admin-modal-panel::before {
+    position: absolute;
+    z-index: 2;
+    top: 0.5rem;
+    left: 50%;
+    width: 2.25rem;
+    height: 0.25rem;
+    border-radius: 999px;
+    background: #50505a;
+    content: "";
+    transform: translateX(-50%);
+  }
+
+  html.admin-dark .admin-bg .admin-modal-header {
+    padding-top: 1.5rem;
+    border-color: #303037;
+    background: linear-gradient(to bottom, #1b1b20, #17171b);
+  }
+
+  html.admin-dark .admin-bg .admin-dashboard-section {
+    position: relative;
+  }
+
+  html.admin-dark .admin-bg .admin-section-heading {
+    align-items: center;
+    padding: 0 0.125rem 0.65rem;
+    border-bottom: 1px solid #26262c;
+  }
+
+  html.admin-dark .admin-bg .admin-section-heading h2 {
+    color: #e4e4e7 !important;
+    font-size: 0.75rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  html.admin-dark .admin-bg .admin-section-heading > p {
+    color: #7f7f89 !important;
+    font-size: 0.7rem;
+  }
+
+  html.admin-dark .admin-bg .admin-metric-card {
+    position: relative;
+    min-height: 8.7rem;
+    overflow: hidden;
+    padding: 1rem;
+    border-color: #303038 !important;
+    border-radius: 1.25rem;
+    color: #f7f7f8 !important;
+    background: linear-gradient(150deg, #1c1c21, #121216 78%) !important;
+    box-shadow:
+      0 1px rgba(255, 255, 255, 0.045) inset,
+      0 18px 36px -28px rgba(0, 0, 0, 1);
+  }
+
+  html.admin-dark .admin-bg .admin-metric-card::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 0.2rem;
+    content: "";
+  }
+
+  html.admin-dark .admin-bg .admin-metric-card::after {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 999px;
+    background: rgba(124, 58, 237, 0.12);
+    filter: blur(1px);
+    content: "";
+  }
+
+  html.admin-dark .admin-bg .admin-tone-dark::before,
+  html.admin-dark .admin-bg .admin-tone-light::before {
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  }
+
+  html.admin-dark .admin-bg .admin-tone-green::before {
+    background: linear-gradient(90deg, #10b981, #6ee7b7);
+  }
+
+  html.admin-dark .admin-bg .admin-tone-amber::before {
+    background: linear-gradient(90deg, #f59e0b, #fcd34d);
+  }
+
+  html.admin-dark .admin-bg .admin-metric-card > div,
+  html.admin-dark .admin-bg .admin-metric-card > div > div {
+    position: relative;
+    z-index: 1;
+  }
+
+  html.admin-dark .admin-bg .admin-metric-label {
+    max-width: calc(100% - 2.25rem);
+    color: #a1a1aa !important;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+  }
+
+  html.admin-dark .admin-bg .admin-tone-green .admin-metric-label {
+    color: #6ee7b7 !important;
+  }
+
+  html.admin-dark .admin-bg .admin-tone-amber .admin-metric-label {
+    color: #fcd34d !important;
+  }
+
+  html.admin-dark .admin-bg .admin-metric-value {
+    margin-top: 1.35rem;
+    color: #ffffff !important;
+    font-size: clamp(1.25rem, 6vw, 1.55rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  html.admin-dark .admin-bg .admin-metric-detail {
+    margin-top: 0.6rem;
+    color: #8f8f99 !important;
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+
+  html.admin-dark .admin-bg .admin-metric-icon {
+    position: absolute;
+    z-index: 2;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    border-color: #414149;
+    border-radius: 0.7rem;
+    color: #c4b5fd;
+    background: rgba(48, 36, 74, 0.8) !important;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  html.admin-dark .admin-bg .admin-tone-green .admin-metric-icon {
+    border-color: #235c46;
+    color: #6ee7b7;
+    background: rgba(16, 37, 29, 0.9) !important;
+  }
+
+  html.admin-dark .admin-bg .admin-tone-amber .admin-metric-icon {
+    border-color: #70541e;
+    color: #fcd34d;
+    background: rgba(48, 37, 15, 0.9) !important;
+  }
+
+  html.admin-dark .admin-bg .admin-progress-card {
+    padding: 0.9rem;
+    border-radius: 1rem !important;
+    background: #151519;
+  }
+
+  html.admin-dark .admin-bg .admin-progress-card [class*="h-2"] {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  html.admin-dark .admin-bg .admin-quick-card {
+    position: relative;
+    min-height: 9.5rem;
+    overflow: hidden;
+    border-color: #303038 !important;
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(124, 58, 237, 0.14), transparent 42%),
+      linear-gradient(150deg, #1b1b20, #141418 76%);
+  }
+
+  html.admin-dark .admin-bg .admin-quick-card::after {
+    position: absolute;
+    inset: auto 0 0;
+    height: 0.22rem;
+    background: linear-gradient(90deg, #5b21b6, #8b5cf6, #4c1d95);
+    content: "";
+  }
+
+  html.admin-dark .admin-bg .admin-quick-card > div > span {
+    border: 1px solid #3d3549;
+    border-radius: 0.85rem;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  html.admin-dark .admin-bg .admin-quick-card h3 {
+    color: #f4f4f5 !important;
+    font-size: 0.95rem;
+    letter-spacing: -0.025em;
+  }
+
+  html.admin-dark .admin-bg .admin-quick-card p {
+    color: #8f8f99 !important;
+    line-height: 1.45;
+  }
+}
+
+@keyframes admin-skeleton-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes admin-skeleton-shimmer {
+  from {
+    transform: translateX(-120%);
+  }
+
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@media (max-width: 639px) {
+  .admin-bg .admin-skeleton-page {
+    animation: admin-skeleton-enter 180ms ease-out 80ms both;
+  }
+
+  html.admin-dark .admin-bg .admin-skeleton-card {
+    border-color: #2e2e35 !important;
+    background-color: #17171b !important;
+    background-image: linear-gradient(155deg, #1a1a1f, #141418 78%) !important;
+  }
+
+  html.admin-dark .admin-bg .admin-skeleton-bar,
+  html.admin-dark .admin-bg .admin-skeleton-block {
+    position: relative;
+    overflow: hidden;
+    border-color: #34343c !important;
+    background-color: #29292f !important;
+    background-image: none !important;
+    animation: none !important;
+  }
+
+  html.admin-dark .admin-bg .admin-skeleton-tile {
+    border: 1px solid #32323a;
+    background-color: #202026 !important;
+  }
+
+  html.admin-dark .admin-bg .admin-skeleton-bar::after,
+  html.admin-dark .admin-bg .admin-skeleton-block::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 15%,
+      rgba(139, 92, 246, 0.09) 42%,
+      rgba(96, 165, 250, 0.12) 50%,
+      rgba(139, 92, 246, 0.09) 58%,
+      transparent 85%
+    );
+    content: "";
+    animation: admin-skeleton-shimmer 1.65s ease-in-out infinite;
+  }
+
+  html.admin-dark .admin-bg .admin-metric-card.admin-skeleton-card::after {
+    display: none;
   }
 }

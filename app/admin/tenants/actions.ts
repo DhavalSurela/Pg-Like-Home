@@ -70,7 +70,7 @@ export async function createTenant(
   }
 
   revalidate();
-  return { status: "success", message: "Tenant added." };
+  return { status: "success", message: "Resident added." };
 }
 
 export async function updateTenant(
@@ -101,7 +101,7 @@ export async function updateTenant(
   }
 
   revalidate();
-  return { status: "success", message: "Tenant updated." };
+  return { status: "success", message: "Resident updated." };
 }
 
 export async function deleteTenant(
@@ -110,7 +110,7 @@ export async function deleteTenant(
 ): Promise<TenantActionState> {
   const id = getString(formData, "id");
   if (!id) {
-    return { status: "error", message: "Missing tenant id." };
+    return { status: "error", message: "Missing resident id." };
   }
 
   const supabase = await createClient();
@@ -137,5 +137,5 @@ export async function deleteTenant(
   }
 
   revalidate();
-  return { status: "success", message: "Tenant deleted." };
+  return { status: "success", message: "Resident deleted." };
 }

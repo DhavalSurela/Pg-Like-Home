@@ -111,11 +111,21 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
           <ImagePlus aria-hidden="true" className="size-4 text-stone-400" />
           <h2 className="text-base font-semibold text-stone-900">Upload a photo</h2>
         </div>
-        <form ref={formRef} onSubmit={handleUpload} className="mt-5 space-y-4" suppressHydrationWarning>
+        <form
+          ref={formRef}
+          onSubmit={handleUpload}
+          className="mt-5 space-y-4"
+          suppressHydrationWarning
+        >
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="text-sm font-medium text-stone-700">Category</span>
-              <select className={inputClass} name="category" required defaultValue={FOOD_CATEGORIES[0].value}>
+              <select
+                className={inputClass}
+                name="category"
+                required
+                defaultValue={FOOD_CATEGORIES[0].value}
+              >
                 {FOOD_CATEGORIES.map((category) => (
                   <option key={category.value} value={category.value}>
                     {category.label}
@@ -158,7 +168,9 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
         return (
           <div key={category.value} className="space-y-3">
             <div className="flex items-baseline justify-between">
-              <h3 className="text-sm font-semibold tracking-wide text-stone-700">{category.label}</h3>
+              <h3 className="text-sm font-semibold tracking-wide text-stone-700">
+                {category.label}
+              </h3>
               <span className="text-xs text-stone-400">
                 {items.length} {items.length === 1 ? "photo" : "photos"}
               </span>
@@ -168,7 +180,7 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
                 {items.map((photo) => (
                   <div
                     key={photo.id}
-                    className="group overflow-hidden rounded-xl border border-stone-200/80 bg-white shadow-card"
+                    className="card-surface group overflow-hidden rounded-xl border border-stone-200/80 shadow-card"
                   >
                     <div className="relative aspect-[4/3] bg-stone-100">
                       <Image
@@ -226,13 +238,13 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
                 <input name="id" type="hidden" value={editingPhoto.id} />
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-stone-200 bg-stone-100">
                   <Image
-                src={editingPhoto.image_url}
-                alt={editingPhoto.title}
-                fill
-                className="object-cover"
-                sizes="400px"
-                unoptimized={editingPhoto.image_url.startsWith("http")}
-              />
+                    src={editingPhoto.image_url}
+                    alt={editingPhoto.title}
+                    fill
+                    className="object-cover"
+                    sizes="400px"
+                    unoptimized={editingPhoto.image_url.startsWith("http")}
+                  />
                 </div>
                 <label className="block">
                   <span className="text-sm font-medium text-stone-700">Caption</span>
@@ -241,7 +253,11 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
                 <div className="grid grid-cols-2 gap-4">
                   <label className="block">
                     <span className="text-sm font-medium text-stone-700">Category</span>
-                    <select className={inputClass} name="category" defaultValue={editingPhoto.category}>
+                    <select
+                      className={inputClass}
+                      name="category"
+                      defaultValue={editingPhoto.category}
+                    >
                       {FOOD_CATEGORIES.map((category) => (
                         <option key={category.value} value={category.value}>
                           {category.label}
@@ -251,7 +267,13 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
                   </label>
                   <label className="block">
                     <span className="text-sm font-medium text-stone-700">Sort order</span>
-                    <input className={inputClass} name="sort_order" type="number" step="1" defaultValue={editingPhoto.sort_order} />
+                    <input
+                      className={inputClass}
+                      name="sort_order"
+                      type="number"
+                      step="1"
+                      defaultValue={editingPhoto.sort_order}
+                    />
                   </label>
                 </div>
                 <ActionMessage state={state} />
@@ -271,15 +293,21 @@ export function FoodPhotosManager({ photos }: { photos: Photo[] }) {
 
       {deletingPhoto ? (
         <Modal title="Delete photo" onClose={() => setDeletingPhoto(null)}>
-          <ActionForm action={deleteFoodPhoto} onSuccess={() => setDeletingPhoto(null)} className="space-y-4">
+          <ActionForm
+            action={deleteFoodPhoto}
+            onSuccess={() => setDeletingPhoto(null)}
+            className="space-y-4"
+          >
             {(state, pending) => (
               <>
                 <input name="id" type="hidden" value={deletingPhoto.id} />
                 <input name="image_url" type="hidden" value={deletingPhoto.image_url} />
                 <p className="text-sm leading-6 text-stone-600">
                   Delete this photo from{" "}
-                  <span className="font-semibold text-stone-900">{foodCategoryLabel(deletingPhoto.category)}</span>? It
-                  will be removed from the public Food page immediately.
+                  <span className="font-semibold text-stone-900">
+                    {foodCategoryLabel(deletingPhoto.category)}
+                  </span>
+                  ? It will be removed from the public Food page immediately.
                 </p>
                 <ActionMessage state={state} />
                 <div className="flex justify-end gap-2">

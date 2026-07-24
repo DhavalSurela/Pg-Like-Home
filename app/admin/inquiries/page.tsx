@@ -12,7 +12,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function InquiriesPage() {
+export default async function InquiriesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ new?: string }>;
+}) {
+  const { new: newInquiry } = await searchParams;
   const supabase = await createClient();
   const { data: inquiries, error } = await supabase
     .from("inquiries")
@@ -22,11 +27,15 @@ export default async function InquiriesPage() {
   const newCount = (inquiries ?? []).filter((i) => i.status === "new").length;
 
   return (
-    <div className="space-y-8">
-      <div>
-        <p className="text-xs font-semibold tracking-[0.18em] text-stone-400 uppercase">Inquiries</p>
-        <h1 className="mt-3 text-4xl font-light tracking-tight text-stone-900 sm:text-5xl">Inquiries</h1>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-stone-500">
+    <div className="space-y-5 sm:space-y-8">
+      <div className="hidden sm:block">
+        <p className="hidden text-xs font-semibold tracking-[0.18em] text-stone-400 uppercase sm:block">
+          Inquiries
+        </p>
+        <h1 className="mt-3 hidden text-4xl font-light tracking-tight text-stone-900 sm:block sm:text-5xl">
+          Inquiries
+        </h1>
+        <p className="mt-0 hidden max-w-xl text-[15px] leading-relaxed text-stone-500 sm:mt-3 sm:block">
           Messages submitted through the website contact form.
           {newCount > 0 ? ` ${newCount} new.` : ""}
         </p>
@@ -39,7 +48,7 @@ export default async function InquiriesPage() {
         </div>
       ) : null}
 
-      <InquiriesManager inquiries={inquiries ?? []} />
+      <InquiriesManager inquiries={inquiries ?? []} initialCreateOpen={newInquiry === "1"} />
     </div>
   );
 }

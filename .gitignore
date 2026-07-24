@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local AI/editor settings
+/.claude/
+
+# local Supabase SQL editor scratch files
+/supabase/snippets/
