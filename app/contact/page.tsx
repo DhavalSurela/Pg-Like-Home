@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   description:
     "Get in touch with PG Like Home in Memnagar, Ahmedabad. Send us a message, call, or WhatsApp to book a visit or ask about rooms, food, and pricing.",
   alternates: {
-    canonical: "https://pg-like-home.vercel.app/contact",
+    canonical: "https://pglikehome.vercel.app/contact",
   },
   openGraph: {
     title: "Contact PG Like Home, Memnagar",
     description: "Send us a message to book a visit or ask about rooms, food, and pricing.",
-    url: "https://pg-like-home.vercel.app/contact",
+    url: "https://pglikehome.vercel.app/contact",
   },
 };
 

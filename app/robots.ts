@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ["/api/"],
             },
         ],
-        sitemap: "https://pg-like-home.vercel.app/sitemap.xml",
+        sitemap: "https://pglikehome.vercel.app/sitemap.xml",
     };
 }

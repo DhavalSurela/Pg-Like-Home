@@ -8,12 +8,12 @@ export const metadata: Metadata = {
         "PG Like Home house rules: no smoking/alcohol, 1-month notice period, visitor policy & refund terms. Simple guidelines for a peaceful student environment in Memnagar, Ahmedabad.",
     keywords: ["PG rules Ahmedabad", "hostel regulations", "PG notice period", "PG refund policy"],
     alternates: {
-        canonical: "https://pg-like-home.vercel.app/rules",
+        canonical: "https://pglikehome.vercel.app/rules",
     },
     openGraph: {
         title: "House Rules - PG Like Home, Memnagar",
         description: "Simple rules for a peaceful, disciplined living environment for all students.",
-        url: "https://pg-like-home.vercel.app/rules",
+        url: "https://pglikehome.vercel.app/rules",
     },
 };
 

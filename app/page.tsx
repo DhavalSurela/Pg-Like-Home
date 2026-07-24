@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   description:
     "Looking for a boys PG in Memnagar, Ahmedabad? PG Like Home offers AC/Non-AC rooms from ₹9,000/month with pure veg food, Wi-Fi, CCTV, RO water & daily housekeeping. Near Gujarat University, IIM Ahmedabad, LD Engineering & CEPT University.",
   alternates: {
-    canonical: "https://pg-like-home.vercel.app",
+    canonical: "https://pglikehome.vercel.app",
   },
   openGraph: {
     title: "PG Like Home - Best Boys PG in Memnagar, Ahmedabad",
     description:
       "Premium student PG with AC rooms & veg food from ₹9,000/month. Near Gujarat University & IIM Ahmedabad.",
-    url: "https://pg-like-home.vercel.app",
+    url: "https://pglikehome.vercel.app",
   },
 };
 

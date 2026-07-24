@@ -10,12 +10,12 @@ export const metadata: Metadata = {
         "PG Like Home was founded by Lalitbhai & Raj Parvadiya in Memnagar, Ahmedabad with a mission to provide students a home away from home. Learn about our vision, story & values.",
     keywords: ["about PG Like Home", "PG owner Memnagar", "student PG Ahmedabad story", "Raj Parvadiya PG"],
     alternates: {
-        canonical: "https://pg-like-home.vercel.app/about",
+        canonical: "https://pglikehome.vercel.app/about",
     },
     openGraph: {
         title: "About Us - PG Like Home, Memnagar",
         description: "Founded by educators, PG Like Home provides a family atmosphere for students in Ahmedabad.",
-        url: "https://pg-like-home.vercel.app/about",
+        url: "https://pglikehome.vercel.app/about",
     },
 };
 

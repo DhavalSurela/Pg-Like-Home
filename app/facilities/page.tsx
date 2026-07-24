@@ -8,12 +8,12 @@ export const metadata: Metadata = {
         "PG Like Home facilities include high-speed Wi-Fi, pure veg food, laundry, RO water, CCTV, power backup, daily housekeeping, study tables & personal storage. Everything included in your rent.",
     keywords: ["PG facilities Ahmedabad", "PG with Wi-Fi Memnagar", "PG with laundry", "hostel amenities Ahmedabad", "PG with food and Wi-Fi"],
     alternates: {
-        canonical: "https://pg-like-home.vercel.app/facilities",
+        canonical: "https://pglikehome.vercel.app/facilities",
     },
     openGraph: {
         title: "Premium Facilities - PG Like Home, Memnagar",
         description: "Wi-Fi, veg food, laundry, CCTV, power backup & daily housekeeping. All included.",
-        url: "https://pg-like-home.vercel.app/facilities",
+        url: "https://pglikehome.vercel.app/facilities",
     },
 };
 

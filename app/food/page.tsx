@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     "unlimited food PG",
   ],
   alternates: {
-    canonical: "https://pg-like-home.vercel.app/food",
+    canonical: "https://pglikehome.vercel.app/food",
   },
   openGraph: {
     title: "Food Menu - Pure Veg Meals Daily | PG Like Home",
     description: "See today's pure veg breakfast, lunch and dinner, plus our recent daily menus.",
-    url: "https://pg-like-home.vercel.app/food",
+    url: "https://pglikehome.vercel.app/food",
   },
 };
 
